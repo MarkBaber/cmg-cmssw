@@ -33,9 +33,6 @@ triggerAna = cfg.Analyzer(
 # this analyzer is just there to select a list of good primary vertices.
 ttHVertexAna = cfg.Analyzer(
     'VertexAnalyzer',
-    goodVertices = 'offlinePrimaryVertices',
-    #goodVertices = 'slimmedPrimaryVertices',
-    #allVertices = 'slimmedPrimaryVertices',
     vertexWeight = None,
     fixedWeight = 1,
     verbose = False
@@ -47,7 +44,6 @@ pileUpAna = cfg.Analyzer(
     "PileUpAnalyzer",
     # build unweighted pu distribution using number of pile up interactions if False
     # otherwise, use fill the distribution using number of true interactions
-    #allVertices = 'slimmedPrimaryVertices',
     true = True,
     makeHists=False
     )
@@ -123,23 +119,24 @@ ttHJetAna = cfg.Analyzer(
     cleanJetsFromTaus = False,
     )
 
-## MET Analyzer
-#ttHMETAna = cfg.Analyzer(
-#    'ttHMETAnalyzer',
-#    )
-
-# Jet MC Match Analyzer
+# Jet MC Match Analyzer (generic)
 ttHJetMCAna = cfg.Analyzer(
     'ttHJetMCMatchAnalyzer',
     smearJets = True,
     shiftJER = 0, # set to +1 or -1 to get +/-1 sigma shifts
     )
 
+# Core Event Analyzer (computes basic quantities like HT, dilepton masses)
+ttHCoreEventAna = cfg.Analyzer(
+    'ttHCoreEventAnalyzer',
+    maxLeps = 4, ## leptons to consider
+    )
+
+
+
 # Event Analyzer
 ttHEventAna = cfg.Analyzer(
     'ttHLepEventAnalyzer',
-    maxLeps = 4, ## leptons to use
-    verbose = False,
     minJets25 = 0,
     )
 
@@ -163,7 +160,7 @@ treeProducer = cfg.Analyzer(
 #-------- SAMPLES
 from CMGTools.TTHAnalysis.samples.samples_8TeV_v517 import * 
 
-for mc in mcSamples+mcSamples+extraMcSamples+fastSimSamples:
+for mc in mcSamplesAll:
     mc.triggers = triggersMC_mue
 for data in dataSamplesMu:
     data.triggers = triggers_mumu
@@ -175,7 +172,7 @@ for data in dataSamplesMuE:
     data.vetoTriggers=triggers_ee+triggers_mumu
 
 
-selectedComponents = dataSamplesAll
+selectedComponents = fastSimSamples
 
 #-------- SEQUENCE
 
@@ -193,8 +190,8 @@ sequence = cfg.Sequence([
     ttHTauAna,
     ttHTauMCAna,
     ttHJetAna,
-    #ttHMETAna,
     ttHJetMCAna,
+    ttHCoreEventAna,
     ttHEventAna,
     treeProducer,
     ])

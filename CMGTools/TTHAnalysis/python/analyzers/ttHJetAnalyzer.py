@@ -34,6 +34,8 @@ class ttHJetAnalyzer( Analyzer ):
         self.doPuId = self.cfg_ana.doPuId if hasattr(self.cfg_ana, 'doPuId') else True
         self.shiftJEC = self.cfg_ana.shiftJEC if hasattr(self.cfg_ana, 'shiftJEC') else 0
         self.doJEC = self.cfg_ana.recalibrateJets or (self.shiftJEC != 0)
+        self.jetLepDR = self.cfg_ana.jetLepDR  if hasattr(self.cfg_ana, 'jetLepDR') else 0.5
+        self.lepPtMin = self.cfg_ana.minLepPt  if hasattr(self.cfg_ana, 'minLepPt') else -1
     def declareHandles(self):
         super(ttHJetAnalyzer, self).declareHandles()
         self.handles['jets']     = AutoHandle( self.cfg_ana.jetCol, 'std::vector<cmg::PFJet>' )
@@ -45,13 +47,13 @@ class ttHJetAnalyzer( Analyzer ):
         
     def process(self, iEvent, event):
         self.readCollections( iEvent )
+        rho  = float(self.handles['rho'].product()[0])
 
         ## Read jets, if necessary recalibrate and shift MET
         allJets = map(Jet, self.handles['jets'].product()) 
         event.deltaMetFromJEC = [0.,0.]
         if self.doJEC:
             #print "\nCalibrating jets %s for lumi %d, event %d" % (self.cfg_ana.jetCol, event.lumi, event.eventId)
-            rho  = float(self.handles['rho'].product()[0])
             corr = self.jetReCalibratorCHS if 'CHS' in self.cfg_ana.jetCol else self.jetReCalibrator
             corr.correctAll(allJets, rho, delta=self.shiftJEC, metShift=event.deltaMetFromJEC)
         event.allJetsUsedForMET = allJets
@@ -62,12 +64,17 @@ class ttHJetAnalyzer( Analyzer ):
             allJets4MVA = map(Jet, self.handles['jets4MVA'].product())
             if self.doJEC:
                 #print "\nCalibrating jets %s for lumi %d, event %d" % (self.cfg_ana.jetCol4MVA, event.lumi, event.eventId)
-                rho  = float(self.handles['rho'].product()[0])
                 corr = self.jetReCalibratorCHS if 'CHS' in self.cfg_ana.jetCol4MVA else self.jetReCalibrator
                 corr.correctAll(allJets4MVA, rho, delta=self.shiftJEC)
         else:
             allJets4MVA = allJets[:]
 
+        ## QG Likelihood
+        QGAlgo = "LD_CHS_CMGVARS" if ("CHS" in self.cfg_ana.jetCol) else "LD_CMGVARS";
+        QGCorr = "Pythia" if self.cfg_comp.isMC else "Data" # FIXME: what about herwig??
+        for jet in allJets:
+            jet.QG = jet.quarkGluonID(rho, QGAlgo, QGCorr) 
+        
         ## Apply jet selection
         event.jets = []
         event.jetsFailId = []
@@ -80,20 +87,20 @@ class ttHJetAnalyzer( Analyzer ):
        
 
         ## Clean Jets from leptons
-        leptons = event.selectedLeptons
+        leptons = [ l for l in event.selectedLeptons if l.pt() > self.lepPtMin ]
         if self.cfg_ana.cleanJetsFromTaus:
             leptons = leptons[:] + event.selectedTaus
         #event.cleanJets, dummy = cleanObjectCollection( event.jets,
         #                                                masks = leptons,
-        #                                                deltaRMin = 0.5 )
-        event.cleanJetsAll = cleanNearestJetOnly(event.jets, leptons, 0.5)
+        #                                                deltaRMin = self.jetLepDR )
+        event.cleanJetsAll = cleanNearestJetOnly(event.jets, leptons, self.jetLepDR)
         event.cleanJets    = [j for j in event.cleanJetsAll if abs(j.eta()) <  self.cfg_ana.jetEtaCentral ]
         event.cleanJetsFwd = [j for j in event.cleanJetsAll if abs(j.eta()) >= self.cfg_ana.jetEtaCentral ]
 
         ## Associate jets to leptons
         leptons = event.inclusiveLeptons if hasattr(event, 'inclusiveLeptons') else event.selectedLeptons
-        #jlpairs = matchObjectCollection( event.inclusiveLeptons, allJets4MVA, 0.5*0.5)
-        jlpairs = matchObjectCollection( leptons, allJets4MVA, 0.5*0.5)
+        #jlpairs = matchObjectCollection( event.inclusiveLeptons, allJets4MVA, self.jetLepDR**2)
+        jlpairs = matchObjectCollection( leptons, allJets4MVA, self.jetLepDR**2)
         for lep in leptons:
             jet = jlpairs[lep]
             if jet is None:

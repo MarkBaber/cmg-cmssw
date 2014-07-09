@@ -46,14 +46,14 @@ bool cmg::Electron::electronID(ElectronID id, const reco::Vertex *vtx, double rh
     float sigmaIEtaIEta = sigmaIetaIeta();
     float hoe = hadronicOverEm();
     float ooemoop = (1.0/ele.ecalEnergy() - ele.eSuperClusterOverP()/ele.ecalEnergy());
-    bool vtxFitConversion = passConversionVeto();
+    bool  vtxFitConversion = !passConversionVeto();
     float mHits = numberOfHits();
     // impact parameter variables
     float d0vtx = 0.0, dzvtx = 0.0;
     if (id == POG_Cuts_Full_Veto || id == POG_Cuts_Full_Loose || id == POG_Cuts_Full_Medium || id == POG_Cuts_Full_Tight) {
         if (vtx == 0)     throw cms::Exception("InvalidArgument", "POG_Cuts_Full_XXX ids require a vertex");
         d0vtx = ele.gsfTrack()->dxy(vtx->position());
-        dzvtx = ele.gsfTrack()->dxy(vtx->position());
+        dzvtx = ele.gsfTrack()->dz(vtx->position());
     } 
     // isolation
     float iso_ch = 0.0, iso_em = 0.0, iso_nh = 0.0;
@@ -68,13 +68,13 @@ bool cmg::Electron::electronID(ElectronID id, const reco::Vertex *vtx, double rh
     }
     switch(id) {
         case POG_Cuts_ID_Veto:
-            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::VETO,   isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    1,                0,     0.0);
+            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::VETO,   isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    0,                0,     0.0);
         case POG_Cuts_ID_Loose:
-            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::LOOSE,  isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    1,                0,     0.0);
+            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::LOOSE,  isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    0,                0,     0.0);
         case POG_Cuts_ID_Medium:
-            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::MEDIUM, isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    1,                0,     0.0);
+            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::MEDIUM, isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    0,                0,     0.0);
         case POG_Cuts_ID_Tight:
-            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::TIGHT,  isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    1,                0,     0.0);
+            return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::TIGHT,  isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, 0.0,   0.0,   0.0,    0.0,    0.0,    0,                0,     0.0);
         case POG_Cuts_Full_Veto:
             return EgammaCutBasedEleId::PassWP(EgammaCutBasedEleId::VETO,   isEB, pt, eta, dEtaIn, dPhiIn, sigmaIEtaIEta, hoe, ooemoop, d0vtx, dzvtx, iso_ch, iso_em, iso_nh, vtxFitConversion, mHits, rho);
         case POG_Cuts_Full_Loose:
