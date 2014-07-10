@@ -82,6 +82,13 @@ if runOnMC is False:
     process.patJets.addGenJetMatch = False
     process.patJets.addGenPartonMatch = False
 
+    # Debugging, switch off everything...
+    process.patCaloJets.addGenJetMatch    = False
+    process.patCaloJets.addBTagInfo       = False
+    process.patCaloJets.addGenPartonMatch = False
+    process.patCaloJets.jetCorrFactorsSource = cms.VInputTag()
+
+
     #if isNewerThan('CMSSW_5_2_0'):
     #    process.PATCMGJetSequenceCHSpruned.remove( process.jetMCSequenceCHSpruned )
     #    process.patJetsCHSpruned.addGenJetMatch = False

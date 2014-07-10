@@ -41,10 +41,10 @@ patCaloJetCorrFactors.payload = 'AK5Calo'
 
 patCaloJets = patJets.clone()
 patCaloJets.jetSource           = calojetSource
-# patCaloJets.addJetCharge        = False
-# patCaloJets.embedCaloTowers     = False
-# patCaloJets.embedPFCandidates   = False
-# patCaloJets.addAssociatedTracks = False
+# # patCaloJets.addJetCharge        = False
+# # patCaloJets.embedCaloTowers     = False
+# # patCaloJets.embedPFCandidates   = False
+# # patCaloJets.addAssociatedTracks = False
 
 # </RA1 addition>
 
@@ -136,13 +136,15 @@ patJetsWithVar = cms.EDProducer('JetExtendedProducer',
     qgtagPOG = cms.InputTag('QGTagger'),    
 )
 
-patJetsWithVarCalo = cms.EDProducer('JetExtendedProducer',
-    jets     = cms.InputTag('selectedPatJets'),
-    vertices = cms.InputTag('goodOfflinePrimaryVertices'),
-    #debug   = cms.untracked.bool(True),
-    payload  = cms.string('AK5Calo'),
-    qgtagPOG = cms.InputTag('QGTagger'),    
-)
+
+# Doesn't work as JetExtendedProducer assumes PF
+# patJetsWithVarCalo = cms.EDProducer('JetExtendedProducer',
+#     jets     = cms.InputTag('selectedPatJets'),
+#     vertices = cms.InputTag('goodOfflinePrimaryVertices'),
+#     #debug   = cms.untracked.bool(True),
+#     payload  = cms.string('AK5Calo'),
+#     qgtagPOG = cms.InputTag('QGTagger'),    
+# )
 
 
 outPFCand = cms.EDProducer('VbfHbbPFCandOutOfJets',
@@ -186,7 +188,7 @@ PATJetSequence = cms.Sequence(
     # <RA1 addition>
 
     ak5CaloJetsSel +
-    patJetsWithVarCalo + 
+#    patJetsWithVarCalo + 
     patCaloJetCorrFactors +
     patCaloJets 
 

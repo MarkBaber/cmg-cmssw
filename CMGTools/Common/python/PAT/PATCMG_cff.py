@@ -130,11 +130,11 @@ cmgPFBaseJetAll.cfg.inputCollection = patJetSource
 
 
 
-patJetCaloSource = cms.InputTag('patJetsWithVarCalo')
+#patJetCaloSource = cms.InputTag('patJetsWithVarCalo')
 
-from CMGTools.Common.factories.cmgBaseJet_cfi import cmgBaseJet
-cmgCaloBaseJetAll = cmgBaseJet.clone()
-cmgCaloBaseJetAll.cfg.inputCollection = patJetCaloSource
+# from CMGTools.Common.factories.cmgBaseJet_cfi import cmgBaseJet
+# cmgCaloBaseJetAll = cmgBaseJet.clone()
+# cmgCaloBaseJetAll.cfg.inputCollection = patJetCaloSource
 
 
 from CMGTools.Common.skims.leadingCMGBaseJetSelector_cfi import leadingCMGBaseJetSelector
@@ -147,7 +147,7 @@ cmgPFBaseJetLead.index = 4
 PATCMGJetSequence = cms.Sequence(
     PATJetSequence + 
     jetSequence +
-    cmgCaloBaseJetAll + 
+#    cmgCaloBaseJetAll + 
     cmgPFBaseJetAll +
     cmgPFBaseJetLead
     )
