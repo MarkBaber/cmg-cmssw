@@ -10,8 +10,15 @@ from CommonTools.ParticleFlow.ParticleSelectors.genericPFJetSelector_cfi import 
 # NOTE cutting on uncorrected jets, but no bias for corrected jet pT>7
 ak5PFJetsSel = selectedPfJets.clone( src = 'ak5PFJets',
                                      cut = 'pt()>0 && abs(eta())<5.0' )
-
 jetSource = 'ak5PFJetsSel'
+
+# <RA1 addition>
+from CommonTools.RecoAlgos.caloJetSelector_cfi import caloJetSelector
+ak5CaloJetsSel = caloJetSelector.clone( src = 'ak5CaloJets',
+                                        cut = 'pt()>0 && abs(eta())<5.0' )
+calojetSource = 'ak5CaloJetsSel'
+# </RA1 addition>
+
 
 # corrections 
 from PhysicsTools.PatAlgos.recoLayer0.jetCorrFactors_cfi import *
@@ -26,6 +33,21 @@ patJets.addJetCharge = False
 patJets.embedCaloTowers = False
 patJets.embedPFCandidates = False
 patJets.addAssociatedTracks = False
+
+# <RA1 addition>
+patCaloJetCorrFactors         = patJetCorrFactors.clone()
+patCaloJetCorrFactors.src     = calojetSource
+patCaloJetCorrFactors.payload = 'AK5Calo'
+
+patCaloJets = patJets.clone()
+patCaloJets.jetSource           = calojetSource
+# patCaloJets.addJetCharge        = False
+# patCaloJets.embedCaloTowers     = False
+# patCaloJets.embedPFCandidates   = False
+# patCaloJets.addAssociatedTracks = False
+
+# </RA1 addition>
+
 
 # b tagging 
 from RecoJets.JetAssociationProducers.ak5JTA_cff import *
@@ -114,6 +136,15 @@ patJetsWithVar = cms.EDProducer('JetExtendedProducer',
     qgtagPOG = cms.InputTag('QGTagger'),    
 )
 
+patJetsWithVarCalo = cms.EDProducer('JetExtendedProducer',
+    jets     = cms.InputTag('selectedPatJets'),
+    vertices = cms.InputTag('goodOfflinePrimaryVertices'),
+    #debug   = cms.untracked.bool(True),
+    payload  = cms.string('AK5Calo'),
+    qgtagPOG = cms.InputTag('QGTagger'),    
+)
+
+
 outPFCand = cms.EDProducer('VbfHbbPFCandOutOfJets',
     jets         = cms.InputTag('patJetsWithVar'),
     vtx          = cms.InputTag('goodOfflinePrimaryVertices'),
@@ -135,7 +166,8 @@ jetMCSequence = cms.Sequence(
 
 
 PATJetSequence = cms.Sequence(
-    ak5PFJetsSel + 
+
+    ak5PFJetsSel +
     jetMCSequence +
     ak5JetTracksAssociatorAtVertex + 
     btaggingExt + 
@@ -149,5 +181,16 @@ PATJetSequence = cms.Sequence(
     patJetsWithVar +
     puJetId +
     outPFCand +
-    ak5SoftPFJetsForVbfHbb
+    ak5SoftPFJetsForVbfHbb +
+
+    # <RA1 addition>
+
+    ak5CaloJetsSel +
+    patJetsWithVarCalo + 
+    patCaloJetCorrFactors +
+    patCaloJets 
+
+    # </RA1 addition>
+
+
     )

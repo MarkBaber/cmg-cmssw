@@ -8,12 +8,22 @@ from CMGTools.Common.skims.leadingCMGBaseJetSelector_cfi import leadingCMGBaseJe
 from CMGTools.Common.skims.leadingCMGPFJetSelector_cfi import leadingCMGPFJetSelector
 from CMGTools.External.pujetidsequence_cff import puJetMva
 
+
+
+
 # PF jets -------------------------------------------------------
 
 # this pt cut is also going to be used to select GenJets,
 # see CMGTools.Common.gen.generator.genJets_cff
 ptCut = 'pt()>10'
 cmgPFJetSel.cut = ptCut
+
+
+# Calo jets -------------------------------------------------------
+
+#cmgBaseJetCalo = cmgBaseJet.clone()
+
+
 
 # Jets for Type 1 MET corrections
 cmgPFJetType1MET = cmgPFJetSel.clone(src = 'cmgPFJet',cut='pt() >= 10 && abs(eta()) < 4.7')
@@ -34,5 +44,6 @@ pfJetSequence = cms.Sequence(
 
 
 jetSequence = cms.Sequence(
-    pfJetSequence
+    pfJetSequence #+
+#    cmgBaseJetCalo
     )
