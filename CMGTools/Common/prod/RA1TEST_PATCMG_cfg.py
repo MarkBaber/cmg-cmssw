@@ -63,6 +63,16 @@ print 'loading the main CMG sequence'
 
 process.load('CMGTools.Common.PAT.PATCMG_cff')
 
+
+# Debugging, switch off everything...
+process.patCaloJets.addGenJetMatch    = False
+process.patCaloJets.addBTagInfo       = False
+process.patCaloJets.addGenPartonMatch = False
+process.patCaloJets.getJetMCFlavour   = False
+process.patCaloJets.jetCorrFactorsSource = cms.VInputTag()
+
+
+
 if runOnMC is False:
     # removing MC stuff
     print 'removing MC stuff, as we are running on Data'
@@ -82,11 +92,6 @@ if runOnMC is False:
     process.patJets.addGenJetMatch = False
     process.patJets.addGenPartonMatch = False
 
-    # Debugging, switch off everything...
-    process.patCaloJets.addGenJetMatch    = False
-    process.patCaloJets.addBTagInfo       = False
-    process.patCaloJets.addGenPartonMatch = False
-    process.patCaloJets.jetCorrFactorsSource = cms.VInputTag()
 
 
     #if isNewerThan('CMSSW_5_2_0'):
