@@ -41,6 +41,8 @@ patCaloJetCorrFactors.payload = 'AK5Calo'
 
 patCaloJets = patJets.clone()
 patCaloJets.jetSource           = calojetSource
+patCaloJets.jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patCaloJetCorrFactors"))
+
 # # patCaloJets.addJetCharge        = False
 # # patCaloJets.embedCaloTowers     = False
 # # patCaloJets.embedPFCandidates   = False

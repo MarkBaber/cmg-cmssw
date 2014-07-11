@@ -69,9 +69,86 @@ process.patCaloJets.addGenJetMatch    = False
 process.patCaloJets.addBTagInfo       = False
 process.patCaloJets.addGenPartonMatch = False
 process.patCaloJets.getJetMCFlavour   = False
-process.patCaloJets.jetCorrFactorsSource = cms.VInputTag()
+#process.patCaloJets.jetCorrFactorsSource = cms.VInputTag()
+#process.patCaloJets.addJetCorrFactors = False
+
+process.patCaloJets.embedGenJetMatch   = cms.bool(True)
+#process.patCaloJets.partonJetSource    = cms.InputTag()
+process.patCaloJets.addGenPartonMatch  = cms.bool(False)
+#process.patCaloJets.JetPartonMapSource = cms.InputTag()
+      
+                                     
+
+#process.patCaloJets.addJetCorrFactors = False 
+
+#process.patCaloJets.genPartonMatch = cms.InputTag()
+process.patCaloJets.embedGenPartonMatch = False
+#process.patCaloJets.genJetMatch = cms.InputTag()
+
+process.patCaloJets.discriminatorSources = cms.VInputTag()
+#process.patCaloJets.trackAssociationSource = cms.InputTag()
+process.patCaloJets.addDiscriminators = False
+#process.patCaloJets.jetChargeSource = cms.InputTag()
+#process.patCaloJets.jetIDMap = cms.InputTag()
+process.patCaloJets.addJetID = False
 
 
+# cms.EDProducer("PATJetProducer",
+#                    addJetCharge = cms.bool(False),
+#                    addGenJetMatch = cms.bool(False),
+#                    embedGenJetMatch = cms.bool(True),
+#                    addAssociatedTracks = cms.bool(False),
+#                    addBTagInfo = cms.bool(False),
+#                    partonJetSource = cms.InputTag("NOT_IMPLEMENTED"),
+#                    addGenPartonMatch = cms.bool(False),
+#                    JetPartonMapSource = cms.InputTag("patJetFlavourAssociation"),
+#                    resolutions = cms.PSet(
+
+#         ),
+#                    genPartonMatch = cms.InputTag("patJetPartonMatch"),
+#                    addTagInfos = cms.bool(False),
+#                    addPartonJetMatch = cms.bool(False),
+#                    embedGenPartonMatch = cms.bool(False),
+#                    efficiencies = cms.PSet(
+
+#         ),
+#                    genJetMatch = cms.InputTag("patJetGenJetMatch"),
+#                    userData = cms.PSet(
+#             userCands = cms.PSet(
+#                 src = cms.VInputTag("")
+#                         ),
+#                     userInts = cms.PSet(
+#                 src = cms.VInputTag("")
+#                         ),
+#                     userFloats = cms.PSet(
+#                 src = cms.VInputTag("")
+#                         ),
+#                     userClasses = cms.PSet(
+#                 src = cms.VInputTag("")
+#                         ),
+#                     userFunctionLabels = cms.vstring(),
+#                     userFunctions = cms.vstring()
+#                 ),
+#                    jetSource = cms.InputTag("ak5CaloJetsSel"),
+#                    addEfficiencies = cms.bool(False),
+#                    discriminatorSources = cms.VInputTag(),
+#                    trackAssociationSource = cms.InputTag("ak5JetTracksAssociatorAtVertex"),
+#                    tagInfoSources = cms.VInputTag(),
+#                    jetCorrFactorsSource = cms.VInputTag(),
+#                    embedPFCandidates = cms.bool(False),
+#                    addJetCorrFactors = cms.bool(False),
+#                    addResolutions = cms.bool(False),
+#                    getJetMCFlavour = cms.bool(False),
+#                    addDiscriminators = cms.bool(False),
+#                    jetChargeSource = cms.InputTag("patJetCharge"),
+#                    embedCaloTowers = cms.bool(False),
+#                    jetIDMap = cms.InputTag("ak5JetID"),
+#                    addJetID = cms.bool(False)
+#                ) 
+
+
+
+                    
 
 if runOnMC is False:
     # removing MC stuff
@@ -117,6 +194,7 @@ if runOnMC is False:
 
     # adding L2L3Residual corrections
     process.patJetCorrFactors.levels.append('L2L3Residual')
+    process.patCaloJetCorrFactors.levels.append('L2L3Residual')
     #if isNewerThan('CMSSW_5_2_0'):
     #    process.patJetCorrFactorsCHSpruned.levels.append('L2L3Residual')
 
@@ -231,6 +309,11 @@ process.outcmg.outputCommands.append('keep *_cmgTriggerPrescales_*_*')
 process.outcmg.outputCommands.append('drop *_cmgTriggerObjectSel_*_*') 
 process.outcmg.outputCommands.append('drop *_offlinePrimaryVertices_*_*') 
 process.outcmg.outputCommands.append('keep *_slimmedPrimaryVertices_*_*') 
+
+# Keep CaloJets
+process.outcmg.outputCommands.append('keep *_cmgCaloBaseJet*_*_*')
+# DEBUGGING
+process.outcmg.outputCommands.append('keep *_cmg*BaseJet*_*_*') 
 
 ########################################################
 ## Conditions 
