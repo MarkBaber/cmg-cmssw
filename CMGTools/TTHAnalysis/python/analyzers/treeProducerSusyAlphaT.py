@@ -27,6 +27,7 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
 
     NTupleVariable("nJet100", lambda ev: sum([j.pt() > 100 for j in ev.cleanJets]), int, help="Number of jets with pt > 100, |eta|<3.0"),
     NTupleVariable("nJet100a", lambda ev: sum([j.pt() > 100 for j in ev.cleanJetsAll]), int, help="Number of jets with pt > 100, |eta|<5.0"),
+
     NTupleVariable("nMuons10",     lambda ev: sum([l.pt() > 10 and abs(l.pdgId()) == 13 for l in ev.selectedLeptons]), int, help="Number of muons with at least pt > 10"),
     NTupleVariable("nElectrons10", lambda ev: sum([l.pt() > 10 and abs(l.pdgId()) == 11 for l in ev.selectedLeptons]), int, help="Number of electrons with at least pt > 10"),
     NTupleVariable("nTaus20",      lambda ev: sum([l.pt() > 20 for l in ev.selectedTaus]), int, help="Number of taus with pt > 20"),
