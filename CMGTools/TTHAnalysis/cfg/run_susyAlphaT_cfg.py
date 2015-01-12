@@ -203,7 +203,7 @@ elif cutFlow == 'Test':
     for comp in selectedComponents:
         comp.isMC = True
         comp.isData = False
-        comp.splitFactor = 1 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
+        comp.splitFactor = 100 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
         comp.puFileMC=dataDir+"/puProfile_Summer12_53X.root"
         comp.puFileData=dataDir+"/puProfile_Data12.root"
         comp.efficiency = eff2012
@@ -258,11 +258,6 @@ elif test==4:
 
 #-------- SEQUENCE
 
-# sequence = cfg.Sequence(susyCoreSequence + [
-#                         ttHAlphaTAna,
-#                         ttHAlphaTControlAna,
-#                         treeProducer,
-#                         ])
 sequence = cfg.Sequence(susyCoreSequence + [
                         ttHPhotonSkim,
                         ttHMuonSkim,
