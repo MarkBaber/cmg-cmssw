@@ -156,45 +156,29 @@ triggerFlagsAna.triggerBits = {
 from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 #Import specific alphaT samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
+#from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 
 selectedComponents = []
 
+#NEED to add WZ,WW,ZZ samples FIXME
+
 if cutFlow == 'Signal':
-    if puRegime == 'PU40bx50':
-        selectedComponents = WJetsToLNu + ZJetsToNuNu + TTbar + SusySignalSamples + QCD
-    elif puRegime == 'PU20bx25':
-        selectedComponents = WJetsToLNu_PU20bx25 + TTbar_PU20bx25 + SusySignalSamples_PU20bx25
+    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #Zinv missing 400-600
 
 elif cutFlow == 'SingleMu':
-    if puRegime == 'PU40bx50':
-        selectedComponents = WJetsToLNu + TTbar + QCD
-    elif puRegime == 'PU20bx25':
-        selectedComponents = WJetsToLNu_PU20bx25 + TTbar_PU20bx25
+    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] 
 
 elif cutFlow == 'DoubleMu':
-    if puRegime == 'PU40bx50':
-        selectedComponents = DYJetsToLL + QCD
-    elif puRegime == 'PU20bx25':
-        selectedComponents = DYJetsToLL_PU20bx25
+    selectedComponents = QCDHT + DYJetsM50HT
 
 elif cutFlow == 'SinglePhoton':
-    if puRegime == 'PU40bx50':
-        selectedComponents = GJets + QCD
-    elif puRegime == 'PU20bx25':
-        selectedComponents = GJets_PU20bx25 
+    selectedComponents = QCDHT + GJetsHT #GJets missing 400 - 600 
 
 elif cutFlow == 'MultiJetEnriched':
-    if puRegime == 'PU40bx50':
-        selectedComponents = QCD
-    elif puRegime == 'PU20bx25':
-        selectedComponents = []
+    selectedComponents = QCDHT
 
 elif cutFlow == 'Inclusive':
-    if puRegime == 'PU40bx50':
-        selectedComponents = WJetsToLNu + ZJetsToNuNu + TTbar + SusySignalSamples + QCD + GJets + DYJetsToLL
-    elif puRegime == 'PU20bx25':
-        selectedComponents = WJetsToLNu_PU20bx25 + TTbar_PU20bx25 + SusySignalSamples_PU20bx25 + DYJetsToLL_PU20bx25 + GJets_PU20bx25 
+    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + DYJetsM50HT + GJetsHT + SusySignalSamples
 
 
 elif cutFlow == 'Test':

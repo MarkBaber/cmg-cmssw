@@ -6,8 +6,8 @@ import CMGTools.RootTools.fwlite.Config as cfg
 ##------------------------------------------
 
 alphaTPSet = cfg.CFG(
-puRegime = 'PU40bx50',
-#puRegime = 'PU20bx25',
+#puRegime = 'PU40bx50',
+puRegime = 'PU20bx25',
 #cutFlow = 'MultiJetEnriched',
 #cutFlow = 'Signal',
 #cutFlow = 'SingleMu',
@@ -15,8 +15,8 @@ puRegime = 'PU40bx50',
 #cutFlow = 'SinglePhoton',
 #cutFlow = 'SingleEle',
 #cutFlow = 'DoubleEle',
-cutFlow = 'Test',
-test =  2,
+cutFlow = 'Inclusive',
+test =  2, #does nothing for now (may re add functionality in future)
 limitFiles = False,
 )
 
