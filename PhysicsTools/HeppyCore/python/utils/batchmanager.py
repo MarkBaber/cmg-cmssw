@@ -305,6 +305,7 @@ class BatchManager:
             #    raise ValueError( err )
 
             if onIC: 
+
                 print 'running on IC : %s from %s' % (batchCmd, hostName)
                 return 'IC'
 
