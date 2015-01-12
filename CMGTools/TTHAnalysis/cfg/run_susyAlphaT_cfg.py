@@ -140,38 +140,62 @@ sequence = cfg.Sequence(susyCoreSequence + [
 from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
 
 #-------- SAMPLES AND TRIGGERS -----------
-from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import triggers_mumu_iso, triggers_mumu_noniso, triggers_ee, triggers_3e, triggers_mue, triggers_1mu_iso, triggers_1e
+from CMGTools.TTHAnalysis.samples.samples_8TeV_v517 import triggers_RA1_Bulk, triggers_RA1_Prompt, triggers_RA1_Parked, triggers_RA1_Single_Mu, triggers_RA1_Photon, triggers_RA1_Muon
+
+
 triggerFlagsAna.triggerBits = {
-    'DoubleMu' : triggers_mumu_iso,
-    'DoubleMuNoIso' : triggers_mumu_noniso,
-    'DoubleEl' : triggers_ee,
-    'TripleEl' : triggers_3e,
-    'MuEG'     : triggers_mue,
-    'SingleMu' : triggers_1mu_iso,
-    'SingleEl' : triggers_1e,
+            'Bulk'     : triggers_RA1_Bulk,
+            'Prompt'   : triggers_RA1_Prompt,
+            'Parked'   : triggers_RA1_Parked,
+            'SingleMu' : triggers_RA1_Single_Mu,
+            'Photon'   : triggers_RA1_Photon,
+            'Muon'     : triggers_RA1_Muon,
 }
 
+#Import general PHYS14 samples
+from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
+
+#Import specific alphaT samples
 from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 
 selectedComponents = []
 
 if cutFlow == 'Signal':
-    selectedComponents = WJetsToLNu + ZJetsToNuNu + TTbar + SusySignalSamples + QCD
+    if puRegime == 'PU40bx50':
+        selectedComponents = WJetsToLNu + ZJetsToNuNu + TTbar + SusySignalSamples + QCD
+    elif puRegime == 'PU20bx25':
+        selectedComponents = WJetsToLNu_PU20bx25 + TTbar_PU20bx25 + SusySignalSamples_PU20bx25
 
 elif cutFlow == 'SingleMu':
-    selectedComponents = WJetsToLNu + TTbar + QCD
+    if puRegime == 'PU40bx50':
+        selectedComponents = WJetsToLNu + TTbar + QCD
+    elif puRegime == 'PU20bx25':
+        selectedComponents = WJetsToLNu_PU20bx25 + TTbar_PU20bx25
 
 elif cutFlow == 'DoubleMu':
-    selectedComponents = DYJetsToLL + QCD
+    if puRegime == 'PU40bx50':
+        selectedComponents = DYJetsToLL + QCD
+    elif puRegime == 'PU20bx25':
+        selectedComponents = DYJetsToLL_PU20bx25
 
 elif cutFlow == 'SinglePhoton':
-    selectedComponents = GJets + QCD
+    if puRegime == 'PU40bx50':
+        selectedComponents = GJets + QCD
+    elif puRegime == 'PU20bx25':
+        selectedComponents = GJets_PU20bx25 
 
 elif cutFlow == 'MultiJetEnriched':
-    selectedComponents = QCD
+    if puRegime == 'PU40bx50':
+        selectedComponents = QCD
+    elif puRegime == 'PU20bx25':
+        selectedComponents = []
 
 elif cutFlow == 'Inclusive':
-    selectedComponents = WJetsToLNu + ZJetsToNuNu + TTbar + SusySignalSamples + QCD + GJets + DYJetsToLL
+    if puRegime == 'PU40bx50':
+        selectedComponents = WJetsToLNu + ZJetsToNuNu + TTbar + SusySignalSamples + QCD + GJets + DYJetsToLL
+    elif puRegime == 'PU20bx25':
+        selectedComponents = WJetsToLNu_PU20bx25 + TTbar_PU20bx25 + SusySignalSamples_PU20bx25 + DYJetsToLL_PU20bx25 + GJets_PU20bx25 
+
 
 elif cutFlow == 'Test':
     selectedComponents = [SMS_T2tt_2J_mStop650_mLSP325]
@@ -184,6 +208,9 @@ elif cutFlow == 'Test':
         comp.puFileData=dataDir+"/puProfile_Data12.root"
         comp.efficiency = eff2012
 
+else:
+    print 'Please choose correct cutFlow and PU regime'
+    #selectedComponents.extend( mcSamples )
 
 
 
