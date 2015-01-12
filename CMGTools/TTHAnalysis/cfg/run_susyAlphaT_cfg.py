@@ -275,6 +275,10 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         treeProducer,
                         ])
 
+if alphaTPSet.limitFiles:
+    for comp in selectedComponents:
+        comp.splitFactor = 2
+        comp.files = comp.files[:2]
 
 # the following is declared in case this cfg is used in input to the heppy.py script
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
