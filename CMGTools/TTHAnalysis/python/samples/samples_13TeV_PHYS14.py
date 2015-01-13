@@ -377,22 +377,22 @@ dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"  # use environmental varia
 
 json=dataDir+'/json/Cert_Run2012ABCD_22Jan2013ReReco.json'
 
-SingleMu = cfg.DataComponent(
-    name = 'SingleMu',
-    files = kreator.getFilesFromEOS('SingleMu', 
-                                    '/SingleMu/Run2012D-15Apr2014-v1/AOD/02e0a1be-c9c7-11e3-bfe2-0024e83ef644/MINIAOD/CMSSW_7_0_9_patch2_GR_70_V2_AN1',
-                                    '/eos/cms/store/cmst3/user/cmgtools/CMG/%s'),
-    intLumi = 1,
-    triggers = [],
-    json = json
-    )
+# SingleMu = cfg.DataComponent(
+#     name = 'SingleMu',
+#     files = kreator.getFilesFromEOS('SingleMu', 
+#                                     '/SingleMu/Run2012D-15Apr2014-v1/AOD/02e0a1be-c9c7-11e3-bfe2-0024e83ef644/MINIAOD/CMSSW_7_0_9_patch2_GR_70_V2_AN1',
+#                                     '/eos/cms/store/cmst3/user/cmgtools/CMG/%s'),
+#     intLumi = 1,
+#     triggers = [],
+#     json = json
+#     )
 
            
-dataSamplesMu=[]
-dataSamplesE=[]
-dataSamplesMuE=[]
-dataSamples1Mu=[SingleMu]
-dataSamplesAll = dataSamplesMu+dataSamplesE+dataSamplesMuE+dataSamples1Mu
+# dataSamplesMu=[]
+# dataSamplesE=[]
+# dataSamplesMuE=[]
+# dataSamples1Mu=[SingleMu]
+# dataSamplesAll = dataSamplesMu+dataSamplesE+dataSamplesMuE+dataSamples1Mu
 
 
 from CMGTools.TTHAnalysis.setup.Efficiencies import *
@@ -407,10 +407,10 @@ for comp in mcSamples:
     comp.puFileData=dataDir+"/puProfile_Data12.root"
     comp.efficiency = eff2012
 
-for comp in dataSamplesAll:
-    comp.splitFactor = 1000
-    comp.isMC = False
-    comp.isData = True
+# for comp in dataSamplesAll:
+#     comp.splitFactor = 1000
+#     comp.isMC = False
+#     comp.isData = True
 
 if __name__ == "__main__":
    import sys

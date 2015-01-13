@@ -140,8 +140,8 @@ sequence = cfg.Sequence(susyCoreSequence + [
 from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
 
 #-------- SAMPLES AND TRIGGERS -----------
-from CMGTools.TTHAnalysis.samples.samples_8TeV_v517 import triggers_RA1_Bulk, triggers_RA1_Prompt, triggers_RA1_Parked, triggers_RA1_Single_Mu, triggers_RA1_Photon, triggers_RA1_Muon
-
+#Import general PHYS14 samples and RA1-specific samples
+from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 
 triggerFlagsAna.triggerBits = {
             'Bulk'     : triggers_RA1_Bulk,
@@ -151,12 +151,6 @@ triggerFlagsAna.triggerBits = {
             'Photon'   : triggers_RA1_Photon,
             'Muon'     : triggers_RA1_Muon,
 }
-
-#Import general PHYS14 samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
-
-#Import specific alphaT samples
-#from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 
 selectedComponents = []
 
@@ -183,7 +177,9 @@ elif cutFlow == 'Inclusive':
 
 elif cutFlow == 'Test':
     selectedComponents = [SMS_T2tt_2J_mStop650_mLSP325]
-    # selectedComponents = QCD
+    # selectedComponents = QCDHT
+    # selectedComponents = WJetsToLNuHT
+    # selectedComponents = GJetsHT
     for comp in selectedComponents:
         comp.isMC = True
         comp.isData = False
