@@ -55,9 +55,6 @@ class ComponentCreator(object):
         try:
             files = getDatasetFromCache('EOS%{path}%{pattern}.pck'.format(path = path.replace('/','_'), pattern = pattern))
         except IOError:
-            print path
-            print eostools.listFiles('/eos/cms'+path)
-            print pattern
             files = [ 'root://eoscms.cern.ch/'+x for x in eostools.listFiles('/eos/cms'+path) if re.match(pattern,x) ] 
             if len(files) == 0:
                 raise RuntimeError, "ERROR making component %s: no files found under %s matching '%s'" % (name,path,pattern)
