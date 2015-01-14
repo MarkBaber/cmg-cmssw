@@ -176,14 +176,14 @@ elif cutFlow == 'Inclusive':
 
 
 elif cutFlow == 'Test':
-    selectedComponents = [SMS_T2tt_2J_mStop650_mLSP325]
+    # selectedComponents = [SMS_T2tt_2J_mStop650_mLSP325]
     # selectedComponents = QCDHT
     # selectedComponents = WJetsToLNuHT
-    # selectedComponents = GJetsHT
+    selectedComponents = GJetsHT
     for comp in selectedComponents:
         comp.isMC = True
         comp.isData = False
-        comp.splitFactor = 100 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
+        comp.splitFactor = 1 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
         comp.puFileMC=dataDir+"/puProfile_Summer12_53X.root"
         comp.puFileData=dataDir+"/puProfile_Data12.root"
         comp.efficiency = eff2012
