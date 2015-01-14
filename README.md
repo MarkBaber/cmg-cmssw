@@ -55,3 +55,27 @@ cd CMGTools/TTHAnalysis/cfg/
 heppy TESTsusy run_susyAlphaT_cfg.py -N 1000 -f
 
 ```
+
+#Installation of CMG Codes at IC
+```
+source /vols/cms/grid/setup.sh
+cmsrel CMSSW_7_2_3
+cd CMSSW_7_2_3/src
+cmsenv
+
+# checkout RA1 cmg-tools
+git init
+git remote add cmg-ra1 git@github.com:CMSRA1/cmg-cmssw-private.git
+git fetch cmg-ra1
+git config core.sparsecheckout true
+cat /vols/ssd00/cms/lucienlo/susy/phys14/public/CMSSW723/sparse-checkout >> .git/info/sparse-checkout
+# check out alphaT code
+git checkout cmg-ra1/Phys14_723
+git checkout -b Phys14_723
+
+# modify CMGTools/TTHAnalysis/BuildFile
+sed -i 's@/afs/cern.ch/cms@/cvmfs/cms.cern.ch@g' CMGTools/TTHAnalysis/BuildFile.xml
+
+# compile
+scram b -v -j 9
+```
