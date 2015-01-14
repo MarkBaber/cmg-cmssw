@@ -255,6 +255,13 @@ if alphaTPSet.limitFiles:
         comp.splitFactor = 2
         comp.files = comp.files[:2]
 
+if test == 1 :
+    selectedComponents = [SMS_T1tttt_2J_mGl1500_mLSP100]
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
+
+
 # the following is declared in case this cfg is used in input to the heppy.py script
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
 config = cfg.Config( components = selectedComponents,
