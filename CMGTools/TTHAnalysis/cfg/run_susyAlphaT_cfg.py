@@ -141,7 +141,10 @@ from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
+if 'hep.ph.ic.ac.uk' in host:
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
+elif 'lxplus' in host:
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 triggerFlagsAna.triggerBits = {
             'Bulk'     : triggers_RA1_Bulk,

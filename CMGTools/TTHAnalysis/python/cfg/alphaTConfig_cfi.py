@@ -1,5 +1,5 @@
 import CMGTools.RootTools.fwlite.Config as cfg
-
+import os
 ##------------------------------------------
 ## Choose the type of cut flow and puRegime
 ## Signal or control sample
@@ -19,6 +19,7 @@ cutFlow = 'DoubleMu',
 #cutFlow = 'Test',
 test =  1, 
 limitFiles = False,
+host = os.environ['HOSTNAME'],
 )
 
 
