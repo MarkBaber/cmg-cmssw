@@ -254,9 +254,6 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         treeProducer,
                         ])
 
-for mod in sequence:
-    print mod.name
-
 if alphaTPSet.limitFiles:
     for comp in selectedComponents:
         comp.splitFactor = 2
