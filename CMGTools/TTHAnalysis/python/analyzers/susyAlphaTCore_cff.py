@@ -92,8 +92,6 @@ ttHAlphaTControlAna = cfg.Analyzer(
             ttHAlphaTControlAnalyzer, name='ttHAlphaTControlAnalyzer'
             )
 
-susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna), 
-                        ttHJetMETSkim)
 
 #-------------------------------------------
 # CUTS AND VETOS

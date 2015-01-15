@@ -238,11 +238,15 @@ elif test==4:
 
 #-------- SEQUENCE
 
+#Insert the skimmers after their analysers in susyCoreSequence (for efficiency)
+susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna)+1,ttHJetMETSkim)
+susyCoreSequence.insert(susyCoreSequence.index(photonAna)+1,ttHPhotonSkim)
+susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHMuonSkim)
+susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHElectronSkim)
+susyCoreSequence.insert(susyCoreSequence.index(isoTrackAna)+1,ttHIsoTrackSkim)
+
+
 sequence = cfg.Sequence(susyCoreSequence + [
-                        ttHPhotonSkim,
-                        ttHMuonSkim,
-                        ttHElectronSkim,
-                        ttHIsoTrackSkim,
                         ttHAlphaTAna,
                         ttHAlphaTControlAna,
                         ttHAlphaTSkim,
@@ -250,13 +254,16 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         treeProducer,
                         ])
 
+for mod in sequence:
+    print mod.name
+
 if alphaTPSet.limitFiles:
     for comp in selectedComponents:
         comp.splitFactor = 2
         comp.files = comp.files[:2]
 
 if test == 1 :
-    selectedComponents = [SMS_T1tttt_2J_mGl1500_mLSP100]
+    selectedComponents = [DYJetsToLL_M50_HT400to600]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
