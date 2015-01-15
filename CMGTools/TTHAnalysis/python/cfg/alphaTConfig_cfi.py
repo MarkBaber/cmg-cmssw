@@ -16,6 +16,7 @@ cutFlow = 'DoubleMu',
 #cutFlow = 'SingleEle',
 #cutFlow = 'DoubleEle',
 #cutFlow = 'Inclusive',
+#cutFlow = 'Test',
 test =  1, 
 limitFiles = False,
 )
