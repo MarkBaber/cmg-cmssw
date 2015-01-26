@@ -10,8 +10,8 @@ alphaTPSet = cfg.CFG(
 puRegime = 'PU20bx25',
 #cutFlow = 'MultiJetEnriched',
 #cutFlow = 'Signal',
-#cutFlow = 'SingleMu',
-cutFlow = 'DoubleMu',
+cutFlow = 'SingleMu',
+#cutFlow = 'DoubleMu',
 #cutFlow = 'SinglePhoton',
 #cutFlow = 'SingleEle',
 #cutFlow = 'DoubleEle',
@@ -22,4 +22,15 @@ limitFiles = False,
 host = os.environ['HOSTNAME'],
 )
 
+def testOption():
 
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
+    if 'lxplus' in os.environ['HOSTNAME']:
+        from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
+
+    selectedComponents = [WJetsToLNu_HT600toInf]
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
+
+    return selectedComponents

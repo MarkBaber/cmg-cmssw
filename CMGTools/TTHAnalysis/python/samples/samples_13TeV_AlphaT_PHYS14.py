@@ -88,21 +88,23 @@ DYJetsToLL_M50_HT600toInf,
 
 GJets_HT100to200 = kreator.makeMCComponentFromIC("GJets_HT100to200", "/GJets_HT-100to200_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",1534)
 GJets_HT200to400 = kreator.makeMCComponentFromIC("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",489.9)
-# GJets_HT400to600 = kreator.makeMCComponentFromIC("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",489.9)
+GJets_HT400to600 = kreator.makeMCComponentFromIC("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
 GJets_HT600toInf = kreator.makeMCComponentFromIC("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",20.87)
 GJetsHT = [
 GJets_HT100to200,
 GJets_HT200to400,
-# GJets_HT400to600,
+GJets_HT400to600,
 GJets_HT600toInf,
 ]
 
 ZJetsToNuNu_HT100to200 = kreator.makeMCComponentFromIC("ZJetsToNuNu_HT100to200", "/ZJetsToNuNu_HT-100to200_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",372.6*1.27)
 ZJetsToNuNu_HT200to400 = kreator.makeMCComponentFromIC("ZJetsToNuNu_HT200to400", "/ZJetsToNuNu_HT-200to400_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",100.8*1.27)
+ZJetsToNuNu_HT400to600 = kreator.makeMCComponentFromIC("ZJetsToNuNu_HT400to600", "/ZJetsToNuNu_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v2/MINIAODSIM", "CMS", ".*root",11.99*1.27)
 ZJetsToNuNu_HT600toInf = kreator.makeMCComponentFromIC("ZJetsToNuNu_HT600toInf", "/ZJetsToNuNu_HT-600toInf_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",4.113*1.27)
 ZJetsToNuNuHT = [
 ZJetsToNuNu_HT100to200,
 ZJetsToNuNu_HT200to400,
+ZJetsToNuNu_HT400to600,
 ZJetsToNuNu_HT600toInf,
 ]
 
