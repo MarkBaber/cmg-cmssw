@@ -1,5 +1,4 @@
 import CMGTools.RootTools.fwlite.Config as cfg
-from CMGTools.TTHAnalysis.cfg.phys14Cuts_cfi import *
 import os
 ##------------------------------------------
 ## Choose the type of cut flow and puRegime
@@ -10,19 +9,17 @@ alphaTPSet = cfg.CFG(
 #puRegime = 'PU40bx50',
 puRegime = 'PU20bx25',
 #cutFlow = 'MultiJetEnriched',
-# cutFlow = 'Signal',
-cutFlow = 'SingleMu',
-# cutFlow = 'DoubleMu',
-# cutFlow = 'SinglePhoton',
+#cutFlow = 'Signal',
+#cutFlow = 'SingleMu',
+cutFlow = 'DoubleMu',
+#cutFlow = 'SinglePhoton',
 #cutFlow = 'SingleEle',
 #cutFlow = 'DoubleEle',
 #cutFlow = 'Inclusive',
 #cutFlow = 'Test',
-test =  0, 
+test =  1, 
 limitFiles = False,
 host = os.environ['HOSTNAME'],
-cuts = singleMuCut
-
 )
 
 

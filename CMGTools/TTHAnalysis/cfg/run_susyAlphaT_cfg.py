@@ -141,12 +141,10 @@ from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
-# from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import 
-# if 'hep.ph.ic.ac.uk' in host:
-#     from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-# elif 'lxplus' in host:
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import triggers_RA1_Bulk,triggers_RA1_Prompt,triggers_RA1_Parked,triggers_RA1_Single_Mu,triggers_RA1_Photon,triggers_RA1_Muon
-from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
+if 'hep.ph.ic.ac.uk' in host:
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
+elif 'lxplus' in host:
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 triggerFlagsAna.triggerBits = {
             'Bulk'     : triggers_RA1_Bulk,
@@ -165,14 +163,13 @@ if cutFlow == 'Signal':
     selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #Zinv missing 400-600
 
 elif cutFlow == 'SingleMu':
-    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop
+    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] 
 
 elif cutFlow == 'DoubleMu':
     selectedComponents = QCDHT + DYJetsM50HT
 
 elif cutFlow == 'SinglePhoton':
-    selectedComponents = [GJets_HT400to600]
-    # selectedComponents = QCDHT + GJetsHT #GJets missing 400 - 600 
+    selectedComponents = QCDHT + GJetsHT #GJets missing 400 - 600 
 
 elif cutFlow == 'MultiJetEnriched':
     selectedComponents = QCDHT
