@@ -1,6 +1,8 @@
 from CMGTools.RootTools.RootTools import *
 from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 
+#All cuts chosen as ones for the signal region from the 2012 analysis
+
 ##------------------------------------------
 ## Redefine analyzer parameters
 ##------------------------------------------
@@ -45,7 +47,7 @@ jetAna.relaxJetId      = False
 jetAna.doPuId          = False
 jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
-jetAna.jetPt           = 50.
+jetAna.jetPt           = 40.
 jetAna.recalibrateJets = False
 jetAna.jetLepDR        = 0.4
 
@@ -102,9 +104,9 @@ ttHAlphaTControlAna = cfg.Analyzer(
 metAna.doMetNoMu=True
 
 #ESums
-ttHJetMETSkim.htCut       = ('htJet50j', 0)
+ttHJetMETSkim.htCut       = ('htJet40j', 0)
 ttHJetMETSkim.mhtCut      = ('htJet40j', 0)
-ttHJetMETSkim.nBJet       = ('CSVM', 0, "jet.pt() > 50")     # require at least 0 jets passing CSVM and pt > 50
+ttHJetMETSkim.nBJet       = ('CSVM', 0, "jet.pt() > 40")     # require at least 0 jets passing CSVM and pt > 50
 
 from CMGTools.TTHAnalysis.analyzers.ttHObjectSkimmer import ttHObjectSkimmer
 from CMGTools.TTHAnalysis.analyzers.ttHIsoTrackSkimmer import ttHIsoTrackSkimmer
@@ -161,7 +163,8 @@ ttHAlphaTSkim = cfg.Analyzer(
                           (0.60, 275, 325),   #(aT, HTlow, HThigh)
                           (0.55, 325, 99999)],#Any region not specified will be vetoed
             invertAlphaT = False, #Invert the alphaT requirement
-            mhtDivMetCut = ('mhtJet50j','met',1.25), #MHT/MET cut
+            mhtDivMetCut = ('mhtJet40j','met',1.25), #MHT/MET cut
+            htJet = 'htJet40j'
             )
 
 ttHAlphaTControlSkim = cfg.Analyzer(
