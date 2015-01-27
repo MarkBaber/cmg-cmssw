@@ -8,8 +8,8 @@ from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 ##------------------------------------------
 # Muons
 #------------------------------
-lepAna.loose_muon_pt               = 10.,
-lepAna.loose_muon_eta              = 2.5,
+lepAna.loose_muon_pt               = 10.
+lepAna.loose_muon_eta              = 2.5
 lepAna.loose_muon_id               = "POG_ID_Tight"
 lepAna.loose_muon_dxy              = 0.2
 lepAna.loose_muon_dz               = 0.5
