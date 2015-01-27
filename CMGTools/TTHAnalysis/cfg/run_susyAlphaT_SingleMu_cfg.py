@@ -24,22 +24,6 @@ ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoMu',1.25)
 ttHAlphaTControlSkim.mtwCut = (30,125)
 ttHAlphaTControlSkim.lepDeltaRCut = 0.5
 
-##------------------------------------------
-##  PRODUCER
-##------------------------------------------
-from CMGTools.TTHAnalysis.analyzers.treeProducerSusyAlphaT import * 
-## Tree Producer
-treeProducer = cfg.Analyzer(
-     AutoFillTreeProducer, name='treeProducerSusyAlphaT',
-     vectorTree = True,
-     saveTLorentzVectors = False,  # can set to True to get also the TLorentzVectors, but trees will be bigger
-     PDFWeights = PDFWeights,
-     globalVariables = susyAlphaT_globalVariables,
-     globalObjects = susyAlphaT_globalObjects,
-     collections = susyAlphaT_collections,
-)
-
-
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
 #if 'hep.ph.ic.ac.uk' in host:
@@ -61,24 +45,6 @@ selectedComponents = []
 #NEED to add WZ,WW,ZZ samples FIXME
 
 selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] 
-
-#-------- SEQUENCE
-
-#Insert the skimmers after their analysers in susyCoreSequence (for efficiency)
-susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna)+1,ttHJetMETSkim)
-susyCoreSequence.insert(susyCoreSequence.index(photonAna)+1,ttHPhotonSkim)
-susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHMuonSkim)
-susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHElectronSkim)
-susyCoreSequence.insert(susyCoreSequence.index(isoTrackAna)+1,ttHIsoTrackSkim)
-
-
-sequence = cfg.Sequence(susyCoreSequence + [
-                        ttHAlphaTAna,
-                        ttHAlphaTControlAna,
-                        ttHAlphaTSkim,
-                        ttHAlphaTControlSkim,
-                        treeProducer,
-                        ])
 
 if test == 1 :
     selectedComponents = [WJetsToLNu_HT600toInf]

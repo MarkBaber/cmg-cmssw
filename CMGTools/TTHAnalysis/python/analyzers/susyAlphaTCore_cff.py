@@ -10,27 +10,29 @@ from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 #------------------------------
 lepAna.loose_muon_pt               = 10.,
 lepAna.loose_muon_eta              = 2.5,
-lepAna.loose_muon_dxy              = 0.5
-lepAna.loose_muon_dz               = 1.0
-#ttHLepAna.loose_muon_relIso           = 0.15
+lepAna.loose_muon_id               = "POG_ID_Tight"
+lepAna.loose_muon_dxy              = 0.2
+lepAna.loose_muon_dz               = 0.5
+lepAna.loose_muon_relIso           = 0.12
 
 # Electrons
 #------------------------------
-lepAna.loose_electron_id           = "POG_Cuts_ID_2012_Veto"
+lepAna.loose_electron_id           = "POG_Cuts_ID_2012_Veto_full5x5"
 lepAna.loose_electron_pt           = 10
 lepAna.loose_electron_eta          = 2.5
-lepAna.loose_electron_dxy          = 0.5
-lepAna.loose_electron_dz           = 0.
-# ttHLepAna.loose_electron_relIso       = 0.15
-# ttHLepAna.loose_electron_lostHits     = 999 # no cut
+lepAna.loose_electron_dxy          = 0.02
+lepAna.loose_electron_dz           = 0.2
+lepAna.loose_electron_relIso       = 0.15
+lepAna.loose_electron_lostHits     = 1 
 # ttHLepAna.inclusive_electron_lostHits = 999 # no cut
-# ttHLepAna.ele_isoCorr                 = "deltaBeta"
-# ttHLepAna.ele_tightId                 = "Cuts_2012"
+lepAna.ele_isoCorr                 = "rhoArea"
+lepAna.ele_tightId                 = "Cuts_2012"
 
 # Photons
 #------------------------------
-photonAna.ptMin                        = 25,
-photonAna.epaMax                       = 2.5,
+photonAna.ptMin                        = 25
+photonAna.etaMax                       = 2.5
+photonAna.gammaID                     = "PhotonCutBasedIDTight"
 
 # Taus 
 #------------------------------
@@ -48,16 +50,14 @@ jetAna.doPuId          = False
 jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
 jetAna.jetPt           = 40.
-jetAna.recalibrateJets = False
+jetAna.recalibrateJets = "MC"
 jetAna.jetLepDR        = 0.4
+jetAna.smearJets       = False
 
 # ttHJetMCAna.smearJets     = False
 
 # Energy sums
 #------------------------------
-# NOTE: Currently energy sums are calculated with 40 GeV jets (ttHCoreEventAnalyzer.py)
-#       However, the input collection is cleanjets which have a 50 GeV cut so this is a labeling problem
-
 
 ##------------------------------------------
 ##  ISOLATED TRACK
@@ -104,7 +104,8 @@ ttHAlphaTControlAna = cfg.Analyzer(
 metAna.doMetNoMu=True
 
 #ESums
-ttHJetMETSkim.htCut       = ('htJet40j', 0)
+ttHJetMETSkim.jetPtCuts   = [100,100]
+ttHJetMETSkim.htCut       = ('htJet40j', 200)
 ttHJetMETSkim.mhtCut      = ('htJet40j', 0)
 ttHJetMETSkim.nBJet       = ('CSVM', 0, "jet.pt() > 40")     # require at least 0 jets passing CSVM and pt > 50
 
@@ -175,5 +176,39 @@ ttHAlphaTControlSkim = cfg.Analyzer(
             photonDeltaRCut = 0,
             )
 
+
+ 
+##------------------------------------------
+##  PRODUCER
+##------------------------------------------
+from CMGTools.TTHAnalysis.analyzers.treeProducerSusyAlphaT import * 
+## Tree Producer
+treeProducer = cfg.Analyzer(
+     AutoFillTreeProducer, name='treeProducerSusyAlphaT',
+     vectorTree = True,
+     saveTLorentzVectors = False,  # can set to True to get also the TLorentzVectors, but trees will be bigger
+     PDFWeights = PDFWeights,
+     globalVariables = susyAlphaT_globalVariables,
+     globalObjects = susyAlphaT_globalObjects,
+     collections = susyAlphaT_collections,
+)
+
+#-------- SEQUENCE
+
+#Insert the skimmers after their analysers in susyCoreSequence (for efficiency)
+susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna)+1,ttHJetMETSkim)
+susyCoreSequence.insert(susyCoreSequence.index(photonAna)+1,ttHPhotonSkim)
+susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHMuonSkim)
+susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHElectronSkim)
+susyCoreSequence.insert(susyCoreSequence.index(isoTrackAna)+1,ttHIsoTrackSkim)
+
+
+sequence = cfg.Sequence(susyCoreSequence + [
+                        ttHAlphaTAna,
+                        ttHAlphaTControlAna,
+                        ttHAlphaTSkim,
+                        ttHAlphaTControlSkim,
+                        treeProducer,
+                        ])
 
 

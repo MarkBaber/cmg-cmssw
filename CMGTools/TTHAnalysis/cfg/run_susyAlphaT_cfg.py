@@ -243,12 +243,8 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         treeProducer,
                         ])
 
-<<<<<<< HEAD
-if alphaTPSet.limitFiles:
-=======
 if test == 1 :
     selectedComponents = [WJetsToLNu_HT600toInf]
->>>>>>> Factorised out the run_susyAlphaT config into different ones for different things
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
