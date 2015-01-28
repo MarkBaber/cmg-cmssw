@@ -7,7 +7,7 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 0
+test = 1
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -48,7 +48,12 @@ selectedComponents = []
 selectedComponents = QCDHT + DYJetsM50HT
 
 if test == 1 :
-    selectedComponents = [WJetsToLNu_HT600toInf]
+
+    #Change any cuts
+    ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoMu',999)
+
+    #Select samples and limit the files
+    selectedComponents = [DYJetsToLL_M50_HT600toInf]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
