@@ -23,4 +23,7 @@ with open('summary.txt', 'w') as outfile:
                 else: 
                     break
             outfile.write("".join(x)+'\n')
+            print "".join(x)+'\n'
             outfile.write(infile.read())
+            infile.seek(0)
+            print infile.read()
