@@ -176,6 +176,15 @@ ttHAlphaTControlSkim = cfg.Analyzer(
             photonDeltaRCut = 0,
             )
 
+##------------------------------------------
+##  EXTRA GEN STUFF
+##------------------------------------------
+
+# Gen Info Analyzer
+from CMGTools.TTHAnalysis.analyzers.ttHGenBinningAnalyzer import ttHGenBinningAnalyzer
+ttHGenBinAna = cfg.Analyzer(
+    ttHGenBinningAnalyzer, name = 'ttHGenBinningAnalyzer'
+    )
 
  
 ##------------------------------------------
@@ -202,12 +211,12 @@ susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHMuonSkim)
 susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHElectronSkim)
 susyCoreSequence.insert(susyCoreSequence.index(isoTrackAna)+1,ttHIsoTrackSkim)
 
-
 sequence = cfg.Sequence(susyCoreSequence + [
                         ttHAlphaTAna,
                         ttHAlphaTControlAna,
                         ttHAlphaTSkim,
                         ttHAlphaTControlSkim,
+                        ttHGenBinAna,
                         treeProducer,
                         ])
 

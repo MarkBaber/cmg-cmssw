@@ -13,7 +13,7 @@ host = os.environ["HOSTNAME"]
 if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
-#Cuts forInclusive 
+#Cuts forInclusive (turn off all skimmers)
 ttHIsoTrackSkim.minObjects  = 0
 ttHIsoTrackSkim.maxObjects  = 999
 ttHLepSkim.minObjects  = 0
@@ -24,28 +24,12 @@ ttHMuonSkim.minObjects  = 0
 ttHMuonSkim.maxObjects  = 999
 ttHPhotonSkim.minObjects  = 0
 ttHPhotonSkim.maxObjects  = 999
-ttHAlphaTSkim.alphaTCuts = [(0.0, 0,99999 )]   #Turn off AlphaT cut
+ttHAlphaTSkim.alphaTCuts = [(-9999, 0,99999 )]   #Turn off AlphaT cut
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoMu',999)
 ttHAlphaTSkim.forwardJetVeto = False
 ttHJetMETSkim.jetPtCuts   = [0]
 ttHJetMETSkim.htCut       = ('htJet40j', 0)
 
-# Gen Info Analyzer
-# ttHGenAna = cfg.Analyzer(
-#     'ttHGenLevelAnalyzer',
-#     filterHiggsDecays = [0, 15, 23, 24],
-#     verbose = False,
-#     PDFWeights = [ pdf for pdf,num in PDFWeights ]
-#     )
-#
-# #Add this to the sequence
-# sequence.insert(sequence.index(ttHAlphaTControlSkim)+1,ttHGenAna)
-#
-# #Add new variables to the tree
-# susyAlphaT_globalVariables.extend([ 
-#      NTupleVariable("genBin", lambda ev : ev.genBin, help="Generator level binning quantity"),
-#      NTupleVariable("genQScale", lambda ev : ev.genQScale, help="Generator level binning quantity, QScale")]
-#      )
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
@@ -78,7 +62,7 @@ for comp in selectedComponents:
 if test == 1 :
 
     #Select samples and limit the files
-    selectedComponents = [DYJetsToLL_M50_HT600toInf]
+    selectedComponents = [QCD_HT_250To500]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
