@@ -7,7 +7,7 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 1
+test = 0
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -31,21 +31,21 @@ ttHJetMETSkim.jetPtCuts   = [0]
 ttHJetMETSkim.htCut       = ('htJet40j', 0)
 
 # Gen Info Analyzer
-ttHGenAna = cfg.Analyzer(
-    'ttHGenLevelAnalyzer',
-    filterHiggsDecays = [0, 15, 23, 24],
-    verbose = False,
-    PDFWeights = [ pdf for pdf,num in PDFWeights ]
-    )
-
-#Add this to the sequence
-sequence.insert(sequence.index(ttHAlphaTControlSkim)+1,ttHGenAna)
-
-#Add new variables to the tree
-susyAlphaT_globalVariables.extend([ 
-     NTupleVariable("genBin", lambda ev : ev.genBin, help="Generator level binning quantity"),
-     NTupleVariable("genQScale", lambda ev : ev.genQScale, help="Generator level binning quantity, QScale")]
-     )
+# ttHGenAna = cfg.Analyzer(
+#     'ttHGenLevelAnalyzer',
+#     filterHiggsDecays = [0, 15, 23, 24],
+#     verbose = False,
+#     PDFWeights = [ pdf for pdf,num in PDFWeights ]
+#     )
+#
+# #Add this to the sequence
+# sequence.insert(sequence.index(ttHAlphaTControlSkim)+1,ttHGenAna)
+#
+# #Add new variables to the tree
+# susyAlphaT_globalVariables.extend([ 
+#      NTupleVariable("genBin", lambda ev : ev.genBin, help="Generator level binning quantity"),
+#      NTupleVariable("genQScale", lambda ev : ev.genQScale, help="Generator level binning quantity, QScale")]
+#      )
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
