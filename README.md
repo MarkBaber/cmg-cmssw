@@ -55,7 +55,7 @@ cd CMGTools/TTHAnalysis/cfg/
 heppy TESTsusy run_susyAlphaT_cfg.py -N 1000 -f
 
 ```
-#Installtion of CMG Codes at IC for 706
+#Installation of CMG Codes at IC for 706
 ```
 source /vols/cms/grid/setup.sh
 cmsrel CMSSW_7_0_6_patch1
@@ -79,7 +79,10 @@ scram b -v -j 9
 
 #Installation of CMG Codes at IC for 723
 ```
-source /vols/cms/grid/setup.sh
+# make sure you have the required architechture
+export SCRAM_ARCH=slc6_amd64_gcc481
+
+source /cvmfs/cms.cern.ch/cmsset_default.sh
 cmsrel CMSSW_7_2_3
 cd CMSSW_7_2_3/src
 cmsenv
@@ -90,9 +93,10 @@ git remote add cmg-ra1 git@github.com:CMSRA1/cmg-cmssw-private.git
 git fetch cmg-ra1
 git config core.sparsecheckout true
 cat /vols/ssd00/cms/lucienlo/susy/phys14/public/CMSSW723/sparse-checkout >> .git/info/sparse-checkout
+
 # check out alphaT code
-git checkout cmg-ra1/Phys14_723
-git checkout -b Phys14_723
+git checkout cmg-ra1/CMGTools-from-CMSSW_7_2_3
+git checkout -b CMGTools-from-CMSSW_7_2_3
 
 # modify CMGTools/TTHAnalysis/BuildFile
 sed -i 's@/afs/cern.ch/cms@/cvmfs/cms.cern.ch@g' CMGTools/TTHAnalysis/BuildFile.xml
