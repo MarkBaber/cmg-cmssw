@@ -16,6 +16,11 @@ susyCore_globalVariables = [
 
             NTupleVariable("nJet40", lambda ev: sum([j.pt() > 40 for j in ev.cleanJets]), int, help="Number of jets with pt > 40, |eta|<2.4"),
             NTupleVariable("nJet40a", lambda ev: sum([j.pt() > 40 for j in ev.cleanJetsAll]), int, help="Number of jets with pt > 40, |eta|<4.7"),
+            NTupleVariable("nBJetCMVALoose25", lambda ev: sum([j.btagWP("CMVAL") for j in ev.cleanJets]), int, help="Number of jets with pt > 25 passing CMVA Loose"),
+            NTupleVariable("nBJetCMVAMedium25", lambda ev: sum([j.btagWP("CMVAM") for j in ev.cleanJets]), int, help="Number of jets with pt > 25 passing CMVA Medium"),
+            NTupleVariable("nBJetCMVATight25", lambda ev: sum([j.btagWP("CMVAT") for j in ev.cleanJets]), int, help="Number of jets with pt > 25 passing CMVA Tight"),
+            NTupleVariable("nJet40", lambda ev: sum([j.pt() > 40 for j in ev.cleanJets]), int, help="Number of jets with pt > 40, |eta|<3.0"),
+            NTupleVariable("nJet40a", lambda ev: sum([j.pt() > 40 for j in ev.cleanJetsAll]), int, help="Number of jets with pt > 40, |eta|<5.0"),
             NTupleVariable("nBJetLoose40", lambda ev: sum([j.btagWP("CSVv2IVFL") for j in ev.cleanJets if j.pt() > 40]), int, help="Number of jets with pt > 40 passing CSV loose"),
             NTupleVariable("nBJetMedium40", lambda ev: sum([j.btagWP("CSVv2IVFM") for j in ev.bjetsMedium if j.pt() > 40]), int, help="Number of jets with pt > 40 passing CSV medium"),
             NTupleVariable("nBJetTight40", lambda ev: sum([j.btagWP("CSVv2IVFT") for j in ev.bjetsMedium if j.pt() > 40]), int, help="Number of jets with pt > 40 passing CSV tight"),
