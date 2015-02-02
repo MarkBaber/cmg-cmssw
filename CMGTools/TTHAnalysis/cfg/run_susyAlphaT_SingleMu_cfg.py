@@ -44,7 +44,7 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] 
+selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop
 
 if test == 1 :
     selectedComponents = [WJetsToLNu_HT600toInf]
