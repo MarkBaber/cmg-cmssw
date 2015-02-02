@@ -7,14 +7,16 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 0
+test = 1
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
 #Cuts
-ttHAlphaTSkim.alphaTCuts = [(0.51, 200,99999 )]   #Flatten AlphaT Cut
+ttHAlphaTSkim.alphaTCuts = [(0.5, 200,99999 )]   #Flatten AlphaT Cut
+ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
+
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
@@ -36,10 +38,10 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #Zinv missing 400-600
+selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
 
 if test == 1 :
-    selectedComponents = [TTJets]
+    selectedComponents = [DM_Monojet_M1000_V]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]

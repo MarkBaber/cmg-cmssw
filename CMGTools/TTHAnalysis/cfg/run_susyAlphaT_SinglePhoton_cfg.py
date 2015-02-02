@@ -22,6 +22,7 @@ ttHPhotonSkim.maxObjects  = 1
 ttHAlphaTSkim.alphaTCuts = [(0.51, 200,99999 )]   
 ttHAlphaTControlSkim.photonDeltaRCut = 1.0
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','met',9999) #turn off MHT/MET cut
+ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
