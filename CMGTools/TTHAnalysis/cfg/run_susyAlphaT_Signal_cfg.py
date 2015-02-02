@@ -7,7 +7,7 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 1
+test = 0
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
