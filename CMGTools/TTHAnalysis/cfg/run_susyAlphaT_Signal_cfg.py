@@ -7,7 +7,7 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 0
+test = 1
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -38,7 +38,7 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = [DM_Monojet_M1000_V] + [DM_Monojet_M10_AV] #QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
+selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
 
 if test == 1 :
     selectedComponents = [DM_Monojet_M1000_V]
