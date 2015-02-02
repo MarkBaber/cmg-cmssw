@@ -75,7 +75,7 @@ def main(outDir,cfg,cutFlow, tag):
             if location == 'CERN':
                 submissionArgs = "bsub -q 8nh -J "+output+" < batchScript.sh"
             elif location == 'Imperial':
-                submissionArgs = "qsub -q hepshort.q batchScript.sh"
+                submissionArgs = "qsub -q hepshort.q < batchScript.sh"
             else:
                 sys.exit("Don't know where I am, can't submit correctly")
 

@@ -19,4 +19,8 @@ elif test \! -f batchScript.sh; then
 fi
 LAB="$(basename $PWD)"; if [[ "$1" != "" ]]; then LAB=$1; fi;
 rename LSFJ OLD_LSFJ *; 
-bsub -q $Q -J $LAB < batchScript.sh
+if [ "$HOSTNAME" == "lx03.hep.ph.ic.ac.uk" ] || [ "$HOSTNAME" == "lx04.hep.ph.ic.ac.uk" ]; then
+  qsub -q $Q < batchScript.sh;
+else
+  bsub -q $Q -J $LAB < batchScript.sh
+fi
