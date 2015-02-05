@@ -60,7 +60,7 @@ def main(outDir,cfg,cutFlow, tag):
 
             #Get the right submission argument
             if location == 'CERN':
-                submissionArgs = "bsub -q 8nh -J "+output+" < batchScript.sh"
+                submissionArgs = "bsub -u /dev/null -q 8nh -J "+output+" < batchScript.sh"
             elif location == 'Imperial':
                 submissionArgs = "qsub -q hepshort.q batchScript.sh"
             else:
@@ -73,7 +73,7 @@ def main(outDir,cfg,cutFlow, tag):
 
             #Get the right submission argument
             if location == 'CERN':
-                submissionArgs = "bsub -q 8nh -J "+output+" < batchScript.sh"
+                submissionArgs = "bsub -u /dev/null -q 8nh -J "+output+" < batchScript.sh"
             elif location == 'Imperial':
                 submissionArgs = "qsub -q hepshort.q < batchScript.sh"
             else:
