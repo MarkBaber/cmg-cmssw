@@ -94,6 +94,29 @@ ttHAlphaTControlAna = cfg.Analyzer(
             ttHAlphaTControlAnalyzer, name='ttHAlphaTControlAnalyzer'
             )
 
+##------------------------------------------ 
+##  CONTROL VARIABLES
+##------------------------------------------ 
+
+from CMGTools.TTHAnalysis.analyzers.ttHMT2Control import ttHMT2Control
+
+ttHMT2Control = cfg.Analyzer(
+            ttHMT2Control, name = 'ttHMT2Control'
+            )
+
+
+
+##------------------------------------------
+##  TOLOLOGIAL VARIABLES: MT, MT2
+##------------------------------------------
+
+from CMGTools.TTHAnalysis.analyzers.ttHTopoVarAnalyzer import ttHTopoVarAnalyzer
+
+ttHTopoJetAna = cfg.Analyzer(
+            ttHTopoVarAnalyzer, name = 'ttHTopoVarAnalyzer',
+            doOnlyDefault = True
+            )
+
 
 #-------------------------------------------
 # CUTS AND VETOS
@@ -217,6 +240,8 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         ttHAlphaTSkim,
                         ttHAlphaTControlSkim,
                         ttHGenBinAna,
+			ttHMT2Control,
+			ttHTopoJetAna,
                         treeProducer,
                         ])
 
