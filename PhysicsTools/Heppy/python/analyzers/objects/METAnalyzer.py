@@ -153,15 +153,15 @@ class METAnalyzer( Analyzer ):
 
         phopx = 0
         phopy = 0
-        #sum muon momentum                                                                                                                                                                                                                            
+        #sum photon momentum                                                                                                                                                                                                                            
         for pho in event.selectedPhotons:
             phopx += pho.px()
             phopy += pho.py()
 
-        #subtract muon momentum and construct met                                                                                                                                                                                                     
-        px,py = event.metNoPhoton.px()-mupx, event.metNoPhoton.py()-mupy
+        #subtract photon momentum and construct met                                                                                                                                                                                                     
+        px,py = event.metNoPhoton.px()-phopx, event.metNoPhoton.py()-phopy
         event.metNoPhoton.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
-        px,py = event.metNoPhotonNoPU.px()-mupx, event.metNoPhotonNoPU.py()-mupy
+        px,py = event.metNoPhotonNoPU.px()-phopx, event.metNoPhotonNoPU.py()-phopy
         event.metNoPhotonNoPU.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
 
 
