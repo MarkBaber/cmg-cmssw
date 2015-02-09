@@ -18,7 +18,6 @@ if puRegime != "PU20bx25":
 ttHAlphaTSkim.alphaTCuts = [(0.5,200,900),(0.0,900,99999)]
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
-
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
 #if 'hep.ph.ic.ac.uk' in host:

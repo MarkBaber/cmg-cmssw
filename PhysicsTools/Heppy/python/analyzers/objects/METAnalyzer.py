@@ -147,6 +147,23 @@ class METAnalyzer( Analyzer ):
           self.metNoPhotonNoPU.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
           setattr(event, "metNoPhotonNoPU"+self.cfg_ana.collectionPostFix, self.metNoPhotonNoPU)
 
+    def makeMETNoPhoton(self, event):
+        event.metNoPhoton = copy.deepcopy(event.met)
+        event.metNoPhotonNoPU = copy.deepcopy(event.metNoPU)
+
+        phopx = 0
+        phopy = 0
+        #sum muon momentum                                                                                                                                                                                                                            
+        for pho in event.selectedPhotons:
+            phopx += pho.px()
+            phopy += pho.py()
+
+        #subtract muon momentum and construct met                                                                                                                                                                                                     
+        px,py = event.metNoPhoton.px()-mupx, event.metNoPhoton.py()-mupy
+        event.metNoPhoton.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
+        px,py = event.metNoPhotonNoPU.px()-mupx, event.metNoPhotonNoPU.py()-mupy
+        event.metNoPhotonNoPU.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
+
 
     def makeMETs(self, event):
         import ROOT
