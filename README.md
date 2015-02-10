@@ -2,7 +2,12 @@
 If you are getting a compilation problem for modules found in the TauAnalysis package, you may need to add the line /TauAnalysis/ to your sparse-checkout:
 ```
 cd $CMSSW_BASE/src
+
+#Append the sparse-checkout
 echo /TauAnalysis/ >> .git/info/sparse-checkout
+
+#Update your new checkout
+git read-tree -mu HEAD
 ```
 
 # cmg-cmssw-private
