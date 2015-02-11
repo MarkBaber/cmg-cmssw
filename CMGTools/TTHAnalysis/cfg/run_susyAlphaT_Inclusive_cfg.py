@@ -35,7 +35,7 @@ ttHJetMETSkim.htCut       = ('htJet40j', 0)
 #Import general PHYS14 samples and RA1-specific samples
 #if 'hep.ph.ic.ac.uk' in host:
 from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'lxplus' in host:
+if 'cern.ch' in host:
     from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 
@@ -59,7 +59,7 @@ for comp in selectedComponents:
     comp.splitFactor = 2
     comp.files = comp.files[:1]
 
-if test == 1 :
+if test == "1" :
 
     #Select samples and limit the files
     selectedComponents = [QCD_HT_250To500]

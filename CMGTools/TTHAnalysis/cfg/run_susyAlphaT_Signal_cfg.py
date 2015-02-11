@@ -21,7 +21,7 @@ ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for t
 #Import general PHYS14 samples and RA1-specific samples
 #if 'hep.ph.ic.ac.uk' in host:
 from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'lxplus' in host:
+if 'cern.ch' in host:
     from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 triggerFlagsAna.triggerBits = {
@@ -44,8 +44,9 @@ from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
 test = getHeppyOption('test')
 if test: print "Will run test scenario %r" % test
 
-if test == 1 :
-    selectedComponents = [DM_Monojet_M1000_V]
+if test == "1" :
+
+    selectedComponents = [TTJets]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]

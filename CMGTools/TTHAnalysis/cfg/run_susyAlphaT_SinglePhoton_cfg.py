@@ -25,9 +25,8 @@ ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for t
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
-#if 'hep.ph.ic.ac.uk' in host:
 from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'lxplus' in host:
+if 'cern.ch' in host:
     from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 triggerFlagsAna.triggerBits = {
@@ -43,14 +42,14 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT_fixPhoton + GJetsHT_fixPhoton
+selectedComponents = QCDHT_fixPhoton + GJets_fixPhoton
 
 #Get testing from command line
 from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
 test = getHeppyOption('test')
 if test: print "Will run test scenario %r" % test
 
-if test == 1 :
+if test == "1" :
     selectedComponents = [GJets_HT600toInf]
     for comp in selectedComponents:
         comp.splitFactor = 1
