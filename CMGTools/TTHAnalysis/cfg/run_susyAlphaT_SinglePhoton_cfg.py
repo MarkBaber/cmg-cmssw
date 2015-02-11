@@ -8,7 +8,6 @@ import os
 # Configurables
 puRegime = "PU20bx25" 
 cutFlow = "Signal"
-test = 0
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -46,6 +45,10 @@ selectedComponents = []
 
 selectedComponents = QCDHT_fixPhoton + GJetsHT_fixPhoton
 
+#Get testing from command line
+from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
+test = getHeppyOption('test')
+if test: print "Will run test scenario %r" % test
 
 if test == 1 :
     selectedComponents = [GJets_HT600toInf]

@@ -7,7 +7,6 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 0
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -39,6 +38,11 @@ selectedComponents = []
 #NEED to add WZ,WW,ZZ samples FIXME
 
 selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
+
+#Get testing from command line
+from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
+test = getHeppyOption('test')
+if test: print "Will run test scenario %r" % test
 
 if test == 1 :
     selectedComponents = [DM_Monojet_M1000_V]

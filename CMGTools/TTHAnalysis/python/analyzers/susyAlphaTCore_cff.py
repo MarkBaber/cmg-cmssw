@@ -24,9 +24,10 @@ lepAna.loose_electron_dxy          = 0.02
 lepAna.loose_electron_dz           = 0.2
 lepAna.loose_electron_relIso       = 0.15
 lepAna.loose_electron_lostHits     = 1 
-# ttHLepAna.inclusive_electron_lostHits = 999 # no cut
-lepAna.ele_isoCorr                 = "rhoArea"
-lepAna.ele_tightId                 = "Cuts_2012"
+
+# Lepton general
+#------------------------------
+#lepAna.doMiniIsolation = False
 
 # Photons
 #------------------------------
@@ -45,14 +46,10 @@ tauAna.vetoLeptonsPOG = True
 
 # Jets (for event variables do apply the jetID and not PUID yet)
 #------------------------------
-jetAna.relaxJetId      = False
-jetAna.doPuId          = False
 jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
 jetAna.jetPt           = 40.
-jetAna.recalibrateJets = "MC"
-jetAna.jetLepDR        = 0.4
-jetAna.smearJets       = False
+jetAna.mGT = "PHYS14_25_V2_LowPtHenningFix" #Henning's fix for spike in low PT JEC
 
 # ttHJetMCAna.smearJets     = False
 
@@ -247,3 +244,6 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         ])
 
 
+#Increase the logging level to give us full information
+import logging
+logging.basicConfig(level=logging.INFO)

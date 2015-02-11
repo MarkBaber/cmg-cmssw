@@ -8,7 +8,6 @@ import os
 # Configurables
 puRegime = "PU20bx25" 
 cutFlow = "Signal"
-test = 0
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -46,6 +45,11 @@ selectedComponents = []
 #NEED to add WZ,WW,ZZ samples FIXME
 
 selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop
+
+#Get testing from command line
+from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
+test = getHeppyOption('test')
+if test: print "Will run test scenario %r" % test
 
 if test == 1 :
     selectedComponents = [WJetsToLNu_HT600toInf]
