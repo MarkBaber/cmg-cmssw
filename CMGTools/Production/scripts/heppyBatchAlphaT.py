@@ -3,7 +3,7 @@
 import sys
 import os
 import subprocess
-import datetime
+import time
 import optparse
 import whereAmI
 
@@ -37,15 +37,15 @@ def main(outDir,cfg,cutFlow, tag):
     location = whereAmI.whereAmI()
     
     #Get the relevant variables from the config
-    now = datetime.datetime.now()
+    now = time.strftime("%Y%m%d")
 
     outFolders = []
     if cfg:
         for name in cfg:
-            outFolders.append( str(now.year)+str(now.month)+str(now.day)+"_"+name.replace('/','_').replace('.py','')+tag )
+            outFolders.append( now+"_"+name.replace('/','_').replace('.py','')+tag )
     elif cutFlow:
         for name in cutFlow:
-            outFolders.append( str(now.year)+str(now.month)+str(now.day)+"_"+name+tag )
+            outFolders.append( now+"_"+name+tag )
 
     outDir = os.path.abspath(outDir)
 
