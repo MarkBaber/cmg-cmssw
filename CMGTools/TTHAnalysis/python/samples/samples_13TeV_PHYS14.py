@@ -155,16 +155,16 @@ DYJetsToLL_M50_HT600toInf,
 
 DYJetsMuMuM50_PtZ180 = kreator.makeMCComponent("DYJetsMuMuM50_PtZ180", "/DYJetsToMuMu_PtZ-180_M-50_13TeV-madgraph/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v3/MINIAODSIM", "CMS", ".*root")
 
-# GJets_HT100to200 = kreator.makeMCComponent("GJets_HT100to200", "/GJets_HT-100to200_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",1534)
-# GJets_HT200to400 = kreator.makeMCComponent("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",489.9)
-# GJets_HT400to600 = kreator.makeMCComponent("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",62.05)
-# GJets_HT600toInf = kreator.makeMCComponent("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",20.87)
+GJets_HT100to200 = kreator.makeMCComponent("GJets_HT100to200", "/GJets_HT-100to200_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",1534)
+GJets_HT200to400 = kreator.makeMCComponent("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",489.9)
+GJets_HT400to600 = kreator.makeMCComponent("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",62.05)
+GJets_HT600toInf = kreator.makeMCComponent("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",20.87)
 
-# with ECAL problems fixed
-GJets_HT100to200 = kreator.makeMyPrivateMCComponent("GJets_HT100to200", "/GJets_HT-100to200_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",1534)
-GJets_HT200to400 = kreator.makeMyPrivateMCComponent("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",489.9)
-GJets_HT400to600 = kreator.makeMyPrivateMCComponent("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",62.05)
-GJets_HT600toInf = kreator.makeMyPrivateMCComponent("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",20.87)
+# with ECAL problems fixed (redundant as now have GJetsHT_fixPhoton)
+# GJets_HT100to200 = kreator.makeMyPrivateMCComponent("GJets_HT100to200", "/GJets_HT-100to200_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",1534)
+# GJets_HT200to400 = kreator.makeMyPrivateMCComponent("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",489.9)
+# GJets_HT400to600 = kreator.makeMyPrivateMCComponent("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",62.05)
+# GJets_HT600toInf = kreator.makeMyPrivateMCComponent("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",20.87)
 
 GJetsHT = [
 GJets_HT100to200,

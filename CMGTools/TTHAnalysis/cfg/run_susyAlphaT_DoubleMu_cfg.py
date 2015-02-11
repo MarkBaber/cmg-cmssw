@@ -46,7 +46,7 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT + DYJetsM50HT
+selectedComponents = QCDHT_fixPhoton + DYJetsM50HT
 
 if test == 1 :
 

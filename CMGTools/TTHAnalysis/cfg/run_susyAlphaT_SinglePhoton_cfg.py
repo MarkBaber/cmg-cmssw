@@ -44,7 +44,7 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT + GJetsHT #GJets missing 400 - 600 
+selectedComponents = QCDHT_fixPhoton + GJetsHT_fixPhoton
 
 
 if test == 1 :
