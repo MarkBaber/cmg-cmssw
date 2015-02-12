@@ -7,7 +7,6 @@ import os
 
 # Configurables
 puRegime = "PU20bx25" 
-test = 0
 host = os.environ["HOSTNAME"]
 
 if puRegime != "PU20bx25":
@@ -58,6 +57,11 @@ selectedComponents = QCDHT + [TTJets] + WJetsToLNuHT + SingleTop + ZJetsToNuNuHT
 for comp in selectedComponents:
     comp.splitFactor = 2
     comp.files = comp.files[:1]
+
+#Get testing from command line
+from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
+test = getHeppyOption('test')
+if test: print "Will run test scenario %r" % test
 
 if test == "1" :
 
