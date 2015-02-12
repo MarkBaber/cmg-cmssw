@@ -226,6 +226,8 @@ treeProducer = cfg.Analyzer(
 #-------- SEQUENCE
 
 #Insert the skimmers after their analysers in susyCoreSequence (for efficiency)
+susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna)+1,ttHAlphaTAna)
+susyCoreSequence.insert(susyCoreSequence.index(ttHAlphaTAna)+1,ttHAlphaTSkim)
 susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna)+1,ttHJetMETSkim)
 susyCoreSequence.insert(susyCoreSequence.index(photonAna)+1,ttHPhotonSkim)
 susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHMuonSkim)
@@ -233,16 +235,13 @@ susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHElectronSkim)
 susyCoreSequence.insert(susyCoreSequence.index(isoTrackAna)+1,ttHIsoTrackSkim)
 
 sequence = cfg.Sequence(susyCoreSequence + [
-                        ttHAlphaTAna,
                         ttHAlphaTControlAna,
-                        ttHAlphaTSkim,
                         ttHAlphaTControlSkim,
                         ttHGenBinAna,
 			ttHMT2Control,
 			ttHTopoJetAna,
                         treeProducer,
                         ])
-
 
 #Increase the logging level to give us full information
 import logging

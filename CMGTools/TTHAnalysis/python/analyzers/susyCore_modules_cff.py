@@ -394,12 +394,12 @@ susyCoreSequence = [
     #ttHLepMCAna,
     photonAna,
     tauAna,
-    isoTrackAna,
     jetAna,
     #ttHFatJetAna,  # out of core sequence for now
     #ttHSVAna, # out of core sequence for now
     metAna,
     ttHCoreEventAna,
+    isoTrackAna,
     #ttHJetMETSkim
     triggerFlagsAna,
     eventFlagsAna,

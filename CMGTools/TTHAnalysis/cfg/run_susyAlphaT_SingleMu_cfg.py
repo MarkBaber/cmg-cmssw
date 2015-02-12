@@ -52,7 +52,7 @@ test = getHeppyOption('test')
 if test: print "Will run test scenario %r" % test
 
 if test == "1" :
-    selectedComponents = [WJetsToLNu_HT600toInf]
+    selectedComponents = [TTJets]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
