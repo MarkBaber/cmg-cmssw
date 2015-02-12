@@ -26,7 +26,7 @@ ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for t
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
 from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'cern.ch' in host:
+if 'hep.ph.ic.ac.uk' not in host:
     from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
 triggerFlagsAna.triggerBits = {
