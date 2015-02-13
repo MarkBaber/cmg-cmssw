@@ -14,7 +14,7 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     NTupleVariable("ht40",           lambda ev : ev.htJet40j,    help="H_{T} computed from only jets (with |eta|<3, pt > 40 GeV)"),
     NTupleVariable("ht50",           lambda ev : ev.htJet50j,    help="H_{T} computed from only jets (with |eta|<3, pt > 50 GeV)"),
     NTupleVariable("deltaPhiMin",  lambda ev : ev.deltaPhiMin_had, help="minimal deltaPhi between the MET and the four leading jets with pt>40 and eta<2.4"),
-    NTupleVariable("diffMetMht",   lambda ev : ev.diffMetMht_had,   help="abs( vec(mht) - vec(met) )"),
+    #NTupleVariable("diffMetMht",   lambda ev : ev.diffMetMht_had,   help="abs( vec(mht) - vec(met) )"),
     NTupleVariable("mht40_pt",       lambda ev : ev.mhtJet40j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j, help="H_{T}^{miss} #phi computed from onlyy jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("mht50_pt",       lambda ev : ev.mhtJet50j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
@@ -39,8 +39,6 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
 
     NTupleVariable("alphaT",        lambda ev: ev.alphaT, help="AlphaT computed using jets with pt > 50, |eta|<3"),
 
-    # NTupleVariable("mZ1",           lambda ev: ev.bestZ1[0], help="Best m(ll) SF/OS"),
-    
     # MT2
     ##--------------------------------------------------
     NTupleVariable("mt2_had", lambda ev: ev.mt2_had, float, help="mt2(j1,j2,met) with jets "),
@@ -56,7 +54,7 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     ##--------------------------------------------------
     NTupleVariable("mtw", lambda ev: ev.mtw, help="mt(l,met)"),
     NTupleVariable("mtwTau", lambda ev: ev.mtwTau, help="mt(tau,met)"),
-    NTupleVariable("IsoTrack_mtw", lambda ev: ev.mtwIsoTrack, help="mt(isoTrack,met)"),
+    NTupleVariable("mtwIsoTrack", lambda ev: ev.mtwIsoTrack, help="mt(isoTrack,met)"),
     NTupleVariable("mll", lambda ev: ev.mll, help="Invariant mass of the two lead leptons"),
 
     ##--------------------------------------------------
@@ -76,22 +74,23 @@ susyAlphaT_collections = susyCore_collections.copy()
 susyAlphaT_collections.update({
     # put more here
     #"selectedLeptons"  : NTupleCollection("lep",      leptonTypeSusy,           50, help="Leptons after the preselection", filter=lambda l : l.pt()>10 ),
-    "selectedTaus"     : NTupleCollection("tau",      tauTypeSusy,              50, help="Taus after the preselection"),
     "cleanJetsAll"     : NTupleCollection("jet",      jetTypeSusy,             100, help="all jets (w/ x-cleaning, w/ ID applied w/o PUID applied pt > 40 |eta| < 5) , sorted by pt", filter=lambda l : l.pt()>40  ),
     "selectedPhotons"  : NTupleCollection("gamma",    photonTypeSusy,           50, help="photons with pt > 25 and loose cut based ID"),
     "selectedIsoTrack" : NTupleCollection("isoTrack", isoTrackType,             50, help="isoTrack, sorted by pt"),
+
+    # leptons and taus 
+    "selectedMuons" : NTupleCollection("muon", leptonTypeSusy, 50, help="Muons selected by the analysis"),
+    "selectedElectrons" : NTupleCollection("ele", leptonTypeSusy, 50, help="Electrons selected by the analysis"),
+    "selectedTaus"     : NTupleCollection("tau",      tauTypeSusy,              50, help="Taus after the preselection"),
 
     #Gen collections
     "genParticles"     : NTupleCollection("genPart",  genParticleWithMotherId, 200, help="all pruned genparticles"),
     "genJets"         : NTupleCollection("genJet",     genParticleType, 10, help="Generated jets (not cleaned)"),
 
-    # add stuff for testing
-    "selectedMuons" : NTupleCollection("muon", leptonTypeSusy, 50, help="Muons selected by the analysis"),
-    "selectedElectrons" : NTupleCollection("ele", leptonTypeSusy, 50, help="Electrons selected by the analysis"),
-
     # dR jet lep for each lepton
-    # not putting in for now, maybe in future
+    # not necessary as muon and electron have jet DR in tree already
     #"minDeltaRLepJet"  : NTupleCollection("minDeltaRLepJet", double, 50, help="Min deltaR between a lepton and all the jets"),
+    #"minDeltaRPhoJet"  : NTupleCollection("minDeltaRPhoJet", double, 50, help="Min deltaR between a photon and all the jets"),
 })
 
             

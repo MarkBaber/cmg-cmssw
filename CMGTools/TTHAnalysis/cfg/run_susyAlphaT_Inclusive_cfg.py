@@ -66,7 +66,7 @@ if test: print "Will run test scenario %r" % test
 if test == "1" :
 
     #Select samples and limit the files
-    selectedComponents = [QCD_HT_250To500]
+    selectedComponents = [GJets_HT600toInf]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
