@@ -84,14 +84,15 @@ def main(outDir,cfg,cutFlow, tag):
             os.system("heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"'")
 
     #Write the git tag and commit into the version info
-    with open(output+'/versionInfo.txt', 'w') as versionInfo:
+    for output in outputs:
 
-        #Get the info from git
-        versionInfo.write("Tag for production: \n")
-        versionInfo.write(os.popen("cd "+cmssw_base+"/src/CMGTools && git describe --tags").read())
+        with open(output+'/versionInfo.txt', 'w') as versionInfo:
+            #Get the info from git
+            versionInfo.write("Tag for production: \n")
+            versionInfo.write(os.popen("cd "+cmssw_base+"/src/CMGTools && git describe --tags").read())
 
-        versionInfo.write("\nExtra information: \n")
-        versionInfo.write(os.popen("cd "+cmssw_base+"/src/CMGTools && git show --quiet").read())
+            versionInfo.write("\nExtra information: \n")
+            versionInfo.write(os.popen("cd "+cmssw_base+"/src/CMGTools && git show --quiet").read())
 
             
 if __name__ == '__main__':
