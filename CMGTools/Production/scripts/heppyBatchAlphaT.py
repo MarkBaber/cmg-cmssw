@@ -62,7 +62,7 @@ def main(outDir,cfg,cutFlow, tag):
             if location == 'CERN':
                 submissionArgs = "bsub -u /dev/null -q 8nh -J "+output+" < batchScript.sh"
             elif location == 'Imperial':
-                submissionArgs = "qsub -q hepshort.q batchScript.sh -o "+output+"/STDOUT.log -e "+output+"/STDERR.log"
+                submissionArgs = "qsub -q hepshort.q batchScript.sh -o "+output+"/ -e "+output+"/"
             else:
                 sys.exit("Don't know where I am, can't submit correctly")
 
@@ -75,7 +75,7 @@ def main(outDir,cfg,cutFlow, tag):
             if location == 'CERN':
                 submissionArgs = "bsub -u /dev/null -q 8nh -J "+output+" < batchScript.sh"
             elif location == 'Imperial':
-                submissionArgs = "qsub -q hepshort.q < batchScript.sh -o "+output+"/STDOUT.log -e "+output+"/STDERR.log"
+                submissionArgs = "qsub -q hepshort.q < batchScript.sh -o "+output+"/ -e "+output+"/"
 
             else:
                 sys.exit("Don't know where I am, can't submit correctly")
