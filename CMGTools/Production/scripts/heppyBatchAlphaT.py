@@ -22,6 +22,7 @@ def parse_args():
     parser.add_option('-c','--cutFlow', type ='string',action='callback',callback=cutFlow_callback,
             help = 'Standard cfg file to be run (for latest cut flows use e g --cutFlow SingleMu Signal ). For multiple choices separate by spaces')
     parser.add_option('-t','--tag',help = 'additional output to folder name',default = '')
+    parser.add_option('-q','--queue',help = 'The queue for batch submission',default = '')
     options,args = parser.parse_args()
     if not options.outDir:
         parser.error('Need output directory')
@@ -31,7 +32,20 @@ def parse_args():
         parser.error('Please choose some form of input')
     return options
 
-def main(outDir,cfg,cutFlow, tag):
+def getSubmissionArgs(output, location, queue):
+
+    #Get the right submission argument
+    if location == 'CERN':
+        if queue=='': queue='8nh'
+        return "bsub -u /dev/null -q "+queue+" -J "+output+" < batchScript.sh"
+    elif location == 'Imperial':
+        if queue=='': queue='hepshort.q'
+        return "qsub -q "+queue+" batchScript.sh -o "+output+"/ -e "+output+"/"
+    else:
+        sys.exit("Don't know where I am, can't submit correctly")
+
+
+def main(outDir,cfg,cutFlow,tag,queue):
     
     #Find out if at CERN or imperial
     location = whereAmI.whereAmI()
@@ -58,28 +72,14 @@ def main(outDir,cfg,cutFlow, tag):
     if cfg:
         for output,name in zip(outputs,cfg):
 
-            #Get the right submission argument
-            if location == 'CERN':
-                submissionArgs = "bsub -u /dev/null -q 8nh -J "+output+" < batchScript.sh"
-            elif location == 'Imperial':
-                submissionArgs = "qsub -q hepshort.q batchScript.sh -o "+output+"/ -e "+output+"/"
-            else:
-                sys.exit("Don't know where I am, can't submit correctly")
+            submissionArgs = getSubmissionArgs(output, location, queue) 
 
             os.system("heppy_batch.py -o "+output+" "+ name +" -b '"+submissionArgs+"'")
 
     elif cutFlow:
         for output,name in zip(outputs,cutFlow):
 
-            #Get the right submission argument
-            if location == 'CERN':
-                submissionArgs = "bsub -u /dev/null -q 8nh -J "+output+" < batchScript.sh"
-            elif location == 'Imperial':
-                submissionArgs = "qsub -q hepshort.q < batchScript.sh -o "+output+"/ -e "+output+"/"
-
-            else:
-                sys.exit("Don't know where I am, can't submit correctly")
-
+            submissionArgs = getSubmissionArgs(output, location, queue) 
 
             os.system("heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"'")
 
