@@ -33,6 +33,8 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     NTupleVariable("nGammas25",    lambda ev: sum([l.pt() > 25 for l in ev.selectedPhotons]), int, help="Number of photons with at least pt > 25"),
     NTupleVariable("nBJet40",      lambda ev: sum([j.btagWP("CSVv2IVFM") for j in ev.cleanJets if j.pt() > 40]), int, help="Number of jets with pt > 40 passing CSV medium"),
     NTupleVariable("nBJet50",      lambda ev: sum([j.btagWP("CSVv2IVFM") for j in ev.cleanJets if j.pt() > 50]), int, help="Number of jets with pt > 50 passing CSV medium"),
+    NTupleVariable("nBJet40Eta2p4",      lambda ev: sum([j.btagWP("CSVv2IVFM") for j in ev.cleanJets if j.pt() > 40 and abs(j.eta()) < 2.4]), int, help="Number of jets with pt > 40 passing CSV medium"),
+    NTupleVariable("nBJet50Eta2p4",      lambda ev: sum([j.btagWP("CSVv2IVFM") for j in ev.cleanJets if j.pt() > 50 and abs(j.eta()) < 2.4]), int, help="Number of jets with pt > 50 passing CSV medium"),
 
     # AlphaT variables
     #----------------------------------------
