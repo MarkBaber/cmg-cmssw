@@ -14,6 +14,7 @@ lepAna.loose_muon_id               = "POG_ID_Tight"
 lepAna.loose_muon_dxy              = 0.2
 lepAna.loose_muon_dz               = 0.5
 lepAna.loose_muon_relIso           = 0.12
+# lepAna.loose_muon_isoCut     = lambda muon : muon.miniRelIso < 0.1
 
 # Electrons
 #------------------------------
@@ -23,11 +24,12 @@ lepAna.loose_electron_eta          = 2.5
 lepAna.loose_electron_dxy          = 0.02
 lepAna.loose_electron_dz           = 0.2
 lepAna.loose_electron_relIso       = 0.15
+# lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
 lepAna.loose_electron_lostHits     = 1 
-
-# Lepton general
-#------------------------------
-#lepAna.doMiniIsolation = False
+# ttHLepAna.inclusive_electron_lostHits = 999 # no cut
+lepAna.ele_isoCorr                 = "rhoArea"
+lepAna.ele_tightId                 = "Cuts_2012"
+lepAna.doMiniIsolation = True
 
 # Photons
 #------------------------------
