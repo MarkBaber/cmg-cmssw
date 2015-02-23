@@ -44,6 +44,7 @@ from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
 test = getHeppyOption('test')
 if test: print "Will run test scenario %r" % test
 
+#For testing one file from a dataset listed in samples/...
 if test == "1" :
 
     selectedComponents = [TTJets]
@@ -51,11 +52,13 @@ if test == "1" :
         comp.splitFactor = 1
         comp.files = comp.files[:1]
 
+#For running on a local file
 if test == "2" :
 
     comp = cfg.MCComponent(
             name = "DM_test",
             files =  [ '/afs/cern.ch/work/p/penning/public/miniAOD_step3_PAT_mDM_50_mPhi125.root'],
+            #files =  [ '/afs/cern.ch/work/a/aelwood/public/ntuples/TtbarMiniAOD.root'],
             xSection = 1,
         )
 
