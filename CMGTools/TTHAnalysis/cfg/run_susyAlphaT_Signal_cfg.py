@@ -51,6 +51,16 @@ if test == "1" :
         comp.splitFactor = 1
         comp.files = comp.files[:1]
 
+if test == "2" :
+
+    comp = cfg.MCComponent(
+            name = "DM_test",
+            files =  [ '/afs/cern.ch/work/p/penning/public/miniAOD_step3_PAT_mDM_50_mPhi125.root'],
+            xSection = 1,
+        )
+
+    selectedComponents = [comp]
+    comp.splitFactor = 1
 
 
 # the following is declared in case this cfg is used in input to the heppy.py script
