@@ -384,7 +384,7 @@ susyCoreSequence = [
     triggerAna,
     pileUpAna,
     genAna,
-    genHiggsAna,
+    #genHiggsAna,
     genHFAna,
     pdfwAna,
     susyScanAna,

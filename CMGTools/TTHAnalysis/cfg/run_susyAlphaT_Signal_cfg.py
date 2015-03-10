@@ -77,7 +77,7 @@ if test == "3" :
 
     selectedComponents = [
             cfg.MCComponent(
-            name = "mDM200_mPhi100",
+            name = "mDM200_mPhi100_A",
             files =  [ 
             '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM200_mPhi100_fast.root',
             ],
@@ -85,7 +85,7 @@ if test == "3" :
             ),
 
             cfg.MCComponent(
-            name = "mDM300_mPhi800",
+            name = "mDM300_mPhi800_A",
             files =  [ 
             '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM300_mPhi800_fast.root',
             ],
@@ -93,7 +93,7 @@ if test == "3" :
             ),
             
             cfg.MCComponent(
-            name = "mDM50_mPhi1100",
+            name = "mDM50_mPhi1100_A",
             files =  [ 
             '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM50_mPhi1100_fast.root',
             ],
@@ -101,7 +101,7 @@ if test == "3" :
             ),
             
             cfg.MCComponent(
-            name = "mDM100_mPhi200",
+            name = "mDM100_mPhi200_S",
             files =  [ 
             '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM100_mPhi200_fast.root',
             ],
@@ -109,7 +109,7 @@ if test == "3" :
             ),
 
             cfg.MCComponent(
-            name = "mDM300_mPhi800",
+            name = "mDM300_mPhi800_S",
             files =  [ 
             '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM300_mPhi800_fast.root',
             ],
@@ -117,7 +117,7 @@ if test == "3" :
             ),
             
             cfg.MCComponent(
-            name = "mDM50_mPhi900",
+            name = "mDM50_mPhi900_S",
             files =  [ 
             '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM50_mPhi900_fast.root',
             ],
