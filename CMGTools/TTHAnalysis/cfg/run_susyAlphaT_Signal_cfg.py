@@ -57,12 +57,75 @@ if test == "2" :
 
     comp = cfg.MCComponent(
             name = "DM_test",
-            files =  [ '/afs/cern.ch/work/p/penning/public/miniAOD_step3_PAT_mDM_50_mPhi125.root'],
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM200_mPhi100_fast.root',
+            # '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM300_mPhi800_fast.root',
+            # '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM50_mPhi1100_fast.root',
+            # '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM100_mPhi200_fast.root',
+            # '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM300_mPhi800_fast.root',
+            # '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM50_mPhi900_fast.root',
+            ],
             #files =  [ '/afs/cern.ch/work/a/aelwood/public/ntuples/TtbarMiniAOD.root'],
             xSection = 1,
         )
 
     selectedComponents = [comp]
+    comp.splitFactor = 1
+
+#For running on multiple local files
+if test == "3" :
+
+    selectedComponents = [
+            cfg.MCComponent(
+            name = "mDM200_mPhi100",
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM200_mPhi100_fast.root',
+            ],
+            xSection = 3.4527877671218938 ,
+            ),
+
+            cfg.MCComponent(
+            name = "mDM300_mPhi800",
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM300_mPhi800_fast.root',
+            ],
+            xSection = 2.8572701088551558,
+            ),
+            
+            cfg.MCComponent(
+            name = "mDM50_mPhi1100",
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_A_mDM50_mPhi1100_fast.root',
+            ],
+            xSection = 3.7660291027678352,
+            ),
+            
+            cfg.MCComponent(
+            name = "mDM100_mPhi200",
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM100_mPhi200_fast.root',
+            ],
+            xSection = 0.10175623329662978,
+            ),
+
+            cfg.MCComponent(
+            name = "mDM300_mPhi800",
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM300_mPhi800_fast.root',
+            ],
+            xSection = 0.0273193576555718284,
+            ),
+            
+            cfg.MCComponent(
+            name = "mDM50_mPhi900",
+            files =  [ 
+            '/afs/cern.ch/work/p/penning/public/fastsim/miniAOD_S_mDM50_mPhi900_fast.root',
+            ],
+            xSection = 6.0530406614865466,
+            ),
+
+            ]
+
     comp.splitFactor = 1
 
 
