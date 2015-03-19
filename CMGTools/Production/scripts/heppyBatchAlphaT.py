@@ -40,7 +40,7 @@ def getSubmissionArgs(output, location, queue):
         return "bsub -u /dev/null -q "+queue+" -J "+output+" < batchScript.sh"
     elif location == 'Imperial':
         if not queue: queue='hepshort.q'
-        return "qsub -q "+queue+" batchScript.sh -o "+output+"/ -e "+output+"/"
+        return "qsub -q "+queue+" -o "+output+"/ -e "+output+"/ batchScript.sh" 
     else:
         sys.exit("Don't know where I am, can't submit correctly")
 
