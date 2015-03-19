@@ -52,6 +52,7 @@ jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
 jetAna.jetPt           = 40.
 jetAna.mcGT = "PHYS14_25_V2_LowPtHenningFix" #Henning's fix for spike in low PT JEC
+jetAna.cleanGenJetsFromPhoton = True
 
 # ttHJetMCAna.smearJets     = False
 

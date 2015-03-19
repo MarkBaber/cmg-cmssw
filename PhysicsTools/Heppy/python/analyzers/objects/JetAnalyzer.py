@@ -203,6 +203,10 @@ class JetAnalyzer( Analyzer ):
                 self.cleanGenJets = cleanNearestJetOnly(self.cleanGenJets, photons, self.jetLepDR)
 
             
+            if self.cfg_ana.cleanGenJetsFromPhoton:
+                event.cleanGenJets = cleanNearestJetOnly(event.cleanGenJets, photons, self.jetLepDR)
+
+            
             #event.nGenJets25 = 0
             #event.nGenJets25Cen = 0
             #event.nGenJets25Fwd = 0

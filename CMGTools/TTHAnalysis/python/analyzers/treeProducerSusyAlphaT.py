@@ -16,9 +16,18 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     NTupleVariable("deltaPhiMin",  lambda ev : ev.deltaPhiMin_had, help="minimal deltaPhi between the MET and the four leading jets with pt>40 and eta<2.4"),
     #NTupleVariable("diffMetMht",   lambda ev : ev.diffMetMht_had,   help="abs( vec(mht) - vec(met) )"),
     NTupleVariable("mht40_pt",       lambda ev : ev.mhtJet40j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
-    NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j, help="H_{T}^{miss} #phi computed from onlyy jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("mht50_pt",       lambda ev : ev.mhtJet50j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
-    NTupleVariable("mht50_phi",      lambda ev : ev.mhtPhiJet50j, help="H_{T}^{miss} #phi computed from onlyy jets (with |eta|<3.0, pt > 50 GeV)"),
+    NTupleVariable("mht50_phi",      lambda ev : ev.mhtPhiJet50j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
+
+    #For gen
+    NTupleVariable("genHt40",           lambda ev : ev.htGenJet40j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
+    NTupleVariable("genHt50",           lambda ev : ev.htGenJet50j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 50 GeV)"),
+    NTupleVariable("genMht40_pt",       lambda ev : ev.mhtGenJet40j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("genMht40_phi",      lambda ev : ev.mhtPhiGenJet40j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("genMht50_pt",       lambda ev : ev.mhtGenJet50j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
+    NTupleVariable("genMht50_phi",      lambda ev : ev.mhtPhiGenJet50j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
+
     ##--------------------------------------------------
     NTupleVariable("biasedDPhi",   lambda ev : ev.biasedDPhi, help="biased delta phi"),
 
@@ -41,7 +50,8 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     # AlphaT variables
     #----------------------------------------
 
-    NTupleVariable("alphaT",        lambda ev: ev.alphaT, help="AlphaT computed using jets with pt > 50, |eta|<3"),
+    NTupleVariable("alphaT",        lambda ev: ev.alphaT, help="AlphaT computed using jets with pt > 40, |eta|<3"),
+    NTupleVariable("genAlphaT",        lambda ev: ev.genAlphaT, help="AlphaT computed using gen jets with pt > 40, |eta|<3"),
 
     # MT2
     ##--------------------------------------------------
@@ -88,8 +98,8 @@ susyAlphaT_collections.update({
     "selectedTaus"     : NTupleCollection("tau",      tauTypeSusy,              50, help="Taus after the preselection"),
 
     #Gen collections
-    "genParticles"     : NTupleCollection("genPart",  genParticleWithMotherId, 200, help="all pruned genparticles"),
-    "genJets"         : NTupleCollection("genJet",     genParticleType, 10, help="Generated jets (not cleaned)"),
+    #"genParticles"     : NTupleCollection("allGenPart",  genParticleWithMotherId, 200, help="all pruned genparticles"),
+    "cleanGenJets"         : NTupleCollection("genJet",     genParticleType, 10, help="Generated jets (cleaned)"),
 
     # dR jet lep for each lepton
     # not necessary as muon and electron have jet DR in tree already
