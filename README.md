@@ -26,14 +26,14 @@ git config core.sparsecheckout true
 cp /afs/cern.ch/user/c/cmgtools/public/sparse-checkout_72X_heppy .git/info/sparse-checkout
 
 # check out RA1 code
-git checkout cmsra1/CMGTools-from-CMSSW_7_2_3
-git checkout -b CMGTools-from-CMSSW_7_2_3
+git checkout cmsra1/RA1-CMGTools-from-CMSSW_7_2_3
+git checkout -b RA1-CMGTools-from-CMSSW_7_2_3
 
 # compile
 scram b -v -j 9
 
 #To update
-git pull cmsra1 CMGTools-from-CMSSW_7_2_3
+git pull cmsra1 RA1-CMGTools-from-CMSSW_7_2_3
 
 #Update from the central cmg repo
 #This should be done regularly to make sure we keep up to date
@@ -107,8 +107,8 @@ git config core.sparsecheckout true
 cat /vols/ssd00/cms/lucienlo/susy/phys14/public/CMSSW723/sparse-checkout >> .git/info/sparse-checkout
 
 # check out alphaT code
-git checkout cmg-ra1/CMGTools-from-CMSSW_7_2_3
-git checkout -b CMGTools-from-CMSSW_7_2_3
+git checkout cmg-ra1/RA1-CMGTools-from-CMSSW_7_2_3
+git checkout -b RA1-CMGTools-from-CMSSW_7_2_3
 
 # modify CMGTools/TTHAnalysis/BuildFile
 sed -i 's@/afs/cern.ch/cms@/cvmfs/cms.cern.ch@g' CMGTools/TTHAnalysis/BuildFile.xml
