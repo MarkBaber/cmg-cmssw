@@ -40,9 +40,8 @@ selectedComponents = []
 
 selectedComponents = [TTJets]
 for comp in selectedComponents:
-    comp.splitFactor = 1
-    comp.files = comp.files[:1]
-
+    comp.splitFactor = 2
+    comp.files = comp.files[:2]
 
 
 # the following is declared in case this cfg is used in input to the heppy.py script
