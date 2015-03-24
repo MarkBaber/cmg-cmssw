@@ -8,28 +8,33 @@ from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 ##------------------------------------------
 # Muons
 #------------------------------
+# Choose tight point from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideMuonId#Tight_Muon
 lepAna.loose_muon_pt               = 10.
 lepAna.loose_muon_eta              = 2.5
 lepAna.loose_muon_id               = "POG_ID_Tight"
 lepAna.loose_muon_dxy              = 0.2
 lepAna.loose_muon_dz               = 0.5
 lepAna.loose_muon_relIso           = 0.12
+lepAna.mu_isoCorr                  = "deltaBeta"
 # lepAna.loose_muon_isoCut     = lambda muon : muon.miniRelIso < 0.1
 
 # Electrons
 #------------------------------
-lepAna.loose_electron_id           = "POG_Cuts_ID_2012_Veto_full5x5"
+# Choose loose point from https://twiki.cern.ch/twiki/bin/viewauth/CMS/CutBasedElectronIdentificationRun2
+#lepAna.loose_electron_id           = "POG_Cuts_ID_2012_Veto_full5x5" #should be loose
+lepAna.loose_electron_id           = "POG_Cuts_ID_PHYS14_25ns_v1_Loose"
 lepAna.loose_electron_pt           = 10
 lepAna.loose_electron_eta          = 2.5
 lepAna.loose_electron_dxy          = 0.02
-lepAna.loose_electron_dz           = 0.2
-lepAna.loose_electron_relIso       = 0.15
+lepAna.loose_electron_dz           = 0.173670
+lepAna.loose_electron_relIso       = 0.12
 # lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
 lepAna.loose_electron_lostHits     = 1 
 # ttHLepAna.inclusive_electron_lostHits = 999 # no cut
-lepAna.ele_isoCorr                 = "rhoArea"
+lepAna.ele_isoCorr                 = "deltaBeta"
 lepAna.ele_tightId                 = "Cuts_2012"
 lepAna.doMiniIsolation = True
+miniIsolationPUCorr = 'deltaBeta' 
 
 # Photons
 #------------------------------
