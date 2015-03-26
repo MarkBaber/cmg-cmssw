@@ -102,9 +102,8 @@ susyAlphaT_collections.update({
     "cleanGenJets"         : NTupleCollection("genJet",     genParticleType, 10, help="Generated jets (cleaned)"),
 
     # dR jet lep for each lepton
-    # not necessary as muon and electron have jet DR in tree already
-    #"minDeltaRLepJet"  : NTupleCollection("minDeltaRLepJet", double, 50, help="Min deltaR between a lepton and all the jets"),
-    #"minDeltaRPhoJet"  : NTupleCollection("minDeltaRPhoJet", double, 50, help="Min deltaR between a photon and all the jets"),
+    "minDeltaRLepJet"  : NTupleCollection("minDeltaRLepJet", double, 50, help="Min deltaR between a lepton and all the jets"),
+    "minDeltaRPhoJet"  : NTupleCollection("minDeltaRPhoJet", double, 50, help="Min deltaR between a photon and all the jets"),
 })
 
             
