@@ -40,7 +40,7 @@ miniIsolationPUCorr = 'deltaBeta'
 #------------------------------
 photonAna.ptMin                        = 25
 photonAna.etaMax                       = 2.5
-photonAna.gammaID                     = "PhotonCutBasedIDTight"
+photonAna.gammaID                     = "POG_PHYS14_25ns_Tight"
 
 # Taus 
 #------------------------------
