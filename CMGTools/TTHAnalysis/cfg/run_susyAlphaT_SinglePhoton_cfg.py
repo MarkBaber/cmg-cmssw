@@ -20,7 +20,6 @@ ttHPhotonSkim.minObjects  = 1
 ttHPhotonSkim.maxObjects  = 1 
 ttHAlphaTSkim.alphaTCuts = [(0., 200,99999 )] #turn off alphaT cut
 ttHAlphaTControlSkim.photonDeltaRCut = 1.0
-# ttHAlphaTControlSkim.photonDeltaRCut = 0.1
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoPhoton',1.25) 
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
