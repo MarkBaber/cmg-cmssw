@@ -130,6 +130,7 @@ ttHTopoJetAna = cfg.Analyzer(
 #Start with the signal region default cut flow
 
 metAna.doMetNoMu=True
+metAna.doMetNoEle=True
 metAna.doMetNoPhoton=True
 
 #ESums
