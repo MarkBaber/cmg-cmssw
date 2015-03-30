@@ -159,9 +159,9 @@ class METAnalyzer( Analyzer ):
             phopy += pho.py()
 
         #subtract photon momentum and construct met                                                                                                                                                                                                     
-        px,py = event.metNoPhoton.px()-phopx, event.metNoPhoton.py()-phopy
+        px,py = event.metNoPhoton.px()+phopx, event.metNoPhoton.py()+phopy
         event.metNoPhoton.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
-        px,py = event.metNoPhotonNoPU.px()-phopx, event.metNoPhotonNoPU.py()-phopy
+        px,py = event.metNoPhotonNoPU.px()+phopx, event.metNoPhotonNoPU.py()+phopy
         event.metNoPhotonNoPU.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
 
 
