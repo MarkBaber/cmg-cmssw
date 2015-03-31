@@ -12,6 +12,11 @@ host = os.environ["HOSTNAME"]
 if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
+# LHE
+lheAna = cfg.Analyzer(
+    LHEAnalyzer, name = 'LHEAnalyzer'
+)
+
 #Cuts forInclusive (turn off all skimmers)
 ttHIsoTrackSkim.minObjects  = 0
 ttHIsoTrackSkim.maxObjects  = 999
@@ -46,6 +51,12 @@ triggerFlagsAna.triggerBits = {
             'Photon'   : triggers_RA1_Photon,
             'Muon'     : triggers_RA1_Muon,
 }
+
+
+# LHE
+susyAlphaT_globalVariables.append(NTupleVariable("lheHT", lambda ev : ev.lheHT, help="LHE HT( q + g )"))
+
+sequence.insert(sequence.index(treeProducer)-1,lheAna)
 
 selectedComponents = []
 
