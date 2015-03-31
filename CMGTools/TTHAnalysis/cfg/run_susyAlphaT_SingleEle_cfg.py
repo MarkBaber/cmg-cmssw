@@ -11,13 +11,14 @@ host = os.environ["HOSTNAME"]
 if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
-lepAna.loose_electron_pt   = 30
-lepAna.loose_electron_eta  = 2.1
+ttHElectronSkim.idCut = "abs(object.eta()) < 2.1"
+ttHElectronSkim.ptCuts = [30.,30.]
 ttHElectronSkim.minObjects = 1
 ttHElectronSkim.maxObjects = 1
 ttHIsoTrackSkim.allowedElectron = 1
 ttHAlphaTSkim.alphaTCuts = [(0.0, 200,99999 )]   #Turn off AlphaT cut 
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoEle',1.25)
+ttHAlphaTControlSkim.maxLeps = 1
 ttHAlphaTControlSkim.mtwCut = (30,125)
 ttHAlphaTControlSkim.lepDeltaRCut = 0.5
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin

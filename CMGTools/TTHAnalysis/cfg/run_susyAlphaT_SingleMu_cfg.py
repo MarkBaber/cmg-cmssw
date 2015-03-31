@@ -13,13 +13,14 @@ host = os.environ["HOSTNAME"]
 if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
-lepAna.loose_muon_pt   = 30.
-lepAna.loose_muon_eta  = 2.1
+ttHMuonSkim.idCut = "abs(object.eta()) < 2.1"
+ttHMuonSkim.ptCuts = [30.,30.] # Require first 2 to have greater than 30GeV, then only pass if exactly 1
 ttHMuonSkim.minObjects  = 1
 ttHMuonSkim.maxObjects  = 1
 ttHIsoTrackSkim.allowedMuon  = 1 #
 ttHAlphaTSkim.alphaTCuts = [(0.0, 200,99999 )]   #Turn off AlphaT cut 
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoMu',1.25)
+ttHAlphaTControlSkim.maxLeps = 1
 ttHAlphaTControlSkim.mtwCut = (30,125)
 ttHAlphaTControlSkim.lepDeltaRCut = 0.5
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
