@@ -2,13 +2,13 @@
 
 See: https://twiki.cern.ch/twiki/bin/view/CMS/AlphaT#Running_Heppy_CMGTools_flat_tree
 
-# Tau Analysis package compilation problems
-If you are getting a compilation problem for modules found in the TauAnalysis package, you may need to add the line /TauAnalysis/ to your sparse-checkout:
+# Magnetic field package compilation problems
+If you are getting a compilation problem for modules found in the Magnetic field package, you may need to add the line /MagneticField/ParametrizedEngine/ to your sparse-checkout:
 ```bash
 cd $CMSSW_BASE/src
 
 #Append the sparse-checkout
-echo /TauAnalysis/ >> .git/info/sparse-checkout
+echo /MagneticField/ParametrizedEngine/ >> .git/info/sparse-checkout
 
 #Update your new checkout
 git read-tree -mu HEAD
