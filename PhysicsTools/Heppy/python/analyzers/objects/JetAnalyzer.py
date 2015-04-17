@@ -164,9 +164,9 @@ class JetAnalyzer( Analyzer ):
         ###
 
         if self.cfg_ana.alwaysCleanPhotons:
-            event.cleanJets = event.gamma_cleanJets
-            event.cleanJetsAll = event.gamma_cleanJetsAll
-            event.cleanJetsFwd = event.gamma_cleanJetsFwd
+            self.cleanJets = self.gamma_cleanJets
+            self.cleanJetsAll = self.gamma_cleanJetsAll
+            self.cleanJetsFwd = self.gamma_cleanJetsFwd
 
         ## Associate jets to leptons
         leptons = event.inclusiveLeptons if hasattr(event, 'inclusiveLeptons') else event.selectedLeptons
