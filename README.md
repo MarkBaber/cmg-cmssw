@@ -1,6 +1,10 @@
+#Running CMG
+
+See twiki
+
 # Tau Analysis package compilation problems
 If you are getting a compilation problem for modules found in the TauAnalysis package, you may need to add the line /TauAnalysis/ to your sparse-checkout:
-```
+```bash
 cd $CMSSW_BASE/src
 
 #Append the sparse-checkout
@@ -45,7 +49,7 @@ git remote add cmg-central git@github.com:CERN-PH-CMG/cmg-cmssw.git
 git pull cmg-central CMGTools-from-CMSSW_7_2_3
 ```
 #TTHAnalysis
-```
+```bash
 # set up the TTHAnalysis code
 cd CMGTools/TTHAnalysis/python/plotter
 root.exe -b -l -q smearer.cc++ mcCorrections.cc++
@@ -90,7 +94,7 @@ scram b -v -j 9
 ```
 
 #Installation of CMG Codes at IC for 723
-```
+```bash
 # make sure you have the required architechture
 export SCRAM_ARCH=slc6_amd64_gcc481
 
