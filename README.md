@@ -1,6 +1,6 @@
 #Running CMG
 
-See twiki
+See: https://twiki.cern.ch/twiki/bin/view/CMS/AlphaT#Running_Heppy_CMGTools_flat_tree
 
 # Tau Analysis package compilation problems
 If you are getting a compilation problem for modules found in the TauAnalysis package, you may need to add the line /TauAnalysis/ to your sparse-checkout:
