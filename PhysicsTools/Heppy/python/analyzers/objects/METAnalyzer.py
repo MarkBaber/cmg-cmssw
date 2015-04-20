@@ -147,23 +147,6 @@ class METAnalyzer( Analyzer ):
           self.metNoPhotonNoPU.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
           setattr(event, "metNoPhotonNoPU"+self.cfg_ana.collectionPostFix, self.metNoPhotonNoPU)
 
-    def makeMETNoPhoton(self, event):
-        event.metNoPhoton = copy.deepcopy(event.met)
-        event.metNoPhotonNoPU = copy.deepcopy(event.metNoPU)
-
-        phopx = 0
-        phopy = 0
-        #sum photon momentum                                                                                                                                                                                                                            
-        for pho in event.selectedPhotons:
-            phopx += pho.px()
-            phopy += pho.py()
-
-        #subtract photon momentum and construct met                                                                                                                                                                                                     
-        px,py = event.metNoPhoton.px()+phopx, event.metNoPhoton.py()+phopy
-        event.metNoPhoton.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
-        px,py = event.metNoPhotonNoPU.px()+phopx, event.metNoPhotonNoPU.py()+phopy
-        event.metNoPhotonNoPU.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
-
 
     def makeMETs(self, event):
         import ROOT
@@ -188,7 +171,6 @@ class METAnalyzer( Analyzer ):
 
         self.met_sig = self.met.significance()
         self.met_sumet = self.met.sumEt()
-
 
         ###https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/DataFormats/PatCandidates/interface/MET.h
         if not self.cfg_ana.copyMETsByValue:
