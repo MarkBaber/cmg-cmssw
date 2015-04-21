@@ -11,12 +11,12 @@ from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 # Choose tight point from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideMuonId#Tight_Muon
 lepAna.loose_muon_pt               = 10.
 lepAna.loose_muon_eta              = 2.5
-lepAna.loose_muon_id               = "POG_ID_Tight"
+lepAna.loose_muon_id               = "POG_ID_Medium"
 lepAna.loose_muon_dxy              = 0.2
 lepAna.loose_muon_dz               = 0.5
 lepAna.loose_muon_relIso           = 0.12
 lepAna.mu_isoCorr                  = "deltaBeta"
-# lepAna.loose_muon_isoCut     = lambda muon : muon.miniRelIso < 0.1
+lepAna.loose_muon_isoCut     = lambda muon : muon.miniRelIso < 0.2
 
 # Electrons
 #------------------------------
@@ -28,7 +28,7 @@ lepAna.loose_electron_eta          = 2.5
 lepAna.loose_electron_dxy          = 0.02
 lepAna.loose_electron_dz           = 0.173670
 lepAna.loose_electron_relIso       = 0.12
-# lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
+lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
 lepAna.loose_electron_lostHits     = 1 
 # ttHLepAna.inclusive_electron_lostHits = 999 # no cut
 lepAna.ele_isoCorr                 = "deltaBeta"
