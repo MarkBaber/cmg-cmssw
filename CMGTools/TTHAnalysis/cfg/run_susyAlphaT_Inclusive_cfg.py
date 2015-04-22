@@ -1,4 +1,5 @@
 import PhysicsTools.HeppyCore.framework.config as cfg
+from PhysicsTools.Heppy.analyzers.gen.LHEAnalyzer import LHEAnalyzer
 
 #Load all analyzers with defaults for alphaT analysis
 from CMGTools.TTHAnalysis.analyzers.susyAlphaTCore_cff import *
