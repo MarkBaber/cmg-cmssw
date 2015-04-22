@@ -6,9 +6,17 @@ from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
 ##------------------------------------------
 ## Redefine analyzer parameters
 ##------------------------------------------
+# Generator parameters
+#------------------------------
+
+#turn off LHE info for now, as it slows everything down
+genAna.makeLHEweights = False
+susyScanAna.doLHE = False
+
 # Muons
 #------------------------------
-# Choose tight point from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideMuonId#Tight_Muon
+# Choose medium point from https://indico.cern.ch/event/357213/contribution/2/material/slides/0.pdf
+# other things in https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideMuonId
 lepAna.loose_muon_pt               = 10.
 lepAna.loose_muon_eta              = 2.5
 lepAna.loose_muon_id               = "POG_ID_Medium"
