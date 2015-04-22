@@ -13,6 +13,7 @@ if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
 
+lepAna.loose_electron_id           = "POG_Cuts_ID_PHYS14_25ns_v1_Tight"
 ttHElectronSkim.idCut = "abs(object.eta()) < 2.1"
 ttHElectronSkim.ptCuts = [30.,30.,30.] # Require first 3 to have greater than 30GeV, then only pass if exactly 2
 ttHElectronSkim.minObjects = 2

@@ -11,6 +11,7 @@ host = os.environ["HOSTNAME"]
 if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
+lepAna.loose_electron_id           = "POG_Cuts_ID_PHYS14_25ns_v1_Tight"
 ttHElectronSkim.idCut = "abs(object.eta()) < 2.1"
 ttHElectronSkim.ptCuts = [30.,30.]
 ttHElectronSkim.minObjects = 1

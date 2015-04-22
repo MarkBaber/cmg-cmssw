@@ -105,6 +105,8 @@ susyAlphaT_collections.update({
     # dR jet lep for each lepton
     "minDeltaRLepJet"  : NTupleCollection("minDeltaRLepJet", objectFloat, 10, help="Min deltaR between a lepton and all the jets"),
     "minDeltaRPhoJet"  : NTupleCollection("minDeltaRPhoJet", objectFloat, 10, help="Min deltaR between a photon and all the jets"),
+
+    "LHE_weights"    : NTupleCollection("LHEweight",  weightsInfoType, 1000, help="LHE weight info"),
 })
 
             

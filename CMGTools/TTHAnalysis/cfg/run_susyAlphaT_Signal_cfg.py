@@ -14,7 +14,7 @@ if puRegime != "PU20bx25":
 
 #Cuts
 #ttHAlphaTSkim.alphaTCuts = [(0.5, 200,99999 )]   #Flatten AlphaT Cut
-ttHAlphaTSkim.alphaTCuts = [(0.5,200,900),(0.0,900,99999)]
+ttHAlphaTSkim.alphaTCuts = [(0.5,200,800),(0.0,800,99999)]
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
 #-------- SAMPLES AND TRIGGERS -----------
