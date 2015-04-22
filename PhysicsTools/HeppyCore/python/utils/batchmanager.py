@@ -207,6 +207,12 @@ class BatchManager:
             else: queue = "hepshort.q"
 
             os.system("qsub -q "+queue+" -t 1-"+str(len(self.listOfJobs_))+" "+submitScript)
+=======
+            # st = os.stat(submitScript)
+            # os.chmod(submitScript, st.st_mode | stat.S_IEXEC)
+
+            os.system("qsub -q hepshort.q -t 1-"+str(len(self.listOfJobs_))+" "+submitScript)
+>>>>>>> Added parametric job running for IC
             
         else:
         #continue as before, submitting one job per directory
