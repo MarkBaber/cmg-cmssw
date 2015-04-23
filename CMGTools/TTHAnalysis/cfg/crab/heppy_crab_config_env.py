@@ -14,6 +14,7 @@ production_label = os.environ["PROD_LABEL"]
 cmg_version = os.environ["CMG_VERSION"]
 debug  = os.environ["DEBUG"] == 'True'
 useAAA = os.environ["USEAAA"] == 'True'
+log_directory = os.environ["LOGDIR"]
 
 if debug:
     NJOBS = 4
@@ -22,7 +23,7 @@ if debug:
 print "Will send dataset", dataset, "with", NJOBS, "jobs"
 
 config.General.requestName = dataset + "_" + cmg_version # task name
-config.General.workArea = 'crab_' + production_label # crab dir name
+config.General.workArea = os.path.join(log_directory,'crab_' + production_label) # crab dir name
 
 # this will divide task in *exactly* NJOBS jobs (for this we need JobType.pluginName = 'PrivateMC' and Data.splitting = 'EventBased')
 config.Data.unitsPerJob = 10

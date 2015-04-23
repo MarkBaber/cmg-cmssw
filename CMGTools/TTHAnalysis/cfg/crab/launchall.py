@@ -4,7 +4,8 @@ import imp, os
 # number of jobs to run per dataset decided based on splitFactor and fineSplitFactor from cfg file
 # in principle one only needs to modify the following two lines:
 production_label = "testSplit"
-cmg_version = 'MT2_CMGTools-from-CMSSW_7_2_3'
+cmg_version = 'RA1-CMGTools-from-CMSSW_7_2_3'
+log_directory = '/afs/cern.ch/work/a/aelwood/alphat/crabLogs'
 
 debug  = False
 useAAA = True
@@ -21,6 +22,7 @@ os.environ["PROD_LABEL"]  = production_label
 os.environ["CMG_VERSION"] = cmg_version
 os.environ["DEBUG"]       = str(debug)
 os.environ["USEAAA"]      = str(useAAA)
+os.environ["LOGDIR"]      = log_directory
 
 from PhysicsTools.HeppyCore.framework.heppy import split
 for comp in conf.components:

@@ -18,7 +18,8 @@ ROOT.AutoLibraryLoader.enable()
 
 dataset = ""
 total = 0  # total number of jobs for given dataset, not used at the moment
-nevents = None # this means run all events
+#nevents = None # this means run all events
+nevents = 100000 # this means run all events
 nprint  = 0 # quiet printout, change if you want to print the first nprint events
 useAAA = True # use xrootd by default
 

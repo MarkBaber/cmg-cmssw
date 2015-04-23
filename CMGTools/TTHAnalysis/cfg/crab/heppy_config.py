@@ -1,1 +1,1 @@
-../run_susyMT2_cfg.py
+../run_susyAlphaT_Signal_cfg.py
