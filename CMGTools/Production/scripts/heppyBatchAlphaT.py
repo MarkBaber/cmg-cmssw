@@ -83,7 +83,7 @@ def main(outDir,cfg,cutFlow,tag,queue):
 
             submissionArgs = getSubmissionArgs(output, location, queue) 
 
-            os.system("heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"'")
+            os.system("heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"' -p")
 
     #Write the git tag and commit into the version info
     for output in outputs:
