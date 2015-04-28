@@ -170,11 +170,27 @@ DM_Monojet_M10_V,
 DM_Monojet_M10_AV,
 ]
 
+DM_TTDMDM_M1000 = kreator.makeMCComponentFromIC("DM_TTDMDM_M1000", "/TTDMDMJets_M1000GeV_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+DM_TTDMDM_M200 = kreator.makeMCComponentFromIC("DM_TTDMDM_M200", "/TTDMDMJets_M200GeV_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+DM_TTDMDM_M10 = kreator.makeMCComponentFromIC("DM_TTDMDM_M10", "/TTDMDMJets_M10GeV_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+DM_TTDMDM_M600 = kreator.makeMCComponentFromIC("DM_TTDMDM_M600", "/TTDMDMJets_M600GeV_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+DM_TTDMDM_M50 = kreator.makeMCComponentFromIC("DM_TTDMDM_M50", "/TTDMDMJets_M50GeV_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+DM_TTDMDM_M1 = kreator.makeMCComponentFromIC("DM_TTDMDM_M1", "/TTDMDMJets_M1GeV_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+
+DmSignalSamples2 = [
+DM_TTDMDM_M1000,
+DM_TTDMDM_M200, 
+DM_TTDMDM_M10,
+DM_TTDMDM_M600, 
+DM_TTDMDM_M50,
+DM_TTDMDM_M1 
+]
+
 Test = [
 QCD_HT_100To250,
 ]
 
-mcSamples = Test + QCDHT + WJetsToLNuHT + DYJetsM50HT + GJetsHT + ZJetsToNuNuHT + SingleTop + [TTJets] + [TTWJets] + [TTZJets] + [TTH] + SusySignalSamples + DmSignalSamples
+mcSamples = Test + QCDHT + WJetsToLNuHT + DYJetsM50HT + GJetsHT + ZJetsToNuNuHT + SingleTop + [TTJets] + [TTWJets] + [TTZJets] + [TTH] + SusySignalSamples + DmSignalSamples + DmSignalSamples2
 
 for comp in mcSamples:
     comp.isMC = True
