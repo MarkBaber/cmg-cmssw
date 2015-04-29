@@ -14,7 +14,7 @@ if puRegime != "PU20bx25":
 
 #Cuts for DoubleMu
 ttHMuonSkim.idCut = "abs(object.eta()) < 2.1"
-ttHMuonSkim.ptCuts = [30.,30.,30.] # Require first 3 to have greater than 30GeV, then only pass if exactly 2
+ttHMuonSkim.ptCuts = [30.,30.] 
 ttHMuonSkim.minObjects  = 2
 ttHMuonSkim.maxObjects  = 2
 ttHIsoTrackSkim.allowedMuon  = 2 #

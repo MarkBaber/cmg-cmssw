@@ -14,7 +14,7 @@ if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
 ttHMuonSkim.idCut = "abs(object.eta()) < 2.1"
-ttHMuonSkim.ptCuts = [30.,30.] # Require first 2 to have greater than 30GeV, then only pass if exactly 1
+ttHMuonSkim.ptCuts = [30.] 
 ttHMuonSkim.minObjects  = 1
 ttHMuonSkim.maxObjects  = 1
 ttHIsoTrackSkim.allowedMuon  = 1 #
@@ -57,6 +57,12 @@ if test == "1" :
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
+
+if test == "2" :
+    selectedComponents = [DYJetsToLL_M50_HT400to600]
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        #comp.files = comp.files[:1]
 
 
 
