@@ -16,7 +16,7 @@ susyScanAna.doLHE = False
 # Muons
 #------------------------------
 # Choose medium point from https://indico.cern.ch/event/357213/contribution/2/material/slides/0.pdf
-# other things in https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideMuonId
+# other things in https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonId2015
 lepAna.loose_muon_pt               = 10.
 lepAna.loose_muon_eta              = 2.5
 lepAna.loose_muon_id               = "POG_ID_Medium"
