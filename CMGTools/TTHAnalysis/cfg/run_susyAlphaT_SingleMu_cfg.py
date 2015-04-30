@@ -14,7 +14,7 @@ if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
 ttHMuonSkim.idCut = "abs(object.eta()) < 2.1"
-ttHMuonSkim.ptCuts = [30.] 
+ttHMuonSkim.ptCuts = [30.,10.] 
 ttHMuonSkim.minObjects  = 1
 ttHMuonSkim.maxObjects  = 1
 ttHIsoTrackSkim.allowedMuon  = 1 #
@@ -45,7 +45,8 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop
+#selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop
+selectedComponents =  [TTJets]
 
 #Get testing from command line
 from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption

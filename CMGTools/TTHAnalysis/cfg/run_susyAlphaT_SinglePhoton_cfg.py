@@ -15,7 +15,7 @@ if puRegime != "PU20bx25":
 
 #Cuts
 ttHPhotonSkim.idCut = "abs(object.eta()) < 1.45"
-ttHPhotonSkim.ptCuts = [165.]
+ttHPhotonSkim.ptCuts = [165.,25.]
 ttHPhotonSkim.minObjects  = 1
 ttHPhotonSkim.maxObjects  = 1 
 ttHAlphaTSkim.alphaTCuts = [(0., 200,99999 )] #turn off alphaT cut

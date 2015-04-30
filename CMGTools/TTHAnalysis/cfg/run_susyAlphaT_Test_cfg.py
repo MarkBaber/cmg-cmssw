@@ -37,17 +37,38 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-
 selectedComponents = [TTJets]
 for comp in selectedComponents:
     comp.splitFactor = 2
     comp.files = comp.files[:2]
+
+#Get testing from command line
+from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
+test = getHeppyOption('test')
+if test: print "Will run test scenario %r" % test
+
+preprocessor = None
+
+if test == "1" :
+    from PhysicsTools.Heppy.utils.cmsswPreprocessor import CmsswPreprocessor
+    preprocessor = CmsswPreprocessor("miniAOD-prod_PAT.py")
+
+    selectedComponents = [
+            cfg.MCComponent(
+            name = "ttbarTest",
+            files =  [ 
+            '/afs/cern.ch/work/a/aelwood/public/alphaT/cmgtools/testAod/ttJetsAodSim.root',
+            ],
+            ),
+            ]
+   
 
 
 # the following is declared in case this cfg is used in input to the heppy.py script
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
 config = cfg.Config( components = selectedComponents,
                      sequence = sequence,
+                     preprocessor = preprocessor,
                      services = [],  
                      events_class = Events)
 
