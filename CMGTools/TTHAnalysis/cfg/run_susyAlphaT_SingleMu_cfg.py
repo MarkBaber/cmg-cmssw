@@ -14,7 +14,9 @@ if puRegime != "PU20bx25":
     sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
 ttHMuonSkim.idCut = "abs(object.eta()) < 2.1"
-ttHMuonSkim.ptCuts = [30.,10.] 
+ttHMuonSkim.ptCuts = [30.] 
+ttHMuonSkim.minObjectsBeforeRequirements  = 1
+ttHMuonSkim.maxObjectsBeforeRequirements  = 1
 ttHMuonSkim.minObjects  = 1
 ttHMuonSkim.maxObjects  = 1
 ttHIsoTrackSkim.allowedMuon  = 1 #

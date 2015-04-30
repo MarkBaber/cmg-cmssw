@@ -36,6 +36,9 @@ class ttHObjectSkimmer( Analyzer ):
 
         self.idCut = cfg_ana.idCut if hasattr(cfg_ana, 'idCut') else "True"
         self.idFunc = eval("lambda object : "+self.idCut);
+        
+        self.minObjectsBeforeRequirements = cfg_ana.minObjectsBeforeRequirements if hasattr(cfg_ana,'minObjectsBeforeRequirements') else 0
+        self.maxObjectsBeforeRequirements = cfg_ana.maxObjectsBeforeRequirements if hasattr(cfg_ana,'maxObjectsBeforeRequirements') else 999
 
     def declareHandles(self):
         super(ttHObjectSkimmer, self).declareHandles()
@@ -45,8 +48,10 @@ class ttHObjectSkimmer( Analyzer ):
         self.counters.addCounter('events')
         count = self.counters.counter('events')
         count.register('all events')
-        count.register('too many objects')
-        count.register('too few objects')
+        count.register('too many objects before requirements')
+        count.register('too few objects before requirements')
+        count.register('too many objects after requirements')
+        count.register('too few objects after requirements')
         count.register('accepted events')
 
 
@@ -57,20 +62,27 @@ class ttHObjectSkimmer( Analyzer ):
         
         objects = []
         selectedObjects = getattr(event, self.cfg_ana.objects)
+
+        if len(selectedObjects) < self.minObjectsBeforeRequirements:
+            self.counters.counter('events').inc('too few objects before requirements')
+            return False
+            
+        if len(selectedObjects) > self.maxObjectsBeforeRequirements:
+            self.counters.counter('events').inc('too many objects before requirements')
+            return True
+
         for obj, ptCut in zip(selectedObjects, self.ptCuts):
-            if not self.idFunc(obj):
-                continue
-            if obj.pt() > ptCut: 
+            if obj.pt() > ptCut and self.idFunc(obj): 
                 objects.append(obj)
 
         ret = False 
         if len(objects) >= self.cfg_ana.minObjects:
             ret = True
         else:
-            self.counters.counter('events').inc('too few objects')
+            self.counters.counter('events').inc('too few objects after requirements')
 
         if len(objects) > self.cfg_ana.maxObjects:
-            self.counters.counter('events').inc('too many objects')
+            self.counters.counter('events').inc('too many objects after requirements')
             ret = False
 
         if ret: self.counters.counter('events').inc('accepted events')
