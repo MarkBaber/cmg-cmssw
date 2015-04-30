@@ -13,7 +13,7 @@ if puRegime != "PU20bx25":
 
 lepAna.loose_electron_id = "POG_Cuts_ID_PHYS14_25ns_v1_Tight"
 ttHElectronSkim.idCut = "abs(object.eta()) < 2.1"
-ttHElectronSkim.ptCuts = [30.,10.]
+ttHElectronSkim.ptCuts = [30.]
 ttHElectronSkim.minObjectsBeforeRequirements  = 1
 ttHElectronSkim.maxObjectsBeforeRequirements  = 1
 ttHElectronSkim.minObjects = 1
