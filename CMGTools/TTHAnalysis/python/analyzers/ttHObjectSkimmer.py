@@ -69,7 +69,7 @@ class ttHObjectSkimmer( Analyzer ):
             
         if len(selectedObjects) > self.maxObjectsBeforeRequirements:
             self.counters.counter('events').inc('too many objects before requirements')
-            return True
+            return False
 
         for obj, ptCut in zip(selectedObjects, self.ptCuts):
             if obj.pt() > ptCut and self.idFunc(obj): 
