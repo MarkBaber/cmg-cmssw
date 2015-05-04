@@ -61,11 +61,12 @@ class ttHAlphaTControlAnalyzer( Analyzer ):
 
         return
 
-    # Calculate the invariant mass from two lead leptons
+    # Calculate the invariant mass from two lead leptons (only if opposite charge)
     def makeMll(self, event):
         
         if len(event.selectedLeptons)>=2:
-            event.mll = (event.selectedLeptons[0].p4()+event.selectedLeptons[1].p4()).M()
+            if event.selectedLeptons[0].charge()*event.selectedLeptons[1].charge() == -1:
+                event.mll = (event.selectedLeptons[0].p4()+event.selectedLeptons[1].p4()).M()
 
         return
 
