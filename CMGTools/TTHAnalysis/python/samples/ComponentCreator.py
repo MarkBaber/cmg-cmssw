@@ -102,12 +102,31 @@ class ComponentCreator(object):
         files = ds.fileNames
         mapping = 'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms%s'
         return [ mapping % f for f in files]
+        
+    def getFilesFromICLocal(self, dataset, user, pattern):
+        print 'getting files for', dataset,user,pattern
+        ds = myDatasetToSource( user, dataset, pattern, 'phys03', True )
+        files = ds.fileNames
+        mapping = 'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms%s'
+        return [ mapping % f for f in files]
 
     def makeMCComponentFromIC(self,name,dataset,path,pattern=".*root",xSec=1):
         component = cfg.MCComponent(
             dataset=dataset,
             name = name,
             files = self.getFilesFromIC(dataset,path,pattern),
+            xSection = xSec,
+            nGenEvents = 1,
+            triggers = [],
+            effCorrFactor = 1,
+        )
+        return component
+        
+    def makeMCComponentFromICLocal(self,name,dataset,path,pattern=".*root",xSec=1):
+        component = cfg.MCComponent(
+            dataset=dataset,
+            name = name,
+            files = self.getFilesFromICLocal(dataset,path,pattern),
             xSection = xSec,
             nGenEvents = 1,
             triggers = [],
