@@ -8,8 +8,19 @@ namespace heppy {
 
 double AlphaT::getAlphaT( const std::vector<double>& et,
 			  const std::vector<double>& px,
-			  const std::vector<double>& py ){
-    
+			  const std::vector<double>& py,
+			  std::vector<bool> * jet_pseudoFlag,
+			  double& minDeltaHT){
+   
+    // Clear pesudo-jet container
+    if (jet_pseudoFlag){
+      jet_pseudoFlag->clear();
+      jet_pseudoFlag->resize(et.size());
+    }
+
+    // Initialization of DeltaHT to overwrite the previous values stored
+    minDeltaHT = 0.;
+
     // Momentum sums in transverse plane
     const double sum_et = accumulate( et.begin(), et.end(), 0. );
     const double sum_px = accumulate( px.begin(), px.end(), 0. );
