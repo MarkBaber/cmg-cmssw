@@ -19,6 +19,8 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("mht50_pt",       lambda ev : ev.mhtJet50j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
     NTupleVariable("mht50_phi",      lambda ev : ev.mhtPhiJet50j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
+    NTupleVariable("minDeltaHT", lambda ev : ev.minDeltaHT,  help=" #Delta H_{T} between two pseudo jets"),
+
 
     #For gen
     NTupleVariable("genHt40",           lambda ev : ev.htGenJet40j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
@@ -27,6 +29,7 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     NTupleVariable("genMht40_phi",      lambda ev : ev.mhtPhiGenJet40j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("genMht50_pt",       lambda ev : ev.mhtGenJet50j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
     NTupleVariable("genMht50_phi",      lambda ev : ev.mhtPhiGenJet50j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
+    NTupleVariable("genMinDeltaHT" , lambda ev : ev.genMinDeltaHT, help=" #Delta H_{T} between two pseudo genjets"),
 
     ##--------------------------------------------------
     NTupleVariable("biasedDPhi",   lambda ev : ev.biasedDPhi, help="biased delta phi"),
@@ -85,11 +88,16 @@ susyAlphaT_globalObjects.update({
     "metNoPhoton":         NTupleObject("metNoPhoton",fourVectorType, help="met computed with photon momentum substracted"),
 })
 
+jetTypeAlphaT = NTupleObjectType("jetSusy",  baseObjectTypes = [ jetTypeSusy ], variables = [
+	    NTupleVariable("pseudoJetFlag",  lambda x : x.pseudoJetFlag , int, mcOnly=False , help="Flag for which pseudo jets the jet belongs to"),
+	    NTupleVariable("inPseudoJet",  lambda x : x.inPseudoJet , int, mcOnly=False , help="Flag for which the jet belongs to any pseudo jet"),
+	    ])
+
 susyAlphaT_collections = susyCore_collections.copy()
 susyAlphaT_collections.update({
     # put more here
     #"selectedLeptons"  : NTupleCollection("lep",      leptonTypeSusy,           50, help="Leptons after the preselection", filter=lambda l : l.pt()>10 ),
-    "cleanJetsAll"     : NTupleCollection("jet",      jetTypeSusy,             100, help="all jets (w/ x-cleaning, w/ ID applied w/o PUID applied pt > 40 |eta| < 5) , sorted by pt", filter=lambda l : l.pt()>40  ),
+    "cleanJetsAll"     : NTupleCollection("jet",      jetTypeAlphaT,             100, help="all jets (w/ x-cleaning, w/ ID applied w/o PUID applied pt > 40 |eta| < 5) , sorted by pt", filter=lambda l : l.pt()>40  ),
     "selectedPhotons"  : NTupleCollection("gamma",    photonTypeSusy,           50, help="photons with pt > 25 and loose cut based ID"),
     "selectedIsoTrack" : NTupleCollection("isoTrack", isoTrackType,             50, help="isoTrack, sorted by pt"),
 
