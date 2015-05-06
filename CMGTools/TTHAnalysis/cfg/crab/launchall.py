@@ -4,7 +4,7 @@ import imp, os
 # number of jobs to run per dataset decided based on splitFactor and fineSplitFactor from cfg file
 # in principle one only needs to modify the following two lines:
 production_label = "testSplit"
-cmg_version = 'RA1-CMGTools-from-CMSSW_7_2_3'
+cmg_version = 'RA1-CMGTools-from-CMSSW_7_2_3_v3'
 log_directory = '/afs/cern.ch/work/a/aelwood/alphat/crabLogs'
 
 debug  = False

@@ -87,7 +87,7 @@ looper.write()
 #os.system("ls -lR") # for debugging
 
 # assign the right name
-os.rename("Output/mt2.root", "mt2.root")
+os.rename("Output/alphaT.root", "alphaT.root")
 
 # print in crab log file the content of the job log files, so one can see it from 'crab getlog'
 print "-"*25
@@ -101,7 +101,7 @@ os.system("tar czf output.log.tgz Output/")
 
 
 import ROOT
-f=ROOT.TFile.Open('mt2.root')
+f=ROOT.TFile.Open('alphaT.root')
 entries=f.Get('tree').GetEntries()
 f.Close()
 

@@ -128,6 +128,15 @@ if test == "3" :
 
     comp.splitFactor = 1
 
+#Testing on data
+if test == '4' :
+    from CMGTools.TTHAnalysis.samples.samples_8TeV_AlphaT import *
+    selectedComponents = [singleMu2012D]
+
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
+
 
 # the following is declared in case this cfg is used in input to the heppy.py script
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
