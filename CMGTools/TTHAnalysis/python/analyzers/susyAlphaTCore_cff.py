@@ -132,6 +132,13 @@ ttHTopoJetAna = cfg.Analyzer(
             )
 
 
+from PhysicsTools.Heppy.analyzers.eventtopology.MT2Analyzer import MT2Analyzer
+
+MT2Ana = cfg.Analyzer(
+            MT2Analyzer, name = 'MT2Analyzer',
+            doOnlyDefault = True
+            )
+
 #-------------------------------------------
 # CUTS AND VETOS
 #-------------------------------------------
@@ -257,6 +264,7 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         ttHAlphaTControlSkim,
                         ttHGenBinAna,
 			ttHMT2Control,
+			MT2Ana,
 			ttHTopoJetAna,
                         treeProducer,
                         ])
