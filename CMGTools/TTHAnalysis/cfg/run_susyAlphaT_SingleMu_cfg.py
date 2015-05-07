@@ -47,8 +47,7 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-#selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop
-selectedComponents =  [TTJets]
+selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop
 
 #Get testing from command line
 from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
