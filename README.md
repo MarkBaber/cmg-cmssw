@@ -70,6 +70,7 @@ cd CMGTools/TTHAnalysis/cfg/
 #for 723 and after
 heppy TESTsusy run_susyAlphaT_cfg.py -N 1000 -f
 
+# For tests/debugging verbosity can be reduced with addition of the flags: -q -p 0
 ```
 #Installation of CMG Codes at IC for 706
 ```
