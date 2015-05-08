@@ -149,11 +149,11 @@ metAna.doMetNoMu=True
 metAna.doMetNoEle=True
 metAna.doMetNoPhoton=True
 
-#ESums
+#Jets and ESums
 ttHJetMETSkim.jetPtCuts   = [100,100]
 ttHJetMETSkim.htCut       = ('htJet40j', 200)
 ttHJetMETSkim.mhtCut      = ('mhtJet40j', 0)
-ttHJetMETSkim.nBJet       = ('CSVM', 0, "jet.pt() > 40")     # require at least 0 jets passing CSVM and pt > 50
+ttHJetMETSkim.nBJet       = ('CSVM', 0, "jet.pt() > 40")     # require at least 0 jets passing CSVM and pt > 40
 
 from CMGTools.TTHAnalysis.analyzers.ttHObjectSkimmer import ttHObjectSkimmer
 from CMGTools.TTHAnalysis.analyzers.ttHIsoTrackSkimmer import ttHIsoTrackSkimmer

@@ -87,12 +87,13 @@ looper.write()
 #os.system("ls -lR") # for debugging
 
 # assign the right name
-os.rename("Output/alphaT.root", "alphaT.root")
+os.rename("Output/treeProducerSusyAlphaT/tree.root", "tree.root")
 
 # print in crab log file the content of the job log files, so one can see it from 'crab getlog'
 print "-"*25
 print "printing output txt files"
-os.system('for i in Output/*.txt; do echo $i; cat $i; echo "---------"; done')
+#os.system('for i in Output/*.txt; do echo $i; cat $i; echo "---------"; done')
+os.system('cd Output; summariseCmgOutput.py; cd -')
 
 # pack job log files to be sent to output site
 os.system("tar czf output.log.tgz Output/")
@@ -101,7 +102,7 @@ os.system("tar czf output.log.tgz Output/")
 
 
 import ROOT
-f=ROOT.TFile.Open('alphaT.root')
+f=ROOT.TFile.Open('tree.root')
 entries=f.Get('tree').GetEntries()
 f.Close()
 
