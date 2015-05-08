@@ -1,11 +1,12 @@
 import imp, os
+import crabMaster_cfg
 
 # datasets to run as defined from run_susyMT2.cfg
 # number of jobs to run per dataset decided based on splitFactor and fineSplitFactor from cfg file
 # in principle one only needs to modify the following two lines:
-production_label = "testSplit"
-cmg_version = 'RA1-CMGTools-from-CMSSW_7_2_3_v3'
-log_directory = '/afs/cern.ch/work/a/aelwood/alphat/crabLogs'
+production_label = crabMaster_cfg.production_label
+cmg_version = os.popen("git describe --tags").read()[:-1]
+log_directory = crabMaster_cfg.log_directory
 
 debug  = False
 useAAA = True

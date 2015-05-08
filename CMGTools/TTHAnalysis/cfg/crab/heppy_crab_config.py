@@ -19,7 +19,8 @@ config.JobType.outputFiles = ['output.log.tgz'] # mt2.root is automatically send
 config.section_("Data")
 config.Data.inputDBS = 'global'
 config.Data.splitting = 'EventBased'
-config.Data.outLFN = '/store/user/' + os.environ["USER"]
+config.Data.outLFNDirBase = '/store/user/' + os.environ["USER"]
+#config.Data.outLFN = '/store/user/' + os.environ["USER"]
 config.Data.publication = False
 
 config.section_("Site")
