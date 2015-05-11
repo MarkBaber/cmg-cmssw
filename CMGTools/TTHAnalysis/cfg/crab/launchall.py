@@ -5,7 +5,7 @@ import crabMaster_cfg
 # number of jobs to run per dataset decided based on splitFactor and fineSplitFactor from cfg file
 # in principle one only needs to modify the following two lines:
 production_label = crabMaster_cfg.production_label
-cmg_version = os.popen("git describe --tags").read()[:-1]
+cmg_version = os.popen("git describe --tags").read()[:-1].replace(".","_")
 log_directory = crabMaster_cfg.log_directory
 
 debug  = False
