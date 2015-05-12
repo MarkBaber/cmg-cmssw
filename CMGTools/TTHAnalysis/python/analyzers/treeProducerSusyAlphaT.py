@@ -89,8 +89,8 @@ susyAlphaT_globalObjects.update({
 })
 
 jetTypeAlphaT = NTupleObjectType("jetSusy",  baseObjectTypes = [ jetTypeSusy ], variables = [
-	    NTupleVariable("pseudoJetFlag",  lambda x : x.pseudoJetFlag , int, mcOnly=False , help="Flag for which pseudo jets the jet belongs to"),
-	    NTupleVariable("inPseudoJet",  lambda x : x.inPseudoJet , int, mcOnly=False , help="Flag for which the jet belongs to any pseudo jet"),
+	    NTupleVariable("pseudoJetFlag",  lambda x : x.pseudoJetFlag if hasattr(x,"pseudoJetFlag") else -1 , int, mcOnly=False , help="Flag for which pseudo jets the jet belongs to"),
+	    NTupleVariable("inPseudoJet",  lambda x : x.inPseudoJet if hasattr(x,"inPseudoJet") else False, int, mcOnly=False , help="Flag for which the jet belongs to any pseudo jet"),
 	    ])
 
 susyAlphaT_collections = susyCore_collections.copy()
