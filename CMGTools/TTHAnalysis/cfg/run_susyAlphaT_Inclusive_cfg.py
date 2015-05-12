@@ -68,7 +68,7 @@ selectedComponents = QCDHT + [TTJets] + WJetsToLNuHT + SingleTop + ZJetsToNuNuHT
 #Limit the files as inclusive
 for comp in selectedComponents:
     comp.splitFactor = 2
-    comp.files = comp.files[:1]
+    comp.files = comp.files[1:3]
 
 #Get testing from command line
 from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
