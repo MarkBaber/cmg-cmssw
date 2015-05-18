@@ -67,32 +67,9 @@ scram b -v -j 9
 # run for 1000 events to test
 cd CMGTools/TTHAnalysis/cfg/ 
 
-#for 723 and after
-heppy TESTsusy run_susyAlphaT_Signal_cfg.py -N 1000 -f
+#for 723 and after (verbosity can be reduced with addition of the flags: -q -p 0)
+heppy TESTsusy run_susyAlphaT_Inclusive_cfg.py -N 1000 -f -o test=1 -q -p 0
 
-# For tests/debugging verbosity can be reduced with addition of the flags: -q -p 0
-```
-#Installation of CMG Codes at IC for 706
-```
-source /vols/cms/grid/setup.sh
-cmsrel CMSSW_7_0_6_patch1
-cd CMSSW_7_0_6_patch1/src
-cmsenv
-
-# checkout RA1 cmg-tools
-git init
-git remote add cmg-ra1 git@github.com:CMSRA1/cmg-cmssw-private.git
-git fetch cmg-ra1
-git config core.sparsecheckout true
-cat /vols/ssd00/cms/lucienlo/susy/phys14/public/sparse-checkout >> .git/info/sparse-checkout
-# check out alphaT code
-#(if this branch doesn't work use ImperialPort-CMSSW_7_0_6 if it exists)
-git checkout cmg-ra1/CMG_MiniAOD_Lite_V6_0_from-CMSSW_7_0_6
-git checkout -b CMG_MiniAOD_Lite_V6_0_from-CMSSW_7_0_6
-
-# compile
-scram b -v -j 9
-```
 
 #Installation of CMG Codes at IC for 723
 ```bash
@@ -121,3 +98,24 @@ sed -i 's@/afs/cern.ch/cms@/cvmfs/cms.cern.ch@g' CMGTools/TTHAnalysis/BuildFile.
 # compile
 scram b -v -j 9
 ```
+
+#Installation of CMG Codes at IC for 706
+```
+source /vols/cms/grid/setup.sh
+cmsrel CMSSW_7_0_6_patch1
+cd CMSSW_7_0_6_patch1/src
+cmsenv
+
+# checkout RA1 cmg-tools
+git init
+git remote add cmg-ra1 git@github.com:CMSRA1/cmg-cmssw-private.git
+git fetch cmg-ra1
+git config core.sparsecheckout true
+cat /vols/ssd00/cms/lucienlo/susy/phys14/public/sparse-checkout >> .git/info/sparse-checkout
+# check out alphaT code
+#(if this branch doesn't work use ImperialPort-CMSSW_7_0_6 if it exists)
+git checkout cmg-ra1/CMG_MiniAOD_Lite_V6_0_from-CMSSW_7_0_6
+git checkout -b CMG_MiniAOD_Lite_V6_0_from-CMSSW_7_0_6
+
+# compile
+scram b -v -j 9
