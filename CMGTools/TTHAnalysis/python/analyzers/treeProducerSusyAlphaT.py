@@ -11,33 +11,28 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
 
     # Energy sums (RECO)
     ##----------------------------------------
-    NTupleVariable("ht40",           lambda ev : ev.htJet40j,    help="H_{T} computed from only jets (with |eta|<3, pt > 40 GeV)"),
-    #NTupleVariable("ht50",          lambda ev : ev.htJet50j,    help="H_{T} computed from only jets (with |eta|<3, pt > 50 GeV)"),
+    NTupleVariable("ht40",           lambda ev : ev.htJet40j,        help="H_{T} computed from only jets (with |eta|<3, pt > 40 GeV)"),
     NTupleVariable("deltaPhiMin",    lambda ev : ev.deltaPhiMin_had, help="minimal deltaPhi between the MET and the four leading jets with pt>40 and eta<2.4"),
-    #NTupleVariable("diffMetMht",    lambda ev : ev.diffMetMht_had,   help="abs( vec(mht) - vec(met) )"),
-    NTupleVariable("mht40_pt",       lambda ev : ev.mhtJet40j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
-    NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
-    # NTupleVariable("mht50_pt",     lambda ev : ev.mhtJet50j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
-    # NTupleVariable("mht50_phi",    lambda ev : ev.mhtPhiJet50j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
-    NTupleVariable("minDeltaHT",     lambda ev : ev.minDeltaHT,  help=" #Delta H_{T} between two pseudo jets"),
+    #NTupleVariable("diffMetMht",    lambda ev : ev.diffMetMht_had,  help="abs( vec(mht) - vec(met) )"),
+    NTupleVariable("mht40_pt",       lambda ev : ev.mhtJet40j,       help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j,    help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("minDeltaHT",     lambda ev : ev.minDeltaHT,      help=" #Delta H_{T} between two pseudo jets"),
 
 
     # Energy sums (GEN)
     ##----------------------------------------
-    NTupleVariable("genHt40",        lambda ev : ev.htGenJet40j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
-    #NTupleVariable("genHt50",       lambda ev : ev.htGenJet50j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 50 GeV)"),
+    NTupleVariable("genHt40",        lambda ev : ev.htGenJet40j,     help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
     NTupleVariable("genMht40_pt",    lambda ev : ev.mhtGenJet40j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("genMht40_phi",   lambda ev : ev.mhtPhiGenJet40j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
-    # NTupleVariable("genMht50_pt",  lambda ev : ev.mhtGenJet50j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
-    # NTupleVariable("genMht50_phi", lambda ev : ev.mhtPhiGenJet50j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
-    NTupleVariable("genMinDeltaHT" , lambda ev : ev.genMinDeltaHT, help=" #Delta H_{T} between two pseudo genjets"),
+    NTupleVariable("genMinDeltaHT" , lambda ev : ev.genMinDeltaHT,   help=" #Delta H_{T} between two pseudo genjets"),
+
 
     ##--------------------------------------------------
 
     # Physics object multplicities
     ##----------------------------------------
 
-    NTupleVariable("nJet40Eta2p4", lambda ev: sum([(j.pt() > 40 and abs(j.eta()) < 2.4) for j in ev.cleanJets]), int, help="Number of jets with pt > 40, |eta|<2.4"),
+    NTupleVariable("nJet40Eta2p4",  lambda ev: sum([(j.pt() > 40 and abs(j.eta()) < 2.4) for j in ev.cleanJets]), int, help="Number of jets with pt > 40, |eta|<2.4"),
     NTupleVariable("nJet100",       lambda ev: sum([j.pt() > 100 for j in ev.cleanJets]), int, help="Number of jets with pt > 100, |eta|<3.0"),
     NTupleVariable("nJet100Eta2p4", lambda ev: sum([(j.pt() > 100 and abs(j.eta()) < 2.4) for j in ev.cleanJets]), int, help="Number of jets with pt > 100, |eta|<2.4"),
     NTupleVariable("nJet100a",      lambda ev: sum([j.pt() > 100 for j in ev.cleanJetsAll]), int, help="Number of jets with pt > 100, |eta|<5.0"),
@@ -56,7 +51,7 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     NTupleVariable("alphaT",        lambda ev: ev.alphaT,    help="AlphaT computed using jets with pt > 40, |eta|<3"),
     NTupleVariable("genAlphaT",     lambda ev: ev.genAlphaT, help="AlphaT computed using gen jets with pt > 40, |eta|<3"),
 
-    NTupleVariable("biasedDPhi",    lambda ev : ev.biasedDPhi, help="biased delta phi"),
+    NTupleVariable("biasedDPhi",    lambda ev: ev.biasedDPhi,help="biased delta phi"),
 
 
     # MT2
@@ -90,7 +85,6 @@ susyAlphaT_globalObjects.update({
     "metNoEle"     : NTupleObject("metNoEle",      fourVectorType, help="met computed with electron momentum substracted"),
     "metNoPhoton"  : NTupleObject("metNoPhoton",   fourVectorType, help="met computed with photon momentum substracted"),
 
-    "genMetTrue"   : NTupleObject("genMetTrue",    fourVectorType, help="MET of all generated particles in simulation in their final states but excluding neutrinos, excited neutrinos, right-handed neutrinos, sneutrinos, neutralinos, gravitons, gravitinos"),
 })
 
 

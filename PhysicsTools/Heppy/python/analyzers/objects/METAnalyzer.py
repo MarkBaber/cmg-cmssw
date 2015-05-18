@@ -27,7 +27,7 @@ class METAnalyzer( Analyzer ):
         self.handles['cmgCand'] = AutoHandle( self.cfg_ana.candidates, self.cfg_ana.candidatesTypes )
         self.handles['vertices'] =  AutoHandle( "offlineSlimmedPrimaryVertices", 'std::vector<reco::Vertex>', fallbackLabel="offlinePrimaryVertices" )
         self.mchandles['packedGen']  = AutoHandle( 'packedGenParticles', 'std::vector<pat::PackedGenParticle>' )
-        self.mchandles['genMetTrue'] = AutoHandle( 'genMetTrue',         'std::vector<reco::GenMET>' )
+
 
     def beginLoop(self, setup):
         super(METAnalyzer,self).beginLoop(setup)
@@ -82,9 +82,6 @@ class METAnalyzer( Analyzer ):
         event.tkPVchsSumEt = sum([x.pt() for x in chargedchs])
         event.tkPVLooseSumEt = sum([x.pt() for x in chargedPVLoose])
         event.tkPVTightSumEt = sum([x.pt() for x in chargedPVTight])
-
-    def makeGenMetTrue(self, event): 
-        event.genMetTrue = self.mchandles['genMetTrue'].product().front()
 
 
     def makeGenTkMet(self, event):
@@ -221,7 +218,6 @@ class METAnalyzer( Analyzer ):
 
             if self.cfg_comp.isMC and hasattr(event, 'genParticles'):
                 self.makeGenTkMet(event)
-                self.makeGenMetTrue(event)
 
         return True
 
