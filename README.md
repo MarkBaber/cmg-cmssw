@@ -68,7 +68,7 @@ scram b -v -j 9
 cd CMGTools/TTHAnalysis/cfg/ 
 
 #for 723 and after
-heppy TESTsusy run_susyAlphaT_cfg.py -N 1000 -f
+heppy TESTsusy run_susyAlphaT_Signal_cfg.py -N 1000 -f
 
 # For tests/debugging verbosity can be reduced with addition of the flags: -q -p 0
 ```
