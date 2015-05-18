@@ -12,23 +12,23 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     #----------------------------------------
 
     NTupleVariable("ht40",           lambda ev : ev.htJet40j,    help="H_{T} computed from only jets (with |eta|<3, pt > 40 GeV)"),
-    NTupleVariable("ht50",           lambda ev : ev.htJet50j,    help="H_{T} computed from only jets (with |eta|<3, pt > 50 GeV)"),
+    #NTupleVariable("ht50",           lambda ev : ev.htJet50j,    help="H_{T} computed from only jets (with |eta|<3, pt > 50 GeV)"),
     NTupleVariable("deltaPhiMin",  lambda ev : ev.deltaPhiMin_had, help="minimal deltaPhi between the MET and the four leading jets with pt>40 and eta<2.4"),
     #NTupleVariable("diffMetMht",   lambda ev : ev.diffMetMht_had,   help="abs( vec(mht) - vec(met) )"),
     NTupleVariable("mht40_pt",       lambda ev : ev.mhtJet40j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("mht40_phi",      lambda ev : ev.mhtPhiJet40j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 40 GeV)"),
-    NTupleVariable("mht50_pt",       lambda ev : ev.mhtJet50j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
-    NTupleVariable("mht50_phi",      lambda ev : ev.mhtPhiJet50j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
+    # NTupleVariable("mht50_pt",       lambda ev : ev.mhtJet50j,    help="H_{T}^{miss} computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
+    # NTupleVariable("mht50_phi",      lambda ev : ev.mhtPhiJet50j, help="H_{T}^{miss} #phi computed from only jets (with |eta|<3.0, pt > 50 GeV)"),
     NTupleVariable("minDeltaHT", lambda ev : ev.minDeltaHT,  help=" #Delta H_{T} between two pseudo jets"),
 
 
     #For gen
     NTupleVariable("genHt40",           lambda ev : ev.htGenJet40j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
-    NTupleVariable("genHt50",           lambda ev : ev.htGenJet50j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 50 GeV)"),
+    #NTupleVariable("genHt50",           lambda ev : ev.htGenJet50j,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 50 GeV)"),
     NTupleVariable("genMht40_pt",       lambda ev : ev.mhtGenJet40j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
     NTupleVariable("genMht40_phi",      lambda ev : ev.mhtPhiGenJet40j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
-    NTupleVariable("genMht50_pt",       lambda ev : ev.mhtGenJet50j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
-    NTupleVariable("genMht50_phi",      lambda ev : ev.mhtPhiGenJet50j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
+    # NTupleVariable("genMht50_pt",       lambda ev : ev.mhtGenJet50j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
+    # NTupleVariable("genMht50_phi",      lambda ev : ev.mhtPhiGenJet50j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 50 GeV)"),
     NTupleVariable("genMinDeltaHT" , lambda ev : ev.genMinDeltaHT, help=" #Delta H_{T} between two pseudo genjets"),
 
     ##--------------------------------------------------
