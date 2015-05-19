@@ -85,10 +85,11 @@ isoTrackAna.ptMinEMU        = 10 ### for EMU
 isoTrackAna.dzMax           = 0.05
 isoTrackAna.isoDR           = 0.3
 isoTrackAna.ptPartMin       = 0
-isoTrackAna.dzPartMax       = 0.1
+isoTrackAna.dzPartMax       = 0.05
 isoTrackAna.maxAbsIso       = 8
-isoTrackAna.MaxIsoSum       = 0.1 ### unused
-isoTrackAna.MaxIsoSumEMU    = 0.2 ### unused
+isoTrackAna.doRelIsolation  = True
+isoTrackAna.MaxIsoSum       = 0.1 
+isoTrackAna.MaxIsoSumEMU    = 0.1 
 isoTrackAna.doSecondVeto    = False
 
 
