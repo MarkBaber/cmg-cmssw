@@ -63,7 +63,7 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT + [TTJets] + WJetsToLNuHT + SingleTop + ZJetsToNuNuHT + GJetsHT + DYJetsM50HT
+selectedComponents = QCDHT_fixPhoton + [TTJets] + WJetsToLNuHT + SingleTop + ZJetsToNuNuHT + GJetsHT_fixPhoton + DYJetsM50HT
 
 #Limit the files as inclusive
 for comp in selectedComponents:

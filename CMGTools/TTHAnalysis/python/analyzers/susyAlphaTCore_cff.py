@@ -39,10 +39,10 @@ lepAna.loose_electron_relIso       = 0.12
 lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
 lepAna.loose_electron_lostHits     = 1 
 # ttHLepAna.inclusive_electron_lostHits = 999 # no cut
-lepAna.ele_isoCorr                 = "deltaBeta"
+lepAna.ele_isoCorr                 = "rhoArea"
 lepAna.ele_tightId                 = "Cuts_2012"
 lepAna.doMiniIsolation = True
-miniIsolationPUCorr = 'deltaBeta' 
+miniIsolationPUCorr = 'rhoArea' 
 
 # Photons
 #------------------------------
@@ -51,12 +51,12 @@ photonAna.etaMax                       = 2.5
 photonAna.gammaID                     = "POG_PHYS14_25ns_Tight"
 
 # Taus 
+# https://twiki.cern.ch/twiki/bin/view/CMS/TauIDRecommendation13TeV
 #------------------------------
-tauAna.etaMax         = 2.3
-tauAna.dxyMax         = 99999.
-tauAna.dzMax          = 99999.
-tauAna.vetoLeptons    = False
-tauAna.vetoLeptonsPOG = True
+tauAna.etaMax = 2.3
+tauAna.vetoLeptons = True # use our own leptons rather than the tau working group's definition - we just veto
+tauAna.vetoLeptonsPOG = False
+tauAna.decayModeID = "" # ignored if not set or ""
 
 
 # Jets (for event variables do apply the jetID and not PUID yet)
