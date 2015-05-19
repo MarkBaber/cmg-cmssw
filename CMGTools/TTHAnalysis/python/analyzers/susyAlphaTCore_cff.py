@@ -56,7 +56,6 @@ photonAna.gammaID                     = "POG_PHYS14_25ns_Tight"
 tauAna.etaMax = 2.3
 tauAna.vetoLeptons = True # use our own leptons rather than the tau working group's definition - we just veto
 tauAna.vetoLeptonsPOG = False
-tauAna.decayModeID = "" # ignored if not set or ""
 
 
 # Jets (for event variables do apply the jetID and not PUID yet)
