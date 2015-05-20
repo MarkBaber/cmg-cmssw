@@ -105,10 +105,10 @@ class IsoTrackAnalyzer( Analyzer ):
 
             isoSum = self.IsoTrackIsolationComputer.chargedAbsIso(track.physObj, self.cfg_ana.isoDR, 0., self.cfg_ana.ptPartMin)
 
-            if doRelIsolation:
+            if self.cfg_ana.doRelIsolation:
                 relIso = (isoSum-track.pt())/track.pt()
                 if ( (abs(track.pdgId())!=11) and (abs(track.pdgId())!=13) and (relIso > self.cfg_ana.MaxIsoSum) ): continue
-                elif((relIso > self.cfg_ana.MaxIsoSumEMU): continue
+                elif((relIso > self.cfg_ana.MaxIsoSumEMU)): continue
             else:
                 if(isoSum > (self.cfg_ana.maxAbsIso + track.pt())): continue
 
@@ -120,7 +120,7 @@ class IsoTrackAnalyzer( Analyzer ):
             #event.preIsoTrack.append(track)
             
 #            if (isoSum < minIsoSum ) :
-            if doRelIsolation or (track.absIso < min(0.2*track.pt(), self.cfg_ana.maxAbsIso)): 
+            if self.cfg_ana.doRelIsolation or (track.absIso < min(0.2*track.pt(), self.cfg_ana.maxAbsIso)): 
                 event.selectedIsoTrack.append(track)
 
                 if self.cfg_ana.doPrune:
