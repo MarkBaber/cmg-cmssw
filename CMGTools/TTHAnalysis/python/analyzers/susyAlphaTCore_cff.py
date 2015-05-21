@@ -42,7 +42,7 @@ lepAna.loose_electron_lostHits     = 1
 lepAna.ele_isoCorr                 = "rhoArea"
 lepAna.ele_tightId                 = "Cuts_2012"
 lepAna.doMiniIsolation = True
-miniIsolationPUCorr = 'rhoArea' 
+lepAna.miniIsolationPUCorr = None #Will use the correction defined for the individual objects
 
 # Photons
 #------------------------------
