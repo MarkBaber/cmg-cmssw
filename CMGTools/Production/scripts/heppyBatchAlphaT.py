@@ -23,6 +23,7 @@ def parse_args():
             help = 'Standard cfg file to be run (for latest cut flows use e g --cutFlow SingleMu Signal ). For multiple choices separate by spaces')
     parser.add_option('-t','--tag',help = 'additional output to folder name',default = '')
     parser.add_option('-q','--queue',help = 'The queue for batch submission')
+    parser.add_option("--dry-run", action = "store_true", default = False, help = "do not run any commands; only print them")
     options,args = parser.parse_args()
     if not options.outDir:
         parser.error('Need output directory')
@@ -47,8 +48,9 @@ def getSubmissionArgs(output, location, queue):
         sys.exit("Don't know where I am, can't submit correctly")
 
 
-def main(outDir,cfg,cutFlow,tag,queue):
+def main(outDir,cfg,cutFlow,tag,queue,dry_run):
     
+
     #Find out if at CERN or imperial
     location = whereAmI.whereAmI()
     
@@ -76,14 +78,24 @@ def main(outDir,cfg,cutFlow,tag,queue):
 
             submissionArgs = getSubmissionArgs(output, location, queue) 
 
-            os.system("heppy_batch.py -o "+output+" "+ name +" -b '"+submissionArgs+"'")
+            command = "heppy_batch.py -o "+output+" "+ name +" -b '"+submissionArgs+"'"
+            if dry_run:
+                print command
+            else:
+                os.system(command)
 
     elif cutFlow:
         for output,name in zip(outputs,cutFlow):
 
             submissionArgs = getSubmissionArgs(output, location, queue) 
 
-            os.system("heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"' -p")
+            command = "heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"' -p"
+            if dry_run:
+                print command
+            else:
+                os.system(command)
+
+    if dry_run: return
 
     #Write the git tag and commit into the version info
     for output in outputs:
