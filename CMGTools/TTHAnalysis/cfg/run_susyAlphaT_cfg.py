@@ -139,47 +139,35 @@ sequence = cfg.Sequence(susyCoreSequence + [
 #-------- SAMPLES AND TRIGGERS -----------
 from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
 
-#-------- SAMPLES AND TRIGGERS -----------
-#Import general PHYS14 samples and RA1-specific samples
-#if 'hep.ph.ic.ac.uk' in host:
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'lxplus' in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
-triggerFlagsAna.triggerBits = {
-            'Bulk'     : triggers_RA1_Bulk,
-            'Prompt'   : triggers_RA1_Prompt,
-            'Parked'   : triggers_RA1_Parked,
-            'SingleMu' : triggers_RA1_Single_Mu,
-            'Photon'   : triggers_RA1_Photon,
-            'Muon'     : triggers_RA1_Muon,
-}
+# Selected samples as defined on the AlphaT twiki
+WJetsToLNu   = [ WJetsToLNu_HT100to200_PU_S14_POSTLS170, WJetsToLNu_HT200to400_PU_S14_POSTLS170, WJetsToLNu_HT400to600_PU_S14_POSTLS170, WJetsToLNu_HT600toInf_PU_S14_POSTLS170]
 
+# Currently not defined in the samples file could be added from here: https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*DYJetsToLL*13TeV*%2F*PU20bx25*%2F*AODSIM
+#DYJetsToLL  = []
+# Currently not defined in the samples file could be added from here: https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*ZJetsToNuNu*13TeV*%2F*PU20bx25*%2F*AODSIM
+#ZJetsToNuNu = []
+# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*GJets*13TeV*%2F*PU20bx25*%2F*AODSIM
+#GJets       = []
+
+# NOT INCLUDING: /TTJets_MSDecaysCKM_central_Tune4C_13TeV-madgraph-tauola/Spring14miniaod-PU20bx25_POSTLS170_V5-v2/MINIAODSIM
+TTbar        = [ TTpythia8_PU20bx25 ]
+# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FTToBLNu*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
+#TToBLNu     = []
+# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FSMS-T1qqqq*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
+#T1qqqq       = []
+# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FSMS-T1bbbb*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
+#T1bbbb       = []
+T1tttt       = [ T1tttt_PU20bx25 ]
+
+
+#selectedComponents = [ SingleMu, DoubleElectron, TTHToWW_PUS14, DYJetsToLL_M50_PU20bx25, TTJets_PUS14 ]
 selectedComponents = []
+selectedComponents.extend( WJetsToLNu )
+selectedComponents.extend( TTbar )
 
-#NEED to add WZ,WW,ZZ samples FIXME
 
-if cutFlow == 'Signal':
-    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #Zinv missing 400-600
 
-elif cutFlow == 'SingleMu':
-    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] 
-
-elif cutFlow == 'DoubleMu':
-    selectedComponents = QCDHT + DYJetsM50HT
-
-elif cutFlow == 'SinglePhoton':
-    selectedComponents = QCDHT + GJetsHT #GJets missing 400 - 600 
-
-elif cutFlow == 'MultiJetEnriched':
-    selectedComponents = QCDHT
-
-elif cutFlow == 'Inclusive':
-    selectedComponents = QCDHT + WJetsToLNuHT + [TTJets] + DYJetsM50HT + GJetsHT + SusySignalSamples
-
-else:
-    print 'Please choose correct cutFlow and PU regime'
-    #selectedComponents.extend( mcSamples )
 
 
 
@@ -225,33 +213,6 @@ elif test==4:
 #printComps(config.components, True)
         # the following is declared in case this cfg is used in input to the heppy.py script
 
-#-------- SEQUENCE
-
-#Insert the skimmers after their analysers in susyCoreSequence (for efficiency)
-susyCoreSequence.insert(susyCoreSequence.index(ttHCoreEventAna)+1,ttHJetMETSkim)
-susyCoreSequence.insert(susyCoreSequence.index(photonAna)+1,ttHPhotonSkim)
-susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHMuonSkim)
-susyCoreSequence.insert(susyCoreSequence.index(lepAna)+1,ttHElectronSkim)
-susyCoreSequence.insert(susyCoreSequence.index(isoTrackAna)+1,ttHIsoTrackSkim)
-
-
-sequence = cfg.Sequence(susyCoreSequence + [
-                        ttHAlphaTAna,
-                        ttHAlphaTControlAna,
-                        ttHAlphaTSkim,
-                        ttHAlphaTControlSkim,
-                        treeProducer,
-                        ])
-
-if test == 1 :
-    selectedComponents = [WJetsToLNu_HT600toInf]
-    for comp in selectedComponents:
-        comp.splitFactor = 1
-        comp.files = comp.files[:1]
-
-
-
-# the following is declared in case this cfg is used in input to the heppy.py script
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
 config = cfg.Config( components = selectedComponents,
                      sequence = sequence,

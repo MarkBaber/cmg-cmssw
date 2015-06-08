@@ -98,15 +98,15 @@ class ComponentCreator(object):
 
     def getFilesFromIC(self, dataset, user, pattern):
         # print 'getting files for', dataset,user,pattern
-        ds = datasetToSource( user, dataset, pattern, True )
-        files = ds.fileNames
+        ds = createDataset( user, dataset, pattern, True )
+        files = ds.listOfGoodFiles()
         mapping = 'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms%s'
         return [ mapping % f for f in files]
         
     def getFilesFromICLocal(self, dataset, user, pattern):
         print 'getting files for', dataset,user,pattern
-        ds = myDatasetToSource( user, dataset, pattern, 'phys03', True )
-        files = ds.fileNames
+        ds = createMyDataset( user, dataset, pattern, 'phys03', True )
+        files = ds.listOfGoodFiles()
         mapping = 'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms%s'
         return [ mapping % f for f in files]
 

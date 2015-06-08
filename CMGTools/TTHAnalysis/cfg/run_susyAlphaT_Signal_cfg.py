@@ -6,11 +6,7 @@ import sys
 import os
 
 # Configurables
-puRegime = "PU20bx25" 
 host = os.environ["HOSTNAME"]
-
-if puRegime != "PU20bx25":
-    sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
 
 #Cuts
 #ttHAlphaTSkim.alphaTCuts = [(0.5, 200,99999 )]   #Flatten AlphaT Cut
@@ -20,24 +16,27 @@ ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for t
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
 #if 'hep.ph.ic.ac.uk' in host:
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
+#from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
 
-triggerFlagsAna.triggerBits = {
-            'Bulk'     : triggers_RA1_Bulk,
-            'Prompt'   : triggers_RA1_Prompt,
-            'Parked'   : triggers_RA1_Parked,
-            'SingleMu' : triggers_RA1_Single_Mu,
-            'Photon'   : triggers_RA1_Photon,
-            'Muon'     : triggers_RA1_Muon,
-}
+# triggerFlagsAna.triggerBits = {
+#             'Bulk'     : triggers_RA1_Bulk,
+#             'Prompt'   : triggers_RA1_Prompt,
+#             'Parked'   : triggers_RA1_Parked,
+#             'SingleMu' : triggers_RA1_Single_Mu,
+#             'Photon'   : triggers_RA1_Photon,
+#             'Muon'     : triggers_RA1_Muon,
+# }
 
 selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
+#THESE ARE THE OLD SELECTED COMPONENTS, FOR NOW FILL THEM IN AS THEY APPEAR IN python/samples/samples_13TeV_74X.py
+#selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
+
+selectedComponents = [TT_bx25]
 
 #Get testing from command line
 from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
@@ -47,7 +46,7 @@ if test: print "Will run test scenario %r" % test
 #For testing one file from a dataset listed in samples/...
 if test == "1" :
 
-    selectedComponents = [TTJets]
+    selectedComponents = [TT_bx25]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
