@@ -41,7 +41,7 @@ class AlphaTAnalyzer( Analyzer ):
 
 
     # Calculate alphaT using jet ET
-    def makeAlphaT(self, jets):
+    def makeAlphaT(self, jets, jetFlag, minDeltaHT):
 
         if len(jets) == 0:
             return 0.
@@ -56,16 +56,31 @@ class AlphaTAnalyzer( Analyzer ):
             py.push_back(jet.py())
             et.push_back(jet.et())
 
-        alphaTCalc   = AlphaT()
-        return alphaTCalc.getAlphaT( et, px, py )
+        alphaTCalc = AlphaT()
+        return alphaTCalc.getAlphaT( et, px, py, jetFlag, minDeltaHT)
 
     def process(self, event):
         self.readCollections( event.input )
 
-        event.alphaT = self.makeAlphaT(event.cleanJets)
+	minDeltaHT = ROOT.Double(0.)
+	jetFlags = ROOT.std.vector('bool')()
+
+        event.alphaT = self.makeAlphaT(event.cleanJets,jetFlags,minDeltaHT)
+	event.minDeltaHT = minDeltaHT
+	for i,jet in enumerate(event.cleanJets):
+		if i >= jetFlags.size():
+			jet.pseudoJetFlag = False
+			jet.inPseudoJet = False
+		else:
+			jet.pseudoJetFlag = jetFlags[i]
+			jet.inPseudoJet = True
+	
+	genMinDeltaHT = ROOT.Double(0.)
+	genJetFlags = ROOT.std.vector('bool')()
 
         #Do the same with gen jets for MC
         if self.cfg_comp.isMC:
-            event.genAlphaT = self.makeAlphaT(event.cleanGenJets)
+            event.genAlphaT = self.makeAlphaT(event.cleanGenJets,genJetFlags,genMinDeltaHT)
+	event.genMinDeltaHT = genMinDeltaHT
 
         return True
