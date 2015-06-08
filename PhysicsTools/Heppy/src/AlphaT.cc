@@ -36,10 +36,19 @@ double AlphaT::getAlphaT( const std::vector<double>& et,
       }
       if ( ( fabs(delta_sum_et) < min_delta_sum_et || min_delta_sum_et < 0. ) ) {
 	min_delta_sum_et = fabs(delta_sum_et);
+	if (jet_pseudoFlag){
+	// if (!jet_pseudoFlag.empty()){
+          for (unsigned int j = 0; j < et.size(); ++j){
+            (*jet_pseudoFlag)[j] = ((i & (1U << j)) == 0);
+	  }
+        }
       }
     }
-    if ( min_delta_sum_et < 0. ) { return 0.; }
     
+    if ( min_delta_sum_et < 0. ) { return 0.; }
+   
+    minDeltaHT = min_delta_sum_et;
+
     // Alpha_T
     return ( 0.5 * ( sum_et - min_delta_sum_et ) / sqrt( sum_et*sum_et - (sum_px*sum_px+sum_py*sum_py) ) );
 

@@ -303,6 +303,7 @@ class BatchManager:
             #if not onPSI:
             #    err = 'Cannot run %s on %s' % (batchCmd, hostName)
             #    raise ValueError( err )
+
             if onIC: 
                 print 'running on IC : %s from %s' % (batchCmd, hostName)
                 return 'IC'
