@@ -1,3 +1,14 @@
+For installation instructions of 743 see:
+
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/CMGToolsReleasesExperimental#Git_MiniAOD_release_for_Summer_2
+
+and:
+
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/SUSYCMGfwk#7_4_3_and_Heppy_and_Spring15
+
+for now
+
+
 #Running CMG
 
 See: https://twiki.cern.ch/twiki/bin/view/CMS/AlphaT#Running_Heppy_CMGTools_flat_tree
@@ -119,3 +130,6 @@ git checkout -b CMG_MiniAOD_Lite_V6_0_from-CMSSW_7_0_6
 
 # compile
 scram b -v -j 9
+# cmg-cmssw-private
+
+
