@@ -6,12 +6,7 @@ import sys
 import os
 
 # Configurables
-puRegime = "PU20bx25" 
 host = os.environ["HOSTNAME"]
-
-if puRegime != "PU20bx25":
-    sys.exit("Only PU20bx25 available for Phys14 don't have samples for anything else")
-
 
 lepAna.loose_electron_id = "POG_Cuts_ID_PHYS14_25ns_v1_Tight"
 ttHElectronSkim.idCut = "abs(object.eta()) < 2.1"
@@ -34,14 +29,14 @@ from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 if 'hep.ph.ic.ac.uk' not in host:
     from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
 
-triggerFlagsAna.triggerBits = {
-            'Bulk'     : triggers_RA1_Bulk,
-            'Prompt'   : triggers_RA1_Prompt,
-            'Parked'   : triggers_RA1_Parked,
-            'SingleMu' : triggers_RA1_Single_Mu,
-            'Photon'   : triggers_RA1_Photon,
-            'Muon'     : triggers_RA1_Muon,
-}
+# triggerFlagsAna.triggerBits = {
+#             'Bulk'     : triggers_RA1_Bulk,
+#             'Prompt'   : triggers_RA1_Prompt,
+#             'Parked'   : triggers_RA1_Parked,
+#             'SingleMu' : triggers_RA1_Single_Mu,
+#             'Photon'   : triggers_RA1_Photon,
+#             'Muon'     : triggers_RA1_Muon,
+# }
 
 selectedComponents = []
 
