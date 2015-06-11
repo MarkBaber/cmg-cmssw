@@ -63,20 +63,20 @@ class AlphaTAnalyzer( Analyzer ):
         self.readCollections( event.input )
 
 	minDeltaHT = ROOT.Double(0.)
-	jetFlags = ROOT.std.vector('bool')()
+	jetFlags = ROOT.std.vector('int')()
 
         event.alphaT = self.makeAlphaT(event.cleanJets,jetFlags,minDeltaHT)
 	event.minDeltaHT = minDeltaHT
 	for i,jet in enumerate(event.cleanJets):
 		if i >= jetFlags.size():
-			jet.pseudoJetFlag = False
+			jet.pseudoJetFlag = -1
 			jet.inPseudoJet = False
 		else:
 			jet.pseudoJetFlag = jetFlags[i]
 			jet.inPseudoJet = True
 	
 	genMinDeltaHT = ROOT.Double(0.)
-	genJetFlags = ROOT.std.vector('bool')()
+	genJetFlags = ROOT.std.vector('int')()
 
         #Do the same with gen jets for MC
         if self.cfg_comp.isMC:
