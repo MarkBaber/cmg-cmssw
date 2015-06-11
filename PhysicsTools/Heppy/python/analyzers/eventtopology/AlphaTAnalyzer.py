@@ -3,25 +3,16 @@ import itertools
 import copy
 from math import *
 
-#from ROOT import TLorentzVector, TVectorD
-
 from PhysicsTools.HeppyCore.utils.deltar import deltaR, deltaPhi
 from PhysicsTools.Heppy.analyzers.core.Analyzer import Analyzer
 from PhysicsTools.HeppyCore.framework.event import Event
 from PhysicsTools.HeppyCore.statistics.counter import Counter, Counters
 from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 
-# from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Lepton
-# from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Photon
-# from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Electron
-# from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Muon
-# from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Tau
 from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Jet
 
 import ROOT
 from ROOT.heppy import AlphaT
-
-
 import os
 
 class AlphaTAnalyzer( Analyzer ):
@@ -30,8 +21,8 @@ class AlphaTAnalyzer( Analyzer ):
 
     def declareHandles(self):
         super(AlphaTAnalyzer, self).declareHandles()
-       #genJets                                                                                                                                                                     
-        self.handles['genJets'] = AutoHandle( 'slimmedGenJets','std::vector<reco::GenJet>')
+        #genJets 
+        #self.handles['genJets'] = AutoHandle( 'slimmedGenJets','std::vector<reco::GenJet>')
 
     def beginLoop(self,setup):
         super(AlphaTAnalyzer,self).beginLoop(setup)
@@ -63,9 +54,9 @@ class AlphaTAnalyzer( Analyzer ):
         self.readCollections( event.input )
 
 	minDeltaHT = ROOT.Double(0.)
-	jetFlags = ROOT.std.vector('int')()
+	jetFlags   = ROOT.std.vector('int')()
 
-        event.alphaT = self.makeAlphaT(event.cleanJets,jetFlags,minDeltaHT)
+        event.alphaT     = self.makeAlphaT(event.cleanJets,jetFlags,minDeltaHT)
 	event.minDeltaHT = minDeltaHT
 	for i,jet in enumerate(event.cleanJets):
 		if i >= jetFlags.size():
@@ -76,11 +67,12 @@ class AlphaTAnalyzer( Analyzer ):
 			jet.inPseudoJet = True
 	
 	genMinDeltaHT = ROOT.Double(0.)
-	genJetFlags = ROOT.std.vector('int')()
+	genJetFlags   = ROOT.std.vector('int')()
 
         #Do the same with gen jets for MC
         if self.cfg_comp.isMC:
             event.genAlphaT = self.makeAlphaT(event.cleanGenJets,genJetFlags,genMinDeltaHT)
-	event.genMinDeltaHT = genMinDeltaHT
+            event.genMinDeltaHT = genMinDeltaHT
+            pass
 
         return True
