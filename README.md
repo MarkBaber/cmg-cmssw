@@ -27,28 +27,26 @@ git read-tree -mu HEAD
 
 # cmg-cmssw-private
 ```bash
-cmsrel CMSSW_7_2_3
-cd CMSSW_7_2_3/src
+cmsrel CMSSW_7_4_3
+cd CMSSW_7_4_3/src
 cmsenv
 
 # checkout RA1 specific codes
-git init
+git cms-init
 git remote add cmsra1 git@github.com:CMSRA1/cmg-cmssw-private.git
-
 git fetch cmsra1
 
 git config core.sparsecheckout true
-cp /afs/cern.ch/user/c/cmgtools/public/sparse-checkout_72X_heppy .git/info/sparse-checkout
+cp /afs/cern.ch/user/c/cmgtools/public/sparse-checkout_74X_heppy .git/info/sparse-checkout
 
 # check out RA1 code
-git checkout cmsra1/RA1-CMGTools-from-CMSSW_7_2_3
-git checkout -b RA1-CMGTools-from-CMSSW_7_2_3
+git checkout -b RA1-CMGTools-from-CMSSW_7_4_3 cmsra1/RA1-CMGTools-from-CMSSW_7_4_3
 
 # compile
-scram b -v -j 9
+scram b -v -j8
 
 #To update
-git pull cmsra1 RA1-CMGTools-from-CMSSW_7_2_3
+git pull cmsra1 RA1-CMGTools-from-CMSSW_7_4_3
 
 #Update from the central cmg repo
 #This should be done regularly to make sure we keep up to date
@@ -57,7 +55,7 @@ git pull cmsra1 RA1-CMGTools-from-CMSSW_7_2_3
 git remote add cmg-central git@github.com:CERN-PH-CMG/cmg-cmssw.git
 
 #Then each time to update
-git pull cmg-central CMGTools-from-CMSSW_7_2_3
+git pull cmg-central CMGTools-from-CMSSW_7_4_3
 ```
 #TTHAnalysis
 ```bash
@@ -73,7 +71,7 @@ gSystem->SetIncludePath("-I$ROOFITSYS/include");
 cd ../../../../
 
 # compile
-scram b -v -j 9
+scram b -v -j8
 
 # run for 1000 events to test
 cd CMGTools/TTHAnalysis/cfg/ 
