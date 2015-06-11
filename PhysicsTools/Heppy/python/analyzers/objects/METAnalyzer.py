@@ -26,7 +26,8 @@ class METAnalyzer( Analyzer ):
         self.handles['nopumet'] = AutoHandle( self.cfg_ana.noPUMetCollection, 'std::vector<pat::MET>' )
         self.handles['cmgCand'] = AutoHandle( self.cfg_ana.candidates, self.cfg_ana.candidatesTypes )
         self.handles['vertices'] =  AutoHandle( "offlineSlimmedPrimaryVertices", 'std::vector<reco::Vertex>', fallbackLabel="offlinePrimaryVertices" )
-        self.mchandles['packedGen'] = AutoHandle( 'packedGenParticles', 'std::vector<pat::PackedGenParticle>' )
+        self.mchandles['packedGen']  = AutoHandle( 'packedGenParticles', 'std::vector<pat::PackedGenParticle>' )
+
 
     def beginLoop(self, setup):
         super(METAnalyzer,self).beginLoop(setup)
@@ -93,12 +94,12 @@ class METAnalyzer( Analyzer ):
 
         mupx = 0
         mupy = 0
-        #sum muon momentum                                                                                                                                                                                                                            
+        #sum muon momentum 
         for mu in event.selectedMuons:
             mupx += mu.px()
             mupy += mu.py()
 
-        #subtract muon momentum and construct met                                                                                                                                                                                                     
+        #subtract muon momentum and construct met 
         px,py = self.metNoMu.px()+mupx, self.metNoMu.py()+mupy
         self.metNoMu.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
         px,py = self.metNoMuNoPU.px()+mupx, self.metNoMuNoPU.py()+mupy
@@ -113,12 +114,12 @@ class METAnalyzer( Analyzer ):
 
         elepx = 0
         elepy = 0
-        #sum electron momentum                                                                                                                                                                                                                            
+        #sum electron momentum 
         for ele in event.selectedElectrons:
             elepx += ele.px()
             elepy += ele.py()
 
-        #subtract electron momentum and construct met                                                                                                                                                                                                     
+        #subtract electron momentum and construct met 
         px,py = self.metNoEle.px()+elepx, self.metNoEle.py()+elepy
         self.metNoEle.setP4(ROOT.reco.Particle.LorentzVector(px,py, 0, math.hypot(px,py)))
 
@@ -132,7 +133,7 @@ class METAnalyzer( Analyzer ):
 
         phopx = 0
         phopy = 0
-        #sum photon momentum                                                                                                                                                                                                                            
+        #sum photon momentum 
         for pho in event.selectedPhotons:
             phopx += pho.px()
             phopy += pho.py()
@@ -171,7 +172,6 @@ class METAnalyzer( Analyzer ):
 
         self.met_sig = self.met.significance()
         self.met_sumet = self.met.sumEt()
-
 
         ###https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/DataFormats/PatCandidates/interface/MET.h
         if not self.cfg_ana.copyMETsByValue:

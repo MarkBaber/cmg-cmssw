@@ -14,6 +14,7 @@ production_label = os.environ["PROD_LABEL"]
 cmg_version = os.environ["CMG_VERSION"]
 debug  = os.environ["DEBUG"] == 'True'
 useAAA = os.environ["USEAAA"] == 'True'
+log_directory = os.environ["LOGDIR"]
 
 if debug:
     NJOBS = 4
@@ -22,7 +23,7 @@ if debug:
 print "Will send dataset", dataset, "with", NJOBS, "jobs"
 
 config.General.requestName = dataset + "_" + cmg_version # task name
-config.General.workArea = 'crab_' + production_label # crab dir name
+config.General.workArea = os.path.join(log_directory,'crab_' + production_label) # crab dir name
 
 # this will divide task in *exactly* NJOBS jobs (for this we need JobType.pluginName = 'PrivateMC' and Data.splitting = 'EventBased')
 config.Data.unitsPerJob = 10
@@ -33,7 +34,7 @@ config.JobType.scriptArgs = ["dataset="+dataset, "total="+str(NJOBS), "useAAA="+
 
 # output will be .../$outLFN/$PRIMARY_DS/$PUBLISH_NAME/$TIMESTAMP/$COUNTER/$FILENAME
 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/Crab3DataHandling
-config.Data.outLFN += '/babies/' + cmg_version
+config.Data.outLFNDirBase += '/babies/' + cmg_version
 config.Data.primaryDataset =  production_label
 config.Data.publishDataName = dataset
 #final output: /store/user/$USER/babies/cmg_version/production_label/dataset/150313_114158/0000/foo.bar

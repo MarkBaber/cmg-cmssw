@@ -61,6 +61,7 @@ jetAna.jetLepDR        = 0.4
 
 metAna.doMetNoMu=True
 metAna.doMetNoPhoton=True
+metAna.doMetNoEle=True
 
 # Jet-MET based Skim (generic, but requirements depend on the final state)
 from CMGTools.TTHAnalysis.analyzers.ttHJetMETSkimmer import ttHJetMETSkimmer
@@ -90,11 +91,11 @@ isoTrackAna.setOff=False
 ##  ALPHAT VARIABLES
 ##------------------------------------------
 
-from CMGTools.TTHAnalysis.analyzers.ttHAlphaTVarAnalyzer import ttHAlphaTVarAnalyzer
+from PhysicsTools.Heppy.analyzers.eventtopology.AlphaTAnalyzer import AlphaTAnalyzer
 from CMGTools.TTHAnalysis.analyzers.ttHAlphaTControlAnalyzer import ttHAlphaTControlAnalyzer
 # Tree Producer
 ttHAlphaTAna = cfg.Analyzer(
-            ttHAlphaTVarAnalyzer, name='ttHAlphaTVarAnalyzer'
+            AlphaTAnalyzer, name='AlphaTAnalyzer'
             )
 
 ttHAlphaTControlAna = cfg.Analyzer(
@@ -110,6 +111,24 @@ ttHGenBinAna = cfg.Analyzer(
     ttHGenBinningAnalyzer, name = 'ttHGenBinningAnalyzer'
     )
 
+##------------------------------------------
+##  TOLOLOGIAL VARIABLES: MT, MT2
+##------------------------------------------
+
+from CMGTools.TTHAnalysis.analyzers.ttHTopoVarAnalyzer import ttHTopoVarAnalyzer
+
+ttHTopoJetAna = cfg.Analyzer(
+            ttHTopoVarAnalyzer, name = 'ttHTopoVarAnalyzer',
+            doOnlyDefault = True
+            )
+
+
+from PhysicsTools.Heppy.analyzers.eventtopology.MT2Analyzer import MT2Analyzer
+
+MT2Ana = cfg.Analyzer(
+            MT2Analyzer, name = 'MT2Analyzer',
+            doOnlyDefault = True
+            )
 
 #------------------------------------------
 ##  PRODUCER
@@ -131,41 +150,44 @@ treeProducer = cfg.Analyzer(
 sequence = cfg.Sequence(susyCoreSequence + [
                         ttHAlphaTAna,
                         ttHAlphaTControlAna,
+                        MT2Ana,
+                        ttHTopoJetAna,
                         ttHGenBinAna,
                         treeProducer,
                         ])
 
 
 #-------- SAMPLES AND TRIGGERS -----------
-from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
+#from CMGTools.TTHAnalysis.samples.samples_13TeV_CSA14 import *
+from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
 
 
 # Selected samples as defined on the AlphaT twiki
-WJetsToLNu   = [ WJetsToLNu_HT100to200_PU_S14_POSTLS170, WJetsToLNu_HT200to400_PU_S14_POSTLS170, WJetsToLNu_HT400to600_PU_S14_POSTLS170, WJetsToLNu_HT600toInf_PU_S14_POSTLS170]
-
-# Currently not defined in the samples file could be added from here: https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*DYJetsToLL*13TeV*%2F*PU20bx25*%2F*AODSIM
-#DYJetsToLL  = []
-# Currently not defined in the samples file could be added from here: https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*ZJetsToNuNu*13TeV*%2F*PU20bx25*%2F*AODSIM
-#ZJetsToNuNu = []
-# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*GJets*13TeV*%2F*PU20bx25*%2F*AODSIM
-#GJets       = []
-
-# NOT INCLUDING: /TTJets_MSDecaysCKM_central_Tune4C_13TeV-madgraph-tauola/Spring14miniaod-PU20bx25_POSTLS170_V5-v2/MINIAODSIM
-TTbar        = [ TTpythia8_PU20bx25 ]
-# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FTToBLNu*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
-#TToBLNu     = []
-# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FSMS-T1qqqq*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
-#T1qqqq       = []
-# https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FSMS-T1bbbb*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
-#T1bbbb       = []
-T1tttt       = [ T1tttt_PU20bx25 ]
-
-
-#selectedComponents = [ SingleMu, DoubleElectron, TTHToWW_PUS14, DYJetsToLL_M50_PU20bx25, TTJets_PUS14 ]
+# WJetsToLNu   = [ WJetsToLNu_HT100to200_PU_S14_POSTLS170, WJetsToLNu_HT200to400_PU_S14_POSTLS170, WJetsToLNu_HT400to600_PU_S14_POSTLS170, WJetsToLNu_HT600toInf_PU_S14_POSTLS170]
+#
+# # Currently not defined in the samples file could be added from here: https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*DYJetsToLL*13TeV*%2F*PU20bx25*%2F*AODSIM
+# #DYJetsToLL  = []
+# # Currently not defined in the samples file could be added from here: https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*ZJetsToNuNu*13TeV*%2F*PU20bx25*%2F*AODSIM
+# #ZJetsToNuNu = []
+# # https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2F*GJets*13TeV*%2F*PU20bx25*%2F*AODSIM
+# #GJets       = []
+#
+# # NOT INCLUDING: /TTJets_MSDecaysCKM_central_Tune4C_13TeV-madgraph-tauola/Spring14miniaod-PU20bx25_POSTLS170_V5-v2/MINIAODSIM
+# TTbar        = [ TTpythia8_PU20bx25 ]
+# # https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FTToBLNu*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
+# #TToBLNu     = []
+# # https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FSMS-T1qqqq*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
+# #T1qqqq       = []
+# # https://cmsweb.cern.ch/das/request?view=list&limit=100&instance=prod%2Fglobal&input=dataset%3D%2FSMS-T1bbbb*13TeV*%2FSpring*PU20bx25*%2F*AODSIM
+# #T1bbbb       = []
+# T1tttt       = [ T1tttt_PU20bx25 ]
+#
+#
+# #selectedComponents = [ SingleMu, DoubleElectron, TTHToWW_PUS14, DYJetsToLL_M50_PU20bx25, TTJets_PUS14 ]
 selectedComponents = []
-selectedComponents.extend( WJetsToLNu )
-selectedComponents.extend( TTbar )
-
+# selectedComponents.extend( WJetsToLNu )
+# selectedComponents.extend( TTbar )
+#
 
 
 
@@ -177,7 +199,7 @@ test = 1
 # Test a single component, using a single thread.
 #--------------------------------------------------
 if test==1:
-    comp               = TTJets_PU20bx25
+    comp               = TT_bx25
     #comp.files = ['/afs/cern.ch/work/p/pandolf/CMSSW_7_0_6_patch1_2/src/CMGTools/TTHAnalysis/cfg/pickevents.root']
     comp.files         = comp.files[:1]
     

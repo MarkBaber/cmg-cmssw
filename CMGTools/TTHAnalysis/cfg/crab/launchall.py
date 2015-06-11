@@ -1,10 +1,12 @@
 import imp, os
+import crabMaster_cfg
 
 # datasets to run as defined from run_susyMT2.cfg
 # number of jobs to run per dataset decided based on splitFactor and fineSplitFactor from cfg file
 # in principle one only needs to modify the following two lines:
-production_label = "testSplit"
-cmg_version = 'MT2_CMGTools-from-CMSSW_7_2_3'
+production_label = crabMaster_cfg.production_label
+cmg_version = os.popen("git describe --tags").read()[:-1].replace(".","_")
+log_directory = crabMaster_cfg.log_directory
 
 debug  = False
 useAAA = True
@@ -21,6 +23,7 @@ os.environ["PROD_LABEL"]  = production_label
 os.environ["CMG_VERSION"] = cmg_version
 os.environ["DEBUG"]       = str(debug)
 os.environ["USEAAA"]      = str(useAAA)
+os.environ["LOGDIR"]      = log_directory
 
 from PhysicsTools.HeppyCore.framework.heppy import split
 for comp in conf.components:

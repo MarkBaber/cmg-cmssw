@@ -1,1 +1,1 @@
-../run_susyMT2_cfg.py
+../run_susyAlphaT_CrabTest_cfg.py

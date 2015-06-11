@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+#Script to automatically correctly fill the folder name for pybatch
+import sys
+import os
+import subprocess
+import time
+import optparse
+import whereAmI
+
+cmssw_base = os.environ.get('CMSSW_BASE')
+if cmssw_base == None:
+    sys.exit('Please cmsenv in a CMSSW release with CMG tools')
+
+def cutFlow_callback(option, opt, value, parser):
+      setattr(parser.values, option.dest, value.split(','))
+
+def parse_args():
+    parser = optparse.OptionParser()
+    parser.add_option('-o','--outDir',help = 'output dir of jobs')
+    parser.add_option('-i','--cfg', type ='string',action='callback',callback=cutFlow_callback,
+            help = 'Custom cfg file to be run. For multiple choices separate by spaces')
+    parser.add_option('-c','--cutFlow', type ='string',action='callback',callback=cutFlow_callback,
+            help = 'Standard cfg file to be run (for latest cut flows use e g --cutFlow SingleMu Signal ). For multiple choices separate by spaces')
+    parser.add_option('-t','--tag',help = 'additional output to folder name',default = '')
+    parser.add_option('-q','--queue',help = 'The queue for batch submission')
+    parser.add_option("--dry-run", action = "store_true", default = False, help = "do not run any commands; only print them")
+    options,args = parser.parse_args()
+    if not options.outDir:
+        parser.error('Need output directory')
+    if options.cfg and options.cutFlow:
+        parser.error('Please choose custom cfg file (--cfg run_......py) or standard cut flow (e.g. --cutFlow SingleMu), not both')
+    if not options.cfg and not options.cutFlow:
+        parser.error('Please choose some form of input')
+    return options
+
+def getSubmissionArgs(output, location, queue):
+
+    #Get the right submission argument
+    if location == 'CERN':
+        if not queue: queue='8nh'
+        return "bsub -u /dev/null -q "+queue+" -J "+output+" < batchScript.sh"
+    elif location == 'Imperial':
+        if not queue: queue='hepshort.q'
+        #return "qsub -q "+queue+" -o "+output+"/ -e "+output+"/ batchScript.sh" 
+
+        return "qsub -q "+queue+" -o $PWD -e $PWD -N ${PWD##*/} batchScript.sh" 
+    else:
+        sys.exit("Don't know where I am, can't submit correctly")
+
+
+def main(outDir,cfg,cutFlow,tag,queue,dry_run):
+    
+
+    #Find out if at CERN or imperial
+    location = whereAmI.whereAmI()
+    
+    #Get the relevant variables from the config
+    now = time.strftime("%Y%m%d")
+
+    outFolders = []
+    if cfg:
+        for name in cfg:
+            outFolders.append( now+"_"+name.replace('/','_').replace('.py','')+tag )
+    elif cutFlow:
+        for name in cutFlow:
+            outFolders.append( now+"_"+name+tag )
+
+    outDir = os.path.abspath(outDir)
+
+    outputs = []
+    
+    for outFolder in outFolders:
+        outputs.append(os.path.join(outDir,outFolder))
+
+   
+    if cfg:
+        for output,name in zip(outputs,cfg):
+
+            submissionArgs = getSubmissionArgs(output, location, queue) 
+
+            command = "heppy_batch.py -o "+output+" "+ name +" -b '"+submissionArgs+"'"
+            if dry_run:
+                print command
+            else:
+                os.system(command)
+
+    elif cutFlow:
+        for output,name in zip(outputs,cutFlow):
+
+            submissionArgs = getSubmissionArgs(output, location, queue) 
+
+            command = "heppy_batch.py -o "+output+" "+cmssw_base+"/src/CMGTools/TTHAnalysis/cfg/run_susyAlphaT_"+name+"_cfg.py -b '"+submissionArgs+"' -p"
+            if dry_run:
+                print command
+            else:
+                os.system(command)
+
+    if dry_run: return
+
+    #Write the git tag and commit into the version info
+    for output in outputs:
+
+        with open(output+'/versionInfo.txt', 'w') as versionInfo:
+            #Get the info from git
+            versionInfo.write("Tag for production: \n")
+            versionInfo.write(os.popen("cd "+cmssw_base+"/src/CMGTools && git describe --tags").read())
+
+            versionInfo.write("\nExtra information: \n")
+            versionInfo.write(os.popen("cd "+cmssw_base+"/src/CMGTools && git show --quiet").read())
+
+            
+if __name__ == '__main__':
+    main(**vars(parse_args()))
+

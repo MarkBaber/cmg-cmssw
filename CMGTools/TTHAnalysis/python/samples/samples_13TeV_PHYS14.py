@@ -159,12 +159,20 @@ GJets_HT100to200 = kreator.makeMCComponent("GJets_HT100to200", "/GJets_HT-100to2
 GJets_HT200to400 = kreator.makeMCComponent("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",489.9)
 GJets_HT400to600 = kreator.makeMCComponent("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",62.05)
 GJets_HT600toInf = kreator.makeMCComponent("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",20.87)
+
+# with ECAL problems fixed (redundant as now have GJetsHT_fixPhoton)
+# GJets_HT100to200 = kreator.makeMyPrivateMCComponent("GJets_HT100to200", "/GJets_HT-100to200_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",1534)
+# GJets_HT200to400 = kreator.makeMyPrivateMCComponent("GJets_HT200to400", "/GJets_HT-200to400_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",489.9)
+# GJets_HT400to600 = kreator.makeMyPrivateMCComponent("GJets_HT400to600", "/GJets_HT-400to600_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",62.05)
+# GJets_HT600toInf = kreator.makeMyPrivateMCComponent("GJets_HT600toInf", "/GJets_HT-600toInf_Tune4C_13TeV-madgraph-tauola/mmasciov-miniAOD_fixPhoton_7_2_3-c9d750b0fccf216043050d5d9dc39463/USER", "PRIVATE", ".*root", "phys03",20.87)
+
 GJetsHT = [
 GJets_HT100to200,
 GJets_HT200to400,
 GJets_HT400to600,
 GJets_HT600toInf,
 ]
+
 ZJetsToNuNu_HT100to200 = kreator.makeMCComponent("ZJetsToNuNu_HT100to200", "/ZJetsToNuNu_HT-100to200_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",372.6*1.27)
 ZJetsToNuNu_HT200to400 = kreator.makeMCComponent("ZJetsToNuNu_HT200to400", "/ZJetsToNuNu_HT-200to400_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",100.8*1.27)
 ZJetsToNuNu_HT400to600 = kreator.makeMCComponent("ZJetsToNuNu_HT400to600", "/ZJetsToNuNu_HT-400to600_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v2/MINIAODSIM", "CMS", ".*root",11.99*1.27)
@@ -377,21 +385,22 @@ dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"  # use environmental varia
 
 json=dataDir+'/json/Cert_Run2012ABCD_22Jan2013ReReco.json'
 
-SingleMu = cfg.DataComponent(
-    name = 'SingleMu',
-    files = kreator.getFilesFromEOS('SingleMu', 
-                                    '/SingleMu/Run2012D-15Apr2014-v1/AOD/02e0a1be-c9c7-11e3-bfe2-0024e83ef644/MINIAOD/CMSSW_7_0_9_patch2_GR_70_V2_AN1',
-                                    '/eos/cms/store/cmst3/user/cmgtools/CMG/%s'),
-    intLumi = 1,
-    triggers = [],
-    json = json
-    )
+# SingleMu = cfg.DataComponent(
+#     name = 'SingleMu',
+#     files = kreator.getFilesFromEOS('SingleMu', 
+#                                     '/SingleMu/Run2012D-15Apr2014-v1/AOD/02e0a1be-c9c7-11e3-bfe2-0024e83ef644/MINIAOD/CMSSW_7_0_9_patch2_GR_70_V2_AN1',
+#                                     '/eos/cms/store/cmst3/user/cmgtools/CMG/%s'),
+#     intLumi = 1,
+#     triggers = [],
+#     json = json
+#     )
 
            
 dataSamplesMu=[]
 dataSamplesE=[]
 dataSamplesMuE=[]
-dataSamples1Mu=[SingleMu]
+#dataSamples1Mu=[SingleMu]
+dataSamples1Mu=[]
 dataSamplesAll = dataSamplesMu+dataSamplesE+dataSamplesMuE+dataSamples1Mu
 
 
@@ -402,7 +411,7 @@ from CMGTools.TTHAnalysis.setup.Efficiencies import *
 for comp in mcSamples:
     comp.isMC = True
     comp.isData = False
-    comp.splitFactor = 250 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
+    comp.splitFactor = 500 if comp.name in [ "TTJets" ] else 250
     comp.puFileMC=dataDir+"/puProfile_Summer12_53X.root"
     comp.puFileData=dataDir+"/puProfile_Data12.root"
     comp.efficiency = eff2012

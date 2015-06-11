@@ -261,8 +261,9 @@ isoTrackAna = cfg.Analyzer(
     dzPartMax = 0.1,
     maxAbsIso = 8,
     #####
-    MaxIsoSum = 0.1, ### unused
-    MaxIsoSumEMU = 0.2, ### unused
+    doRelIsolation = False,
+    MaxIsoSum = 0.1, ### unused if not rel iso
+    MaxIsoSumEMU = 0.2, ### unused if not rel iso
     doSecondVeto = False,
     #####
     doPrune = True
@@ -362,18 +363,18 @@ ttHCoreEventAna = cfg.Analyzer(
     )
 
 ## Jet-MET based Skim (generic, but requirements depend on the final state)
-# from CMGTools.TTHAnalysis.analyzers.ttHJetMETSkimmer import ttHJetMETSkimmer
-# ttHJetMETSkim = cfg.Analyzer(
-#    ttHJetMETSkimmer, name='ttHJetMETSkimmer',
-#    jets      = "cleanJets", # jet collection to use
-#    jetPtCuts = [],  # e.g. [60,40,30,20] to require at least four jets with pt > 60,40,30,20
-#    jetVetoPt =  0,  # if non-zero, veto additional jets with pt > veto beyond the ones in jetPtCuts
-#    metCut    =  0,  # MET cut
-#    htCut     = ('htJet40j', 0), # cut on HT defined with only jets and pt cut 40, at zero; i.e. no cut
-#                                 # see ttHCoreEventAnalyzer for alternative definitions
-#    mhtCut    = ('mhtJet40', 0), # cut on MHT defined with all leptons, and jets with pt > 40.
-#    nBJet     = ('CSVv2IVFM', 0, "jet.pt() > 30"),     # require at least 0 jets passing CSV medium and pt > 30
-#    )
+from CMGTools.TTHAnalysis.analyzers.ttHJetMETSkimmer import ttHJetMETSkimmer
+ttHJetMETSkim = cfg.Analyzer(
+   ttHJetMETSkimmer, name='ttHJetMETSkimmer',
+   jets      = "cleanJets", # jet collection to use
+   jetPtCuts = [],  # e.g. [60,40,30,20] to require at least four jets with pt > 60,40,30,20
+   jetVetoPt =  0,  # if non-zero, veto additional jets with pt > veto beyond the ones in jetPtCuts
+   metCut    =  0,  # MET cut
+   htCut     = ('htJet40j', 0), # cut on HT defined with only jets and pt cut 40, at zero; i.e. no cut
+                                # see ttHCoreEventAnalyzer for alternative definitions
+   mhtCut    = ('mhtJet40', 0), # cut on MHT defined with all leptons, and jets with pt > 40.
+   nBJet     = ('CSVv2IVFM', 0, "jet.pt() > 30"),     # require at least 0 jets passing CSV medium and pt > 30
+   )
 
 
 # Core sequence of all common modules
@@ -384,7 +385,7 @@ susyCoreSequence = [
     triggerAna,
     pileUpAna,
     genAna,
-    genHiggsAna,
+    #genHiggsAna,
     genHFAna,
     pdfwAna,
     susyScanAna,
@@ -394,12 +395,12 @@ susyCoreSequence = [
     #ttHLepMCAna,
     photonAna,
     tauAna,
-    isoTrackAna,
     jetAna,
     #ttHFatJetAna,  # out of core sequence for now
     #ttHSVAna, # out of core sequence for now
     metAna,
     ttHCoreEventAna,
+    isoTrackAna,
     #ttHJetMETSkim
     triggerFlagsAna,
     eventFlagsAna,

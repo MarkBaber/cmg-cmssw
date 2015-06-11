@@ -102,6 +102,12 @@ jetTypeSusy = NTupleObjectType("jetSusy",  baseObjectTypes = [ jetTypeExtra ], v
     NTupleVariable("mcMatchFlav",  lambda x : x.mcMatchFlav, int, mcOnly=True, help="Flavour of associated parton from hard scatter (if any)"),
 ])
 
+jetTypeAlphaT = NTupleObjectType("jetSusy",  baseObjectTypes = [ jetTypeSusy ], variables = [
+	    #NTupleVariable("pseudoJetFlag",  lambda x : x.pseudoJetFlag if hasattr(x,"pseudoJetFlag") else -1 , int, mcOnly=False , help="Flag for which pseudo jets the jet belongs to"),
+	    NTupleVariable("inPseudoJet",  lambda x : x.inPseudoJet if hasattr(x,"inPseudoJet") else False, int, mcOnly=False , help="Flag for which the jet belongs to any pseudo jet"),
+	    ])
+
+
 jetTypeSusyExtra = NTupleObjectType("jetSusyExtra",  baseObjectTypes = [ jetTypeSusy ], variables = [
     NTupleVariable("prunedMass", lambda x : x.prunedP4.M() if hasattr(x,'prunedP4') else x.mass(), float, help="Pruned mass"),
     NTupleVariable("mcNumPartons", lambda x : getattr(x,'mcNumPartons',-1),int, mcOnly=True, help="Number of matched partons (quarks, photons)"),
