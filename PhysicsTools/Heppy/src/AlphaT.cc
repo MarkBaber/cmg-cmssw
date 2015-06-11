@@ -9,7 +9,7 @@ namespace heppy {
 double AlphaT::getAlphaT( const std::vector<double>& et,
 			  const std::vector<double>& px,
 			  const std::vector<double>& py,
-			  std::vector<bool> * jet_pseudoFlag,
+			  std::vector<int> * jet_pseudoFlag,
 			  double& minDeltaHT){
    
     // Clear pesudo-jet container
@@ -39,7 +39,9 @@ double AlphaT::getAlphaT( const std::vector<double>& et,
 	if (jet_pseudoFlag){
 	// if (!jet_pseudoFlag.empty()){
           for (unsigned int j = 0; j < et.size(); ++j){
-            (*jet_pseudoFlag)[j] = ((i & (1U << j)) == 0);
+            //bool testBool = ((i & (1U << j)) == 0);
+	    if (((i & (1U << j)) == 0)) (*jet_pseudoFlag)[j] = 1;
+	    else (*jet_pseudoFlag)[j] = 0;
 	  }
         }
       }
