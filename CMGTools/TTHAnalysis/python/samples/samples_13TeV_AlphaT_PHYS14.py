@@ -40,15 +40,86 @@ triggers_RA1_Photon    = ["HLT_Photon150_v%d"%i for i in range(1,20)] + ["HLT_Ph
 triggers_RA1_Muon      = ["HLT_IsoMu24_eta2p1_v%d"%i for i in range(1,20)]
 
 
+# ------------------------------------------------------------------------------------------------------------------------
+#                                                     Trigger samples                                                    
+# ------------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------
+# PU20BX25
+# ----------------------------------------
+
+# /QCD_Pt-15to30_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v2/MINIAODSIM
+# /QCD_Pt-30to50_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v2/MINIAODSIM
+# /QCD_Pt-50to80_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-80to120_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-120to170_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-170to300_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-300to470_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-470to600_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-600to800_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-800to1000_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-1000to1400_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+# /QCD_Pt-1800_Tune4C_13TeV_pythia8/Phys14DR-AVE20BX25_tsg_castor_PHYS14_25_V3-v1/MINIAODSIM
+
+DYToEE_AVE20BX25   = kreator.makeMCComponentFromIC("DYToEE_AVE20BX25",   "/DYToEE_Tune4C_13TeV-pythia8/Phys14DR-AVE20BX25_tsg_PHYS14_25_V3-v1/MINIAODSIM", "CMS", ".*root") 
+DYToMuMu_AVE20BX25 = kreator.makeMCComponentFromIC("DYToMuMu_AVE20BX25", "/DYToMuMu_Tune4C_13TeV-pythia8/Phys14DR-AVE20BX25_tsg_PHYS14_25_V3-v1/MINIAODSIM", "CMS", ".*root")
+
+WToENu_AVE20BX25   = kreator.makeMCComponentFromIC("WToENu_AVE20BX25",   "/WToENu_Tune4C_13TeV-pythia8/Phys14DR-AVE20BX25_tsg_PHYS14_25_V3-v1/MINIAODSIM", "CMS", ".*root")
+WToMuNu_AVE20BX25  = kreator.makeMCComponentFromIC("WToMuNu_AVE20BX25",  "/WToMuNu_Tune4C_13TeV-pythia8/Phys14DR-AVE20BX25_tsg_PHYS14_25_V3-v1/MINIAODSIM", "CMS", ".*root")
+
+
+# ----------------------------------------
+# PU30BX50
+# ----------------------------------------
+
+
+# /QCD_Pt-15to30_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v2/MINIAODSIM
+# /QCD_Pt-30to50_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v2/MINIAODSIM
+# /QCD_Pt-50to80_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-80to120_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-120to170_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-170to300_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-300to470_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-470to600_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-600to800_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-800to1000_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-1000to1400_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-1400to1800_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+# /QCD_Pt-1800_Tune4C_13TeV_pythia8/Phys14DR-AVE30BX50_tsg_castor_PHYS14_ST_V1-v1/MINIAODSIM
+
+DYToEE_AVE30BX50   = kreator.makeMCComponentFromIC("DYToEE_AVE30BX50",   "/DYToEE_Tune4C_13TeV-pythia8/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root")
+DYToMuMu_AVE30BX50 = kreator.makeMCComponentFromIC("DYToMuMu_AVE30BX50", "/DYToMuMu_Tune4C_13TeV-pythia8/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root")
+
+WToENu_AVE30BX50   = kreator.makeMCComponentFromIC("WToENu_AVE30BX50",   "/WToENu_Tune4C_13TeV-pythia8/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v2/MINIAODSIM", "CMS", ".*root")
+WToMuNu_AVE30BX50  = kreator.makeMCComponentFromIC("WToMuNu_AVE30BX50",  "/WToMuNu_Tune4C_13TeV-pythia8/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root")
+
+TTbar_AVE30BX50    = kreator.makeMCComponentFromIC("TTbar_AVE30BX50",    "/TT_Tune4C_13TeV-pythia8-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root")
+
+DYJetsToLL_AVE30BX50   = kreator.makeMCComponentFromIC("DYJetsToLL_AVE30BX50",   "/DYJetsToLL_M-50_13TeV-madgraph-pythia8-tauola_v2/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root")
+DYJetsToMuMu_AVE30BX50 = kreator.makeMCComponentFromIC("DYJetsToMuMu_AVE30BX50", "/DYJetsToMuMu_PtZ-180_M-50_13TeV-madgraph/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root")
+
+SMS_T2tt_2J_mStop650_mLSP325_AVE30BX50 = kreator.makeMCComponentFromIC("SMS_T2tt_2J_mStop650_mLSP325_AVE30BX50",   "/SMS-T2tt_2J_mStop-650_mLSP-325_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v2/MINIAODSIM",  "CMS", ".*root",0.107045) 
+SMS_T1bbbb_2J_mGl1000_mLSP900_AVE30BX50 = kreator.makeMCComponentFromIC("SMS_T1bbbb_2J_mGl1000_mLSP900_AVE30BX50", "/SMS-T1bbbb_2J_mGl-1000_mLSP-900_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root",0.325388)
+SMS_T1qqqq_2J_mGl1000_mLSP800_AVE30BX50 = kreator.makeMCComponentFromIC("SMS_T1qqqq_2J_mGl1000_mLSP800_AVE30BX50", "/SMS-T1qqqq_2J_mGl-1000_mLSP-800_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v3/MINIAODSIM", "CMS", ".*root",0.325388)
+SMS_T1tttt_2J_mGl1200_mLSP800_AVE30BX50 = kreator.makeMCComponentFromIC("SMS_T1tttt_2J_mGl1200_mLSP800_AVE30BX50", "/SMS-T1tttt_2J_mGl-1200_mLSP-800_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v2/MINIAODSIM", "CMS", ".*root",0.0856418)
+SMS_T1tttt_2J_mGl1500_mLSP100_AVE30BX50 = kreator.makeMCComponentFromIC("SMS_T1tttt_2J_mGl1500_mLSP100_AVE30BX50", "/SMS-T1tttt_2J_mGl-1500_mLSP-100_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM", "CMS", ".*root",0.0141903)
+SMS_T2tt_2J_mStop425_mLSP325_AVE30BX50  = kreator.makeMCComponentFromIC("SMS_T2tt_2J_mStop425_mLSP325_AVE30BX50", "/SMS-T2tt_2J_mStop-425_mLSP-325_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v1/MINIAODSIM",   "CMS", ".*root",1.31169)
+SMS_T2tt_2J_mStop500_mLSP325_AVE30BX50  = kreator.makeMCComponentFromIC("SMS_T2tt_2J_mStop500_mLSP325_AVE30BX50", "/SMS-T2tt_2J_mStop-500_mLSP-325_Tune4C_13TeV-madgraph-tauola/Phys14DR-AVE30BX50_tsg_PHYS14_ST_V1-v2/MINIAODSIM",   "CMS", ".*root",0.51848)
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+
+
+
 ## Dataset at IC-tier-2
 
 #### Background
-QCD_HT_100To250 = kreator.makeMCComponentFromIC("QCD_HT_100To250", "/QCD_HT-100To250_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
-QCD_HT_250To500 = kreator.makeMCComponentFromIC("QCD_HT_250To500", "/QCD_HT_250To500_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
-QCD_HT_250To500_ext1 = kreator.makeMCComponentFromIC("QCD_HT_250To500_ext1", "/QCD_HT_250To500_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1_ext1-v2/MINIAODSIM", "CMS", ".*root")
-QCD_HT_500To1000 = kreator.makeMCComponentFromIC("QCD_HT_500To1000", "/QCD_HT-500To1000_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+QCD_HT_100To250       = kreator.makeMCComponentFromIC("QCD_HT_100To250",       "/QCD_HT-100To250_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+QCD_HT_250To500       = kreator.makeMCComponentFromIC("QCD_HT_250To500",       "/QCD_HT_250To500_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
+QCD_HT_250To500_ext1  = kreator.makeMCComponentFromIC("QCD_HT_250To500_ext1",  "/QCD_HT_250To500_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1_ext1-v2/MINIAODSIM", "CMS", ".*root")
+QCD_HT_500To1000      = kreator.makeMCComponentFromIC("QCD_HT_500To1000",      "/QCD_HT-500To1000_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
 QCD_HT_500To1000_ext1 = kreator.makeMCComponentFromIC("QCD_HT_500To1000_ext1", "/QCD_HT-500To1000_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1_ext1-v1/MINIAODSIM", "CMS", ".*root")
-QCD_HT_1000ToInf = kreator.makeMCComponentFromIC("QCD_HT_1000ToInf", "/QCD_HT_1000ToInf_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1_ext1-v1/MINIAODSIM", "CMS", ".*root")
+QCD_HT_1000ToInf      = kreator.makeMCComponentFromIC("QCD_HT_1000ToInf",      "/QCD_HT_1000ToInf_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1_ext1-v1/MINIAODSIM", "CMS", ".*root")
 QCD_HT_1000ToInf_ext1 = kreator.makeMCComponentFromIC("QCD_HT_1000ToInf_ext1", "/QCD_HT_1000ToInf_13TeV-madgraph/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root")
 
 
@@ -108,7 +179,7 @@ ZJetsToNuNu_HT400to600,
 ZJetsToNuNu_HT600toInf,
 ]
 
-# https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
+# Single top cross sections: https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
 TToLeptons_tch = kreator.makeMCComponentFromIC("TToLeptons_tch", "/TToLeptons_t-channel-CSA14_Tune4C_13TeV-aMCatNLO-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root", 136.05*0.108) 
 TToLeptons_sch = kreator.makeMCComponentFromIC("TToLeptons_sch", "/TToLeptons_s-channel-CSA14_Tune4C_13TeV-aMCatNLO-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root", 7.20*0.108)
 TBarToLeptons_tch = kreator.makeMCComponentFromIC("TBarToLeptons_tch", "/TBarToLeptons_t-channel_Tune4C_CSA14_13TeV-aMCatNLO-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root", 80.97*0.108)
@@ -120,12 +191,31 @@ SingleTop = [
     TToLeptons_tch, TToLeptons_sch, TBarToLeptons_tch, TBarToLeptons_sch, TBar_tWch, T_tWch
 ]
 
+# TTbar cross section: MCFM with dynamic scale, StandardModelCrossSectionsat13TeV
 TTJets = kreator.makeMCComponentFromIC("TTJets", "/TTJets_MSDecaysCKM_central_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",809.1)
+
+# TTV cross sections are from 13 TeV MG5_aMC@NLO v2.2.1, NNPDF 2.3nlo, fixed scale = mtop + 0.5*mv
 TTWJets = kreator.makeMCComponentFromIC("TTWJets", "/TTWJets_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.6647)
 TTZJets = kreator.makeMCComponentFromIC("TTZJets", "/TTZJets_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.8565)
+
+# TTH cross section from LHC Higgs XS WG: https://twiki.cern.ch/twiki/bin/view/LHCPhysics/CERNYellowReportPageAt1314TeV?rev=15 
 TTH = kreator.makeMCComponentFromIC("TTH", "/TTbarH_M-125_13TeV_amcatnlo-pythia8-tauola/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v2/MINIAODSIM", "CMS", ".*root",0.5085)
 
-## Susy Signal samples
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Signal samples
+# cross sections from LHC SUSY Cross Section Working Group https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SUSYCrossSections
 SMS_T2tt_2J_mStop850_mLSP100 = kreator.makeMCComponentFromIC("SMS_T2tt_2J_mStop850_mLSP100", "/SMS-T2tt_2J_mStop-850_mLSP-100_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.0189612)
 SMS_T2tt_2J_mStop650_mLSP325 = kreator.makeMCComponentFromIC("SMS_T2tt_2J_mStop650_mLSP325", "/SMS-T2tt_2J_mStop-650_mLSP-325_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.107045)
 SMS_T2tt_2J_mStop500_mLSP325 = kreator.makeMCComponentFromIC("SMS_T2tt_2J_mStop500_mLSP325", "/SMS-T2tt_2J_mStop-500_mLSP-325_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.51848)
