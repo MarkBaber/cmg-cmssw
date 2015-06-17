@@ -196,10 +196,10 @@ TTJets = kreator.makeMCComponentFromIC("TTJets", "/TTJets_MSDecaysCKM_central_Tu
 
 # TTV cross sections are from 13 TeV MG5_aMC@NLO v2.2.1, NNPDF 2.3nlo, fixed scale = mtop + 0.5*mv
 TTWJets = kreator.makeMCComponentFromIC("TTWJets", "/TTWJets_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.6647)
-TTZJets = kreator.makeMCComponentFromIC("TTZJets", "/TTZJets_Tune 2.3nloTeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.8565)
+TTZJets = kreator.makeMCComponentFromIC("TTZJets", "/TTZJets_Tune4C_13TeV-madgraph-tauola/Phys14DR-PU20bx25_PHYS14_25_V1-v1/MINIAODSIM", "CMS", ".*root",0.8565)
 
 # TTH cross section from LHC Higgs XS WG: https://twiki.cern.ch/twiki/bin/view/LHCPhysics/CERNYellowReportPageAt1314TeV?rev=15 
-TTH = kreator.makeMCComponentFromIC("TTH", "/TTbarH_M-125_13TeV_amca 2.3nlopythia8-tauola/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v2/MINIAODSIM", "CMS", ".*root",0.5085)
+TTH = kreator.makeMCComponentFromIC("TTH", "/TTbarH_M-125_13TeV_amcatnlo-pythia8-tauola/Phys14DR-PU20bx25_tsg_PHYS14_25_V1-v2/MINIAODSIM", "CMS", ".*root",0.5085)
 
 
 
