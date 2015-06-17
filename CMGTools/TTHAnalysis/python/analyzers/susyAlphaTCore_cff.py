@@ -52,8 +52,8 @@ lepAna.miniIsolationPUCorr = None #Will use the correction defined for the indiv
 photonAna.ptMin                        = 25
 photonAna.etaMax                       = 2.5
 photonAna.gammaID                     = "POG_PHYS14_25ns_Tight"
-# photonAna.rhoPhoton                   = 'fixedGridRhoFastjetAll'
-# photonAna.gamma_isoCorr               = 'rhoArea'
+photonAna.rhoPhoton                   = 'fixedGridRhoFastjetAll'
+photonAna.gamma_isoCorr               = 'rhoArea'
 
 # Taus 
 # https://twiki.cern.ch/twiki/bin/view/CMS/TauIDRecommendation13TeV
