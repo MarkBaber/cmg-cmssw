@@ -28,16 +28,15 @@ ttHPhotonSkim.maxObjects  = 999
 ttHAlphaTSkim.alphaTCuts = [(-9999, 0,99999 )]   #Turn off AlphaT cut
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoMu',999)
 ttHAlphaTSkim.forwardJetVeto = False
-ttHJetMETSkim.jetPtCuts   = [0]
+ttHJetMETSkim.jetPtCuts   = []
 ttHJetMETSkim.htCut       = ('htJet40j', 0)
 
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
 #if 'hep.ph.ic.ac.uk' in host:
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
 if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
 
 
 # triggerFlagsAna.triggerBits = {
