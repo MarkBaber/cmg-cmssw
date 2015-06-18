@@ -29,14 +29,12 @@ if 'hep.ph.ic.ac.uk' not in host:
 #             'Muon'     : triggers_RA1_Muon,
 # }
 
-selectedComponents = []
-
 #NEED to add WZ,WW,ZZ samples FIXME
 
 #THESE ARE THE OLD SELECTED COMPONENTS, FOR NOW FILL THEM IN AS THEY APPEAR IN python/samples/samples_13TeV_74X.py
 #selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
 
-selectedComponents = [TT_bx25]
+selectedComponents = WJetsToLNuHT + [TTJets] 
 
 #Get testing from command line
 from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
