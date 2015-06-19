@@ -6,8 +6,8 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
 
     # Gen quantities
     ##----------------------------------------
-    NTupleVariable("genBin", lambda ev : ev.genBin, help="Generator level binning quantity"),
-    NTupleVariable("genQScale", lambda ev : ev.genQScale, help="Generator level binning quantity, QScale"),
+    NTupleVariable("genBin", lambda ev : ev.genBin, mcOnly=True, help="Generator level binning quantity"),
+    NTupleVariable("genQScale", lambda ev : ev.genQScale, mcOnly=True , help="Generator level binning quantity, QScale"),
 
     # Energy sums (RECO)
     ##----------------------------------------
@@ -21,10 +21,10 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
 
     # Energy sums (GEN)
     ##----------------------------------------
-    NTupleVariable("genHt40",        lambda ev : ev.htGenJet40j,     help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
-    NTupleVariable("genMht40_pt",    lambda ev : ev.mhtGenJet40j,    help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
-    NTupleVariable("genMht40_phi",   lambda ev : ev.mhtPhiGenJet40j, help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
-    NTupleVariable("genMinDeltaHT" , lambda ev : ev.genMinDeltaHT,   help=" #Delta H_{T} between two pseudo genjets"),
+    NTupleVariable("genHt40",        lambda ev : ev.htGenJet40j, mcOnly=True ,    help="H_{T} computed from only gen jets (with |eta|<3, pt > 40 GeV)"),
+    NTupleVariable("genMht40_pt",    lambda ev : ev.mhtGenJet40j, mcOnly=True ,   help="H_{T}^{miss} computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("genMht40_phi",   lambda ev : ev.mhtPhiGenJet40j, mcOnly=True , help="H_{T}^{miss} #phi computed from only gen jets (with |eta|<3.0, pt > 40 GeV)"),
+    NTupleVariable("genMinDeltaHT" , lambda ev : ev.genMinDeltaHT, mcOnly=True ,  help=" #Delta H_{T} between two pseudo genjets"),
 
 
     ##--------------------------------------------------
@@ -49,7 +49,7 @@ susyAlphaT_globalVariables = susyCore_globalVariables + [
     ##----------------------------------------
 
     NTupleVariable("alphaT",        lambda ev: ev.alphaT,    help="AlphaT computed using jets with pt > 40, |eta|<3"),
-    NTupleVariable("genAlphaT",     lambda ev: ev.genAlphaT, help="AlphaT computed using gen jets with pt > 40, |eta|<3"),
+    NTupleVariable("genAlphaT",     lambda ev: ev.genAlphaT, mcOnly=True ,help="AlphaT computed using gen jets with pt > 40, |eta|<3"),
 
     NTupleVariable("biasedDPhi",    lambda ev: ev.biasedDPhi,help="biased delta phi"),
 
@@ -99,6 +99,8 @@ susyAlphaT_collections.update({
     # leptons and taus 
     "selectedMuons"     : NTupleCollection("muon", leptonTypeSusy, 50, help="Muons selected by the analysis"),
     "selectedElectrons" : NTupleCollection("ele",  leptonTypeSusy, 50, help="Electrons selected by the analysis"),
+    # Just to keep in mind cutbased variables are defined in leptonTypeSusyExtra
+    # "selectedElectrons" : NTupleCollection("ele",  leptonTypeSusyExtra, 50, help="Electrons selected by the analysis"),
     "selectedTaus"      : NTupleCollection("tau",  tauTypeSusy,    50, help="Taus after the preselection"),
 
     #Gen collections
@@ -109,7 +111,7 @@ susyAlphaT_collections.update({
     "minDeltaRLepJet"  : NTupleCollection("minDeltaRLepJet", objectFloat, 10, help="Min deltaR between a lepton and all the jets"),
     "minDeltaRPhoJet"  : NTupleCollection("minDeltaRPhoJet", objectFloat, 10, help="Min deltaR between a photon and all the jets"),
 
-    "LHE_weights"    : NTupleCollection("LHEweight",  weightsInfoType, 1000, help="LHE weight info"),
+    "LHE_weights"    : NTupleCollection("LHEweight",  weightsInfoType, 1000,mcOnly=True, help="LHE weight info"),
 })
 
             
