@@ -31,7 +31,7 @@ lepAna.loose_muon_dxy              = 0.2
 lepAna.loose_muon_dz               = 0.5
 lepAna.loose_muon_relIso           = 0.12
 lepAna.mu_isoCorr                  = "deltaBeta"
-lepAna.loose_muon_isoCut     = lambda muon : muon.miniRelIso < 0.2
+lepAna.loose_muon_isoCut           = lambda muon : muon.miniRelIso < 0.2
 
 # Electrons
 #------------------------------
@@ -43,7 +43,7 @@ lepAna.loose_electron_eta          = 2.5
 lepAna.loose_electron_dxy          = 0.02
 lepAna.loose_electron_dz           = 0.173670
 lepAna.loose_electron_relIso       = 0.12
-lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
+lepAna.loose_electron_isoCut       = lambda electron : electron.miniRelIso < 0.1
 lepAna.loose_electron_lostHits     = 1 
 # ttHLepAna.inclusive_electron_lostHits = 999 # no cut
 lepAna.ele_isoCorr                 = "rhoArea"
@@ -56,8 +56,8 @@ lepAna.miniIsolationPUCorr = None #Will use the correction defined for the indiv
 
 # Photons
 #------------------------------
-photonAna.ptMin                        = 25
-photonAna.etaMax                       = 2.5
+photonAna.ptMin                       = 25
+photonAna.etaMax                      = 2.5
 photonAna.gammaID                     = "POG_PHYS14_25ns_Tight"
 photonAna.rhoPhoton                   = 'fixedGridRhoFastjetAll'
 photonAna.gamma_isoCorr               = 'rhoArea'
@@ -79,11 +79,11 @@ jetAna.jetPt           = 40.
 if bunchSpacing == '25ns':
     jetAna.mcGT = "MCRUN2_74_V9" 
 elif bunchSpacing == '50ns':
-    jetAna.mcGT = "MCRUN2_74_V9" 
+    jetAna.mcGT = "MCRUN2_74_V9A" 
 else:
     sys.exit("Unsupported JEC for bunch spacing, exiting")
 
-jetAna.alwaysCleanPhotons = True
+jetAna.alwaysCleanPhotons     = True
 jetAna.cleanGenJetsFromPhoton = True
 
 # ttHJetMCAna.smearJets     = False
