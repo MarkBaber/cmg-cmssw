@@ -5,6 +5,12 @@ import sys
 #All cuts chosen as ones for the signal region from the 2012 analysis
 
 ##------------------------------------------
+## Choose bunch spacing parameter
+##------------------------------------------
+
+bunchSpacing = '25ns'
+
+##------------------------------------------
 ## Redefine analyzer parameters
 ##------------------------------------------
 # Generator parameters
@@ -69,7 +75,14 @@ tauAna.vetoLeptonsPOG = False
 jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
 jetAna.jetPt           = 40.
-jetAna.mcGT = "MCRUN2_74_V9" 
+
+if bunchSpacing == '25ns':
+    jetAna.mcGT = "MCRUN2_74_V9" 
+elif bunchSpacing == '50ns':
+    jetAna.mcGT = "MCRUN2_74_V9" 
+else:
+    sys.exit("Unsupported JEC for bunch spacing, exiting")
+
 jetAna.alwaysCleanPhotons = True
 jetAna.cleanGenJetsFromPhoton = True
 
@@ -311,5 +324,4 @@ test = getHeppyOption('test')
 
 if test: print "Will run test scenario %r" % test
 
-bunchSpacing = '25ns'
 
