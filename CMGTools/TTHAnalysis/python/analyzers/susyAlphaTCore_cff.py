@@ -287,11 +287,14 @@ host = os.environ["HOSTNAME"]
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
-if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
-else:
-    sys.exit("Need to move samples to IC to run them there")
-    #from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_74X import *
+from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
+
+#Append the IC path if at IC instead of the CERN path
+if 'hep.ph.ic.ac.uk' in host:
+
+    for comp in mcSamples+mcSamples_Asymptotic25ns:
+        comp.files = kreator.getFilesFromIC(comp.dataset,"CMS",".*root")
+    
 
 # FIXME the trigger stuff needs sorting
 
