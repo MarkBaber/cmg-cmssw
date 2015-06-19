@@ -96,11 +96,12 @@ class ComponentCreator(object):
         )
         return component
 
-    def getFilesFromIC(self, dataset, user, pattern):
+    def getFilesFromIC(self, dataset, user, pattern, useAAA=False):
         # print 'getting files for', dataset,user,pattern
         ds = createDataset( user, dataset, pattern, True )
         files = ds.listOfGoodFiles()
         mapping = 'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms%s'
+        if useAAA: mapping = 'root://cms-xrd-global.cern.ch/%s'
         return [ mapping % f for f in files]
         
     def getFilesFromICLocal(self, dataset, user, pattern):
