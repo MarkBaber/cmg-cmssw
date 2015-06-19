@@ -2,11 +2,7 @@ import PhysicsTools.HeppyCore.framework.config as cfg
 
 #Load all analyzers with defaults for alphaT analysis
 from CMGTools.TTHAnalysis.analyzers.susyAlphaTCore_cff import *
-import sys
 import os
-
-# Configurables
-host = os.environ["HOSTNAME"]
 
 lepAna.loose_electron_id = "POG_Cuts_ID_PHYS14_25ns_v1_Tight"
 ttHElectronSkim.idCut = "abs(object.eta()) < 2.1"
@@ -23,31 +19,15 @@ ttHAlphaTControlSkim.mllCut = (66.2,116.2)
 ttHAlphaTControlSkim.lepDeltaRCut = 0.5
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
-#-------- SAMPLES AND TRIGGERS -----------
-#Import general PHYS14 samples and RA1-specific samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
-
-# triggerFlagsAna.triggerBits = {
-#             'Bulk'     : triggers_RA1_Bulk,
-#             'Prompt'   : triggers_RA1_Prompt,
-#             'Parked'   : triggers_RA1_Parked,
-#             'SingleMu' : triggers_RA1_Single_Mu,
-#             'Photon'   : triggers_RA1_Photon,
-#             'Muon'     : triggers_RA1_Muon,
-# }
-
 selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT_fixPhoton + DYJetsM50HT
+if bunchSpacing == '25ns':
+    selectedComponents = QCDPt + [DYJetsToLL_M50]
+else:
+    sys.exit("Only for 25ns atm")
 
-#Get testing from the command line
-from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
-test = getHeppyOption('test')
-if test: print "Will run test scenario %r" % test
 
 if test == "1" :
 
@@ -55,11 +35,17 @@ if test == "1" :
     ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoMu',999)
 
     #Select samples and limit the files
-    selectedComponents = [DYJetsToLL_M50_HT600toInf]
+    selectedComponents = [DYJetsToLL_M50]
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
 
+#Option just to use one file per sample
+if test=="2":
+
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
 
 
 # the following is declared in case this cfg is used in input to the heppy.py script

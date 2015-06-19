@@ -5,52 +5,39 @@ from CMGTools.TTHAnalysis.analyzers.susyAlphaTCore_cff import *
 import sys
 import os
 
-# Configurables
-host = os.environ["HOSTNAME"]
-
 #Cuts
 #ttHAlphaTSkim.alphaTCuts = [(0.5, 200,99999 )]   #Flatten AlphaT Cut
 ttHAlphaTSkim.alphaTCuts = [(0.5,200,800),(0.0,800,99999)]
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
-#-------- SAMPLES AND TRIGGERS -----------
-#Import general PHYS14 samples and RA1-specific samples
-#if 'hep.ph.ic.ac.uk' in host:
-#from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
-
-# triggerFlagsAna.triggerBits = {
-#             'Bulk'     : triggers_RA1_Bulk,
-#             'Prompt'   : triggers_RA1_Prompt,
-#             'Parked'   : triggers_RA1_Parked,
-#             'SingleMu' : triggers_RA1_Single_Mu,
-#             'Photon'   : triggers_RA1_Photon,
-#             'Muon'     : triggers_RA1_Muon,
-# }
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
 #THESE ARE THE OLD SELECTED COMPONENTS, FOR NOW FILL THEM IN AS THEY APPEAR IN python/samples/samples_13TeV_74X.py
 #selectedComponents = QCDHT_fixPhoton + WJetsToLNuHT + [TTJets] + SingleTop + ZJetsToNuNuHT + SusySignalSamples #+DmSignalSamples
 
-selectedComponents = WJetsToLNuHT + [TTJets] 
-
-#Get testing from command line
-from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
-test = getHeppyOption('test')
-if test: print "Will run test scenario %r" % test
+if bunchSpacing == '25ns':
+    selectedComponents = [TTJets, TTJets_LO, WJetsToLNu] + WJetsToLNuHT + QCDPt
+else:
+    sys.exit("Only for 25ns atm")
 
 #For testing one file from a dataset listed in samples/...
 if test == "1" :
 
-    selectedComponents = [TT_bx25]
+    selectedComponents = [TTJets]
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
+
+#Option just to use one file per sample
+if test=="2":
+
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
 
 #For running on a local file
-if test == "2" :
+if test == "3" :
 
     comp = cfg.MCComponent(
             name = "DM_test",
@@ -70,7 +57,7 @@ if test == "2" :
     comp.splitFactor = 1
 
 #For running on multiple local files
-if test == "3" :
+if test == "4" :
 
     selectedComponents = [
             cfg.MCComponent(
@@ -126,7 +113,7 @@ if test == "3" :
     comp.splitFactor = 1
 
 #Testing on data
-if test == '4' :
+if test == '5' :
     from CMGTools.TTHAnalysis.samples.samples_8TeV_AlphaT import *
     selectedComponents = [singleMu2012D]
 

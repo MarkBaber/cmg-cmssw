@@ -1,5 +1,6 @@
 from CMGTools.RootTools.RootTools import *
 from CMGTools.TTHAnalysis.analyzers.susyCore_modules_cff import *
+import sys
 
 #All cuts chosen as ones for the signal region from the 2012 analysis
 
@@ -274,6 +275,41 @@ sequence = cfg.Sequence(susyCoreSequence + [
                         treeProducer,
                         ])
 
+#------------------------------------------------------------------------------
+# Carry out any jobs common to all configs
+#------------------------------------------------------------------------------
+
 #Increase the logging level to give us full information
 import logging
 logging.basicConfig(level=logging.INFO)
+
+host = os.environ["HOSTNAME"]
+
+#-------- SAMPLES AND TRIGGERS -----------
+#Import general PHYS14 samples and RA1-specific samples
+if 'hep.ph.ic.ac.uk' not in host:
+    from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
+else:
+    sys.exit("Need to move samples to IC to run them there")
+    #from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_74X import *
+
+# FIXME the trigger stuff needs sorting
+
+# triggerFlagsAna.triggerBits = {
+#             'Bulk'     : triggers_RA1_Bulk,
+#             'Prompt'   : triggers_RA1_Prompt,
+#             'Parked'   : triggers_RA1_Parked,
+#             'SingleMu' : triggers_RA1_Single_Mu,
+#             'Photon'   : triggers_RA1_Photon,
+#             'Muon'     : triggers_RA1_Muon,
+# }
+
+
+#Get testing from the command line
+from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
+test = getHeppyOption('test')
+
+if test: print "Will run test scenario %r" % test
+
+bunchSpacing = '25ns'
+
