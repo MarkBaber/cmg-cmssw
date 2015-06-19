@@ -69,7 +69,7 @@ tauAna.vetoLeptonsPOG = False
 jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
 jetAna.jetPt           = 40.
-jetAna.mcGT = "PHYS14_V4_MC" 
+jetAna.mcGT = "MCRUN2_74_V9" 
 jetAna.alwaysCleanPhotons = True
 jetAna.cleanGenJetsFromPhoton = True
 
