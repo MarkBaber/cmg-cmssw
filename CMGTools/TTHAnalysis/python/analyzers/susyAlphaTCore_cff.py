@@ -5,6 +5,12 @@ import sys
 #All cuts chosen as ones for the signal region from the 2012 analysis
 
 ##------------------------------------------
+## Choose bunch spacing parameter
+##------------------------------------------
+
+bunchSpacing = '25ns'
+
+##------------------------------------------
 ## Redefine analyzer parameters
 ##------------------------------------------
 # Generator parameters
@@ -25,7 +31,7 @@ lepAna.loose_muon_dxy              = 0.2
 lepAna.loose_muon_dz               = 0.5
 lepAna.loose_muon_relIso           = 0.12
 lepAna.mu_isoCorr                  = "deltaBeta"
-lepAna.loose_muon_isoCut     = lambda muon : muon.miniRelIso < 0.2
+lepAna.loose_muon_isoCut           = lambda muon : muon.miniRelIso < 0.2
 
 # Electrons
 #------------------------------
@@ -37,7 +43,7 @@ lepAna.loose_electron_eta          = 2.5
 lepAna.loose_electron_dxy          = 0.02
 lepAna.loose_electron_dz           = 0.173670
 lepAna.loose_electron_relIso       = 0.12
-lepAna.loose_electron_isoCut     = lambda electron : electron.miniRelIso < 0.1
+lepAna.loose_electron_isoCut       = lambda electron : electron.miniRelIso < 0.1
 lepAna.loose_electron_lostHits     = 1 
 # ttHLepAna.inclusive_electron_lostHits = 999 # no cut
 lepAna.ele_isoCorr                 = "rhoArea"
@@ -50,8 +56,8 @@ lepAna.miniIsolationPUCorr = None #Will use the correction defined for the indiv
 
 # Photons
 #------------------------------
-photonAna.ptMin                        = 25
-photonAna.etaMax                       = 2.5
+photonAna.ptMin                       = 25
+photonAna.etaMax                      = 2.5
 photonAna.gammaID                     = "POG_PHYS14_25ns_Tight"
 photonAna.rhoPhoton                   = 'fixedGridRhoFastjetAll'
 photonAna.gamma_isoCorr               = 'rhoArea'
@@ -69,8 +75,15 @@ tauAna.vetoLeptonsPOG = False
 jetAna.jetEta          = 5.
 jetAna.jetEtaCentral   = 3.
 jetAna.jetPt           = 40.
-jetAna.mcGT = "PHYS14_V4_MC" 
-jetAna.alwaysCleanPhotons = True
+
+if bunchSpacing == '25ns':
+    jetAna.mcGT = "MCRUN2_74_V9" 
+elif bunchSpacing == '50ns':
+    jetAna.mcGT = "MCRUN2_74_V9A" 
+else:
+    sys.exit("Unsupported JEC for bunch spacing, exiting")
+
+jetAna.alwaysCleanPhotons     = True
 jetAna.cleanGenJetsFromPhoton = True
 
 # ttHJetMCAna.smearJets     = False
@@ -314,5 +327,4 @@ test = getHeppyOption('test')
 
 if test: print "Will run test scenario %r" % test
 
-bunchSpacing = '25ns'
 
