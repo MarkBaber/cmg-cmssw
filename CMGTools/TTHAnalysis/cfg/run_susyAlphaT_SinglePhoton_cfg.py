@@ -2,11 +2,7 @@ import PhysicsTools.HeppyCore.framework.config as cfg
 
 #Load all analyzers with defaults for alphaT analysis
 from CMGTools.TTHAnalysis.analyzers.susyAlphaTCore_cff import *
-import sys
 import os
-
-# Configurables
-host = os.environ["HOSTNAME"]
 
 #Cuts
 ttHPhotonSkim.idCut = "abs(object.eta()) < 1.45"
@@ -21,31 +17,18 @@ ttHAlphaTControlSkim.photonDeltaRCut = 1.0
 ttHAlphaTSkim.mhtDivMetCut = ('mhtJet40j','metNoPhoton',1.25) 
 ttHJetMETSkim.jetPtCuts   = [100,40]                #Remove second jet cut for the asymmetric dijet bin
 
-#-------- SAMPLES AND TRIGGERS -----------
-#Import general PHYS14 samples and RA1-specific samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_AlphaT_PHYS14 import *
-if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_PHYS14 import *
-
-# triggerFlagsAna.triggerBits = {
-#             'Bulk'     : triggers_RA1_Bulk,
-#             'Prompt'   : triggers_RA1_Prompt,
-#             'Parked'   : triggers_RA1_Parked,
-#             'SingleMu' : triggers_RA1_Single_Mu,
-#             'Photon'   : triggers_RA1_Photon,
-#             'Muon'     : triggers_RA1_Muon,
-# }
-
 selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT_fixPhoton + GJets_fixPhoton
 
-#Get testing from command line
-from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
-test = getHeppyOption('test')
-if test: print "Will run test scenario %r" % test
+#THESE ARE THE OLD SELECTED COMPONENTS, FOR NOW FILL THEM IN AS THEY APPEAR IN python/samples/samples_13TeV_74X.py
+#selectedComponents = QCDHT_fixPhoton + GJets_fixPhoton
+
+if bunchSpacing == '25ns':
+    selectedComponents = QCDPt # +GJets
+else:
+    sys.exit("Only for 25ns atm")
 
 if test == "1" :
     selectedComponents = [GJets_HT600toInf_fixPhoton]
@@ -53,6 +36,12 @@ if test == "1" :
         comp.splitFactor = 1
         comp.files = comp.files[:1]
 
+#Option just to use one file per sample
+if test=="2":
+
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
 
 
 # the following is declared in case this cfg is used in input to the heppy.py script

@@ -6,9 +6,6 @@ from CMGTools.TTHAnalysis.analyzers.susyAlphaTCore_cff import *
 import sys
 import os
 
-# Configurables
-host = os.environ["HOSTNAME"]
-
 # LHE
 lheAna = cfg.Analyzer(
     LHEAnalyzer, name = 'LHEAnalyzer'
@@ -31,24 +28,6 @@ ttHAlphaTSkim.forwardJetVeto = False
 ttHJetMETSkim.jetPtCuts   = []
 ttHJetMETSkim.htCut       = ('htJet40j', 0)
 
-
-#-------- SAMPLES AND TRIGGERS -----------
-#Import general PHYS14 samples and RA1-specific samples
-#if 'hep.ph.ic.ac.uk' in host:
-if 'hep.ph.ic.ac.uk' not in host:
-    from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
-
-
-# triggerFlagsAna.triggerBits = {
-#             'Bulk'     : triggers_RA1_Bulk,
-#             'Prompt'   : triggers_RA1_Prompt,
-#             'Parked'   : triggers_RA1_Parked,
-#             'SingleMu' : triggers_RA1_Single_Mu,
-#             'Photon'   : triggers_RA1_Photon,
-#             'Muon'     : triggers_RA1_Muon,
-# }
-
-
 # LHE
 susyAlphaT_globalVariables.append(NTupleVariable("lheHT", lambda ev : ev.lheHT, help="LHE HT( q + g )"))
 
@@ -58,22 +37,27 @@ selectedComponents = []
 
 #NEED to add WZ,WW,ZZ samples FIXME
 
-selectedComponents = QCDHT_fixPhoton + [TTJets] + WJetsToLNuHT + SingleTop + ZJetsToNuNuHT + GJets_fixPhoton + DYJetsM50HT
+if bunchSpacing == '25ns':
+    selectedComponents = [TTJets, TTJets_LO, WJetsToLNu, DYJetsToLL_M50] + WJetsToLNuHT + QCDPt
+else:
+    sys.exit("Only for 25ns atm")
 
 #Limit the files as inclusive
 for comp in selectedComponents:
     comp.splitFactor = 2
     comp.files = comp.files[1:3]
 
-#Get testing from command line
-from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
-test = getHeppyOption('test')
-if test: print "Will run test scenario %r" % test
-
 if test == "1" :
 
     #Select samples and limit the files
-    selectedComponents = [GJets_HT600toInf]
+    selectedComponents = [WJetsToLNu]
+    for comp in selectedComponents:
+        comp.splitFactor = 1
+        comp.files = comp.files[:1]
+
+#Option just to use one file per sample
+if test=="2":
+
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[:1]
