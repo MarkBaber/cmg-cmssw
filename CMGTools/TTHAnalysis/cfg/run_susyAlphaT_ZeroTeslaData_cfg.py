@@ -126,7 +126,7 @@ comp = cfg.DataComponent(
     )
 
 selectedComponents = [comp]
-comp.splitFactor   = 1 #50
+comp.splitFactor   = 100
 
 # --------------------------------------------------------------------------------
 
