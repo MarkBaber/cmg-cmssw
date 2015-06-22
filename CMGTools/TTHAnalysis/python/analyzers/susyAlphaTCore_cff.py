@@ -313,7 +313,7 @@ if 'hep.ph.ic.ac.uk' in host:
 # Select triggers to store
 selectedTriggerBits = {}
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, dummySignalTriggerBits)
-selectedTriggerBits = appendTriggerDict(selectedTriggerBits, hadronicTriggerBits)
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, dummyHadronicTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, muonTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, electronTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, photonTriggerBits)
