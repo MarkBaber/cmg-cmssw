@@ -132,10 +132,12 @@ class ttHCoreEventAnalyzer( Analyzer ):
         jets = getattr(event,self.jetForBiasedDPhi)
         if len(jets) == 0:
             event.biasedDPhi = 0
+	    event.biasedDPhiJet = []
             return 
         mht = getattr(event,self.mhtForBiasedDPhi)
 
-	biasedDPhi = 10;
+	biasedDPhi = 10
+	biasedDPhiJet = None
         for jet in jets:
 	    newPhi = atan2(mht.py()+jet.py(), mht.px()+jet.px())
 	    biasedDPhiTemp = abs(deltaPhi(newPhi,jet.phi()))
