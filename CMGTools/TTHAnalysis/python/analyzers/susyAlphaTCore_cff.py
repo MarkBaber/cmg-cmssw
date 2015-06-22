@@ -300,7 +300,8 @@ host = os.environ["HOSTNAME"]
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_74X import *
+from CMGTools.TTHAnalysis.samples.samples_13TeV_74X         import *
+from CMGTools.TTHAnalysis.samples.triggers_13TeV_74X_AlphaT import *
 
 #Append the IC path if at IC instead of the CERN path
 if 'hep.ph.ic.ac.uk' in host:
@@ -309,16 +310,16 @@ if 'hep.ph.ic.ac.uk' in host:
         comp.files = kreator.getFilesFromIC(comp.dataset,"CMS",".*root")
     
 
-# FIXME the trigger stuff needs sorting
+# Select triggers to store
+selectedTriggerBits = {}
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, dummySignalTriggerBits)
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, hadronicTriggerBits)
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, muonTriggerBits)
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, electronTriggerBits)
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, photonTriggerBits)
 
-# triggerFlagsAna.triggerBits = {
-#             'Bulk'     : triggers_RA1_Bulk,
-#             'Prompt'   : triggers_RA1_Prompt,
-#             'Parked'   : triggers_RA1_Parked,
-#             'SingleMu' : triggers_RA1_Single_Mu,
-#             'Photon'   : triggers_RA1_Photon,
-#             'Muon'     : triggers_RA1_Muon,
-# }
+triggerFlagsAna.triggerBits = selectedTriggerBits
+
 
 
 #Get testing from the command line
@@ -326,5 +327,5 @@ from PhysicsTools.HeppyCore.framework.heppy import getHeppyOption
 test = getHeppyOption('test')
 
 if test: print "Will run test scenario %r" % test
-
+print "\tBunchSpacing: ", bunchSpacing
 
