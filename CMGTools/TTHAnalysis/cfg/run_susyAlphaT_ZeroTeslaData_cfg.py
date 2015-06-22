@@ -35,41 +35,54 @@ selectedComponents = []
 #NEED to add WZ,WW,ZZ samples FIXME
 
 if bunchSpacing == '25ns':
-    selectedComponents = [TTJets, TTJets_LO, WJetsToLNu, DYJetsToLL_M50] + WJetsToLNuHT + QCDPt
+    selectedComponents = QCDPt #[MinBias_ZT] # RelValsZT
 else:
     sys.exit("Only for 25ns atm")
 
 
 
-#Limit the files as inclusive
+
 for comp in selectedComponents:
-    comp.splitFactor = 2
-    comp.files = comp.files[1:3]
+    comp.splitFactor = 50
     pass
 
 
 
 
+runData = False
 
 # --------------------------------------------------------------------------------
+if not runData:
 
-dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"
-#json    = dataDir+'/json/Cert_246908-247381_13TeV_PromptReco_Collisions15_ZeroTesla.json'
-json    = dataDir+'/json/Cert_246908-247381_13TeV_PromptReco_Collisions15_ZeroTesla_JSON_CaloOnly.json'
+    sequence.remove(triggerAna)
+    sequence.remove(triggerFlagsAna) # Currently causing issues with the relval
+    sequence.remove(eventFlagsAna)
+    pass
+    
+if runData:
+    dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"
+    #json    = dataDir+'/json/Cert_246908-247381_13TeV_PromptReco_Collisions15_ZeroTesla.json'
+    json    = dataDir+'/json/Cert_246908-247381_13TeV_PromptReco_Collisions15_ZeroTesla_JSON_CaloOnly.json'
 
-selectedTriggers = {"L1SingleJet16" : ["HLT_L1SingleJet16_v*"],
-                    "L1SingleJet36" : ["HLT_L1SingleJet36_v*"],
-                    "L1SingleJet68" : ["HLT_L1SingleJet68_v*"],
-                    "Physics"       : ["HLT_Physics_v*"],        }
 
-triggerFlagsAna.triggerBits = selectedTriggers
 
-# Configure data JECs
-jetAna.dataGT = 'GR_P_V56'
 
-comp = cfg.DataComponent(
-    name = "Jet",
-    files =  [
+
+    selectedTriggers = {"L1SingleJet16" : ["HLT_L1SingleJet16_v*"],
+                        "L1SingleJet36" : ["HLT_L1SingleJet36_v*"],
+                        "L1SingleJet68" : ["HLT_L1SingleJet68_v*"],
+                        "Physics"       : ["HLT_Physics_v*"],        }
+
+    triggerFlagsAna.triggerBits = selectedTriggers
+
+
+
+     # Configure data JECs
+    jetAna.dataGT = 'GR_P_V56'
+
+    comp = cfg.DataComponent(
+        name = "Jet",
+        files =  [
 	'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mbaber/GR_P_V56_Run2015A_PromptReco_v1_19Jun15/Jet/crab_Jet/150619_090726/0000/prodMiniAOD_Data_Run2ZeroTeslaPrompt_PAT_55.root',
 	'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mbaber/GR_P_V56_Run2015A_PromptReco_v1_19Jun15/Jet/crab_Jet/150619_090726/0000/prodMiniAOD_Data_Run2ZeroTeslaPrompt_PAT_11.root',
 	'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mbaber/GR_P_V56_Run2015A_PromptReco_v1_19Jun15/Jet/crab_Jet/150619_090726/0000/prodMiniAOD_Data_Run2ZeroTeslaPrompt_PAT_16.root',
@@ -120,14 +133,14 @@ comp = cfg.DataComponent(
 	'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mbaber/GR_P_V56_Run2015A_PromptReco_v1_19Jun15/Jet/crab_Jet/150619_090726/0000/prodMiniAOD_Data_Run2ZeroTeslaPrompt_PAT_34.root',
 
         ],
-    intLumi = 1, 
-    #triggers = triggers, 
-    json = json
-    )
+        intLumi = 1, 
+        triggers = triggers, 
+        json = json
+        )
 
-selectedComponents = [comp]
-comp.splitFactor   = 1 #50
-
+    selectedComponents = [comp]
+    comp.splitFactor   = 1 #50
+    pass
 # --------------------------------------------------------------------------------
 
 

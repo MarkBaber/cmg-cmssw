@@ -6,6 +6,14 @@ import os
 from CMGTools.TTHAnalysis.samples.ComponentCreator import ComponentCreator
 kreator = ComponentCreator()
 
+
+## ==== ZT RelVals =====
+QCD_80to120_ZT  = kreator.makeMCComponent("QCD_80to120_ZT",  "/RelValQCD_Pt_80_120_13/CMSSW_7_4_4-MCRUN2_740TV1_0Tv2-v1/MINIAODSIM", "CMS", ".*root")
+MinBias_ZT      = kreator.makeMCComponent("MinBias_ZT",      "/RelValMinBias_13/CMSSW_7_4_4-MCRUN2_740TV1_0Tv2-v1/MINIAODSIM", "CMS", ".*root")
+QCD_15to3000_ZT = kreator.makeMCComponent("QCD_15to3000_ZT", "/RelValQCD_FlatPt_15_3000HS_13/CMSSW_7_4_4-MCRUN2_740TV1_0Tv2-v1/MINIAODSIM", "CMS", ".*root")
+
+RelValsZT = [ QCD_80to120_ZT, QCD_15to3000_ZT ]
+
 ## ==== RelVals =====
 TT_NoPU = kreator.makeMCComponent("TT_NoPU", "/RelValTTbar_13/CMSSW_7_4_0-MCRUN2_74_V7_GENSIM_7_1_15-v1/MINIAODSIM", "CMS", ".*root",809.1)
 TT_bx25 = kreator.makeMCComponent("TT_bx25", "/RelValTTbar_13/CMSSW_7_4_0-PU25ns_MCRUN2_74_V7_gs7115_puProd-v1/MINIAODSIM", "CMS", ".*root",809.1)
@@ -23,6 +31,12 @@ ZTT_bx50 = kreator.makeMCComponent("ZTT_bx50", "/RelValZTT_13/CMSSW_7_4_0-PU50ns
 RelVals740 = [ TT_NoPU, TT_bx25, TT_bx50, TTLep_NoPU, ZEE_bx50, ZEE_bx25, ZMM_bx25, ZMM_bx50, ZTT_bx25, ZTT_bx50 ]
 
 ### 25 ns
+
+### QCD
+
+# /RelValQCD_Pt_80_120_13/CMSSW_7_4_4-MCRUN2_74_V9_38Tbis-v1/MINIAODSIM
+# /RelValQCD_FlatPt_15_3000HS_13/CMSSW_7_4_4-MCRUN2_74_V9_38Tbis-v1/MINIAODSIM
+
 ### TTbar
 TTJets = kreator.makeMCComponent("TTJets", "/TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root", 831.76, True)
 TTJets_LO = kreator.makeMCComponent("TTJets_LO", "/TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9-v2/MINIAODSIM", "CMS", ".*root", 809.1)
