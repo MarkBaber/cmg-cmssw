@@ -147,7 +147,7 @@ class ttHCoreEventAnalyzer( Analyzer ):
             pass
 
         event.biasedDPhi = biasedDPhi
-        event.biasedDPhiJet = biasedDPhiJet
+        event.biasedDPhiJet = [biasedDPhiJet]
 
         return
 
