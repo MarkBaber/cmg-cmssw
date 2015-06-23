@@ -314,9 +314,11 @@ if 'hep.ph.ic.ac.uk' in host:
 selectedTriggerBits = {}
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, dummySignalTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, dummyHadronicTriggerBits)
+selectedTriggerBits = appendTriggerDict(selectedTriggerBits, monojetTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, muonTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, electronTriggerBits)
 selectedTriggerBits = appendTriggerDict(selectedTriggerBits, photonTriggerBits)
+
 
 triggerFlagsAna.triggerBits = selectedTriggerBits
 
