@@ -88,7 +88,7 @@ dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"
 for comp in mcSamples+mcSamples_Asymptotic25ns:
     comp.isMC = True
     comp.isData = False
-    comp.splitFactor = 250 if "TTJets" not in comp.name else 500 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
+    comp.splitFactor = 500 if "TTJets" not in comp.name else 1000 #  if comp.name in [ "WJets", "DY3JetsM50", "DY4JetsM50","W1Jets","W2Jets","W3Jets","W4Jets","TTJetsHad" ] else 100
     comp.puFileMC=dataDir+"/puProfile_Summer12_53X.root"
     comp.puFileData=dataDir+"/puProfile_Data12.root"
     comp.efficiency = eff2012
