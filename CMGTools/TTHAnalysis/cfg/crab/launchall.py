@@ -9,14 +9,14 @@ cmg_version = os.popen("git describe --tags").read()[:-1].replace(".","_")
 log_directory = crabMaster_cfg.log_directory
 
 debug  = False
-useAAA = True
+useAAA = False
 
 handle = open("heppy_config.py", 'r')
 cfo = imp.load_source("heppy_config", "heppy_config.py", handle)
 conf = cfo.config
 handle.close()
 
-#os.system("scramv1 runtime -sh")
+os.system("scramv1 runtime -sh")
 os.system("source /cvmfs/cms.cern.ch/crab3/crab.sh")
 
 os.environ["PROD_LABEL"]  = production_label
