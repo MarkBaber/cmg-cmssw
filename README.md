@@ -129,5 +129,31 @@ git checkout -b CMG_MiniAOD_Lite_V6_0_from-CMSSW_7_0_6
 # compile
 scram b -v -j 9
 # cmg-cmssw-private
+```
 
+#Installation of CMG Codes at Bristol for 743
+###Logging into soolin (from local machine or lxplus)
+```
+ssh <username>@seis.bris.ac.uk
+ -> ssh <username>@soolin.phy.bris.ac.uk
+```
+###Setting up CMG Framework
+```
+export SCRAM_ARCH=slc6_amd64_gcc491
+# Setup CMSSW   
+. /cvmfs/cms.cern.ch/cmsset_default.sh
+cmsrel CMSSW_7_4_3
+cd CMSSW_7_4_3/src
+cmsenv
+git init
+# Add trunk from Dom's Repo (for now)
+git remote add cmg-ra1-bristol git@github.com:dsmiff/cmg-cmssw-private.git
+git fetch cmg-ra1-bristol
+cp /users/ds13962/public/alphat/sparse-checkout .git/info/sparse-checkout
+git config core.sparsecheckout true
+git checkout cmg-ra1-bristol/Trunk_Bristol_RA1-CMGTools-from-CMSSW_7_4_3
+# Create your branch and compile
+git checkout -b <branch name>
+scram b -v -j 8
+```
 

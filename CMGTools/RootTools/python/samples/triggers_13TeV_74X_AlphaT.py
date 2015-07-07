@@ -36,9 +36,19 @@ dummySignalTriggerBits   = {
                         "PFHT400_DiPFJet90_PFAlphaT0p51" : ["HLT_PFHT400_DiPFJet90_PFAlphaT0p51_v*"],
 
                         # HT trigger
-                        "PFHT900"                           : ["HLT_PFHT900_v"],
+                        "PFHT900"                        : ["HLT_PFHT900_v"],
 }
 
+# Monojet triggers
+monojetTriggerBits   = {
+    "PFMETNoMu120_NoiseCleaned_PFMHTNoMu120_IDTight"                    : ["HLT_PFMETNoMu120_NoiseCleaned_PFMHTNoMu120_IDTight_v*"],
+    "PFMETNoMu90_NoiseCleaned_PFMHTNoMu90_IDTight"                      : ["HLT_PFMETNoMu90_NoiseCleaned_PFMHTNoMu90_IDTight_v*"],
+    "MonoCentralPFJet80_PFMETNoMu90_NoiseCleaned_PFMHTNoMu90_IDTight"   : ["HLT_MonoCentralPFJet80_PFMETNoMu90_NoiseCleaned_PFMHTNoMu90_IDTight_v*"],
+    "MonoCentralPFJet80_PFMETNoMu120_NoiseCleaned_PFMHTNoMu120_IDTight" : ["HLT_MonoCentralPFJet80_PFMETNoMu120_NoiseCleaned_PFMHTNoMu120_IDTight_v*"],
+    "PFMET170_NoiseCleaned"                                             : ["HLT_PFMET170_NoiseCleaned_v*"],
+    "CaloMET200_NoiseCleaned"                                           : ["HLT_CaloMET200_NoiseCleaned_v*"],
+    "CaloJet500_NoJetID"                                                : ["HLT_CaloJet500_NoJetID_v*"],
+}
 
 # ----------------------------------------
 # Muon triggers
