@@ -162,15 +162,25 @@ dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"  # use environmental varia
 json=dataDir+'/json/Cert_246908-248005_13TeV_PromptReco_Collisions15_ZeroTesla_JSON.txt'
 #lumi: delivered= 4.430 (/nb) recorded= 4.013 (/nb)
 
-jetHT_0T = cfg.DataComponent(
-    name = 'jetHT_0T',
-    files = kreator.getFilesFromEOS('jetHT_0T',
-                                    'firstData_JetHT_v2',
-                                    '/store/user/pandolf/MINIAOD/%s'),
-    intLumi = 4.0,
-    triggers = [],
-    json = None #json
-    )
+if 'cern.ch' in os.environ["HOSTNAME"]:
+    jetHT_0T = cfg.DataComponent(
+        name = 'jetHT_0T',
+        files = kreator.getFilesFromEOS('jetHT_0T',
+                                        'firstData_JetHT_v2',
+                                        '/store/user/pandolf/MINIAOD/%s'),
+        intLumi = 4.0,
+        triggers = [],
+        json = None #json
+        )
+else:
+    jetHT_0T = cfg.DataComponent(
+        name = 'jetHT_0T',
+        files = [],
+        intLumi = 4.0,
+        triggers = [],
+        json = None #json
+        )
+
 
 ### ----------------------------- summary ----------------------------------------
 
