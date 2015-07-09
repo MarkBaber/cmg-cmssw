@@ -31,6 +31,7 @@ signalTriggerBits   = { # Primary
 # ----------------------------------------
 muonTriggerBits     = {"HLT_IsoMu24"        : ["HLT_IsoMu24_v"],
                        "HLT_IsoMu24_eta2p1" : ["HLT_IsoMu24_eta2p1_v"],
+                       "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ" :["HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v"],
                        }
 
 # ----------------------------------------
