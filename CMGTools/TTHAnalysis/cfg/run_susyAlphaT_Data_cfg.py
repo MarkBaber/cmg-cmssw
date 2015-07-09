@@ -65,7 +65,7 @@ comp = cfg.DataComponent(
     )
 
 selectedComponents = [comp]
-comp.splitFactor   = 1
+comp.splitFactor   = 5
 
 
 
