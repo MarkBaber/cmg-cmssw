@@ -80,7 +80,7 @@ susyAlphaT_globalObjects.update({
     # put more here
     # "pseudoJet1"       : NTupleObject("pseudoJet1",     fourVectorType, help="pseudoJet1 for hemishphere"),
     # "pseudoJet2"       : NTupleObject("pseudoJet2",     fourVectorType, help="pseudoJet2 for hemishphere"),
-    #"biasedDPhiJet": NTupleObject("biasedDPhiJet", fourVectorType, help="jet closest to missing energy vector"),
+    # "biasedDPhiJet": NTupleObject("biasedDPhiJet", fourVectorType, help="jet closest to missing energy vector"),
     "metNoMu"      : NTupleObject("metNoMu",       fourVectorType, help="met computed with muon momentum substracted"),
     "metNoEle"     : NTupleObject("metNoEle",      fourVectorType, help="met computed with electron momentum substracted"),
     "metNoPhoton"  : NTupleObject("metNoPhoton",   fourVectorType, help="met computed with photon momentum substracted"),
@@ -92,6 +92,7 @@ susyAlphaT_collections = susyCore_collections.copy()
 susyAlphaT_collections.update({
     # put more here
     #"selectedLeptons"  : NTupleCollection("lep",      leptonTypeSusy,           50, help="Leptons after the preselection", filter=lambda l : l.pt()>10 ),
+    "biasedDPhiJet": NTupleCollection("biasedDPhiJet", jetTypeAlphaT, 1, help="jet providing the biasedDPhi value"),
     "cleanJetsAll"     : NTupleCollection("jet",      jetTypeAlphaT,             100, help="all jets (w/ x-cleaning, w/ ID applied w/o PUID applied pt > 40 |eta| < 5) , sorted by pt", filter=lambda l : l.pt()>40  ),
     "selectedPhotons"  : NTupleCollection("gamma",    photonTypeSusy,           50, help="photons with pt > 25 and loose cut based ID"),
     "selectedIsoTrack" : NTupleCollection("isoTrack", isoTrackType,             50, help="isoTrack, sorted by pt"),
