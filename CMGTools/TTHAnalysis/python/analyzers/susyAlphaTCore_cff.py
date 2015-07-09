@@ -300,8 +300,8 @@ host = os.environ["HOSTNAME"]
 
 #-------- SAMPLES AND TRIGGERS -----------
 #Import general PHYS14 samples and RA1-specific samples
-from CMGTools.TTHAnalysis.samples.samples_13TeV_74X         import *
-from CMGTools.TTHAnalysis.samples.triggers_13TeV_74X_AlphaT import *
+from CMGTools.RootTools.samples.samples_13TeV_74X         import *
+from CMGTools.RootTools.samples.triggers_13TeV_74X_AlphaT import *
 
 #Append the IC path if at IC instead of the CERN path
 if 'hep.ph.ic.ac.uk' in host:
